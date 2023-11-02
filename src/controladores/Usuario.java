@@ -1,53 +1,65 @@
 package controladores;
-import java.util.*;
 
-/**
- * 
- */
-public class Usuario {
+public abstract class Usuario {
 
     private String nombre;
     private String apellido;
     private int dni;
     private String contraseña;
     private String correo_electronico;
-    private String rol;
+    private boolean inicio_sesion;
 
-    public Usuario(String correo_electronico,String contraseña, String rol) {
+    public Usuario(String correo_electronico,String contraseña) {
+    	this.correo_electronico = correo_electronico;
+    	this.contraseña = contraseña;
     }
 
     public void setNombre(String nombre) {
+    	if (inicio_sesion) {
+    		this.nombre = nombre;
+    	}
     }
 
     public String getNombre() {
-        return "";
+        return this.nombre;
     }
 
     public void setApellido(String apellido) {
+    	if (inicio_sesion) {
+    	this.apellido = apellido;
+    	}
     }
 
     public String getApellido() {
-        return "";
+        return this.apellido ;
     }
 
     public void setDNI(int DNI) {
-
+    	if (inicio_sesion) {
+    		this.dni = DNI;
+    	}
     }
 
     public int getDNI() {
-        return 0;
+        return this.dni;
     }
 
     public void iniciarSesion(String correo_electronico, String contraseña) {
-    }
-
-    public void gestionarPerfil(String contraseña) {
+    	if (this.correo_electronico ==  correo_electronico && this.contraseña == contraseña) {
+    		this.inicio_sesion = true;
+    	} else {
+    		this.inicio_sesion = false;
+    	}
     }
 
     public void cerrarSesion() {
+    	this.inicio_sesion = false;
     }
 
-    public void visualizarClases() {
+    public abstract void visualizarClases();
+    
+    public void gestionarPerfil(boolean inicio_sesion) {
+    	//VER QUE ONDA
     }
 
 }

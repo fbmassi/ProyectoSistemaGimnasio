@@ -16,7 +16,7 @@ public class ArticuloPersonalizado extends Articulo {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-
+	
 	@Override
 	public void calcularDesgaste(int estado_desgaste) {
 		//DESGASTE PERSONALZADO
