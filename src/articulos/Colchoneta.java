@@ -28,8 +28,7 @@ public class Colchoneta extends Articulo {
 	
 	@Override
 	public void calcularDesgaste(int estado_desgaste) {
-		// TODO Auto-generated method stub
-		
+		//CODIFICAR DESGASTE
 	}
 
 }

@@ -29,7 +29,6 @@ public class Pesa extends Articulo {
 	@Override
 	public void calcularDesgaste(int estado_desgaste) {
 		//CODIFICAR TEMA DESGASTE
-		
 	}
 
 }

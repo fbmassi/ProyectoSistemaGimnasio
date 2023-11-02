@@ -52,7 +52,7 @@ public class SoporteTécnico extends Usuario {
 
 	@Override
 	public void visualizarClases() {
-		// TODO Auto-generated method stub
+		//CODIFICAR
 	}
 	
 	 public void asignarSede(Sede sede, Administrador administrador) {
