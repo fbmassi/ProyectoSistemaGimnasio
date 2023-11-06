@@ -58,8 +58,26 @@ public abstract class Usuario {
 
     public abstract void visualizarClases();
     
-    public void gestionarPerfil(boolean inicio_sesion) {
-    	//VER QUE ONDA
+    @SuppressWarnings("unused")
+	public void gestionarPerfil() {
+    	
+    	String nombre = null;
+    	String apellido = null; 
+    	String correo_electronico;
+    	String contraseña;
+    	int dni;
+    	
+    	String editar = null;
+    	
+	    if (this.inicio_sesion) {
+	    	System.out.println("");
+	    	if (editar == "N") {
+	    		this.nombre = nombre;
+	    	} else if (editar == "A") {
+	    		this.apellido = apellido;
+	    }
+    	 
+	    }
     }
-
+    
 }
