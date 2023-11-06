@@ -1,44 +1,41 @@
 package controladores;
-
 import java.util.*;
 import articulos.Articulo;
 import sistema.*;
 
 public class Administrador extends Usuario {
 	
-	private ArrayList<Clase> clases;
-	private ArrayList<Sede> sedes;
+	private ArrayList<Sede> sedes_asignadas;
+	private ArrayList<Clase> clases_a_administrar;
 
 	public Administrador(String correo_electronico, String contraseña) {
 		super(correo_electronico, contraseña);
 	}
 	
 	public ArrayList<Sede> getSedes() {
-		return this.sedes;
+		return this.sedes_asignadas;
 	}
 
-	public void setSedes(ArrayList<Sede> sedes) {
-		this.sedes = sedes;
+	public void agregarSede(Sede sede) {
+		this.sedes_asignadas.add(sede);
 	}
-    
-    public void crearNuevaClase(Profesor profesor, Emplazamiento emplazamiento, Sede sede, Disciplina disciplina, String horario, String dia) {
-    	Clase clase = new Clase(profesor, sede, emplazamiento, disciplina, dia, horario);
-    	clases.add(clase);
-    	//DUDA: VARIABLE... ES EL MISMO OBJETO?
-    }
-    
-    public void crearNuevaSede(String nombre, String ubicacion, int nivel_suscripcion) {
-    	Sede sede = new Sede (nombre,ubicacion,nivel_suscripcion);
-    	sedes.add(sede);
-    	//DUDA: VARIABLE... ES EL MISMO OBJETO?
-    }
-
+	
+	public void agregarAccesoAClase(Clase clase) {
+		clases_a_administrar.add(clase);
+	}
+	//METODO PARA AGREGAR MODIFICAR LA CANTIDAD DE ARTICULOS DE UNA SEDE
     public void agregarArticulos(Sede sede, Articulo articulo, int cantidad) {
-    	sede.getCantidadStock().put(articulo, cantidad);
+    	sede.agregar_articulo(articulo, cantidad);
     }
     
-    public void transicionarEstadoClase(Clase clase) {
-    	//CODIFICAR TRANSICION DE ESTADO 
+    //METODO PARA DAR DE BAJA ARTICULOS
+    public void eliminarArticuloDeSede(Sede sede, Articulo articulo_a_eliminar) {
+    	sede.eliminarArticulo(articulo_a_eliminar);
+    }
+    
+    //METODO PARA TRANSICIONAR ESTADO DE LAS CLASES
+    public void transicionarEstadoClase(Clase clase, String estado) {
+    	clase.setEstado(estado);
     }
 
     public boolean calcularRentabilidad(Clase clase) {

@@ -2,27 +2,29 @@ package articulos;
 
 public class Colchoneta extends Articulo {
 
-	private String largo;
-    private String ancho;
+	private int largo;
+    private int ancho;
     
-    public Colchoneta(String tipo, int estado_desgaste) {
-		super(tipo, estado_desgaste);
+    public Colchoneta(String tipo, int largo, int ancho) {
+		super(tipo);
+		this.largo = largo;
+		this.ancho = ancho;
 	}
     
 
-	public String getLargo() {
+	public int getLargo() {
 		return this.largo;
 	}
 
-	public void setLargo(String largo) {
+	public void setLargo(int largo) {
 		this.largo = largo;
 	}
 
-	public String getAncho() {
+	public int getAncho() {
 		return this.ancho;
 	}
 
-	public void setAncho(String ancho) {
+	public void setAncho(int ancho) {
 		this.ancho = ancho;
 	}
 	

@@ -5,11 +5,12 @@ public class Pesa extends Articulo {
 	private int peso;
     private String uso;
     
-    public Pesa(String tipo, int peso) {
-		super(tipo, peso);
+    public Pesa(String tipo, int peso, String uso) {
+		super(tipo);
+		this.peso = peso;
+		this.uso = uso;
 	}
     
-
 	public int getPeso() {
 		return peso;
 	}
@@ -25,10 +26,19 @@ public class Pesa extends Articulo {
 	public void setUso(String uso) {
 		this.uso = uso;
 	}
-    
+
+	public int getEstadDesgaste() {
+		return this.estado_desgaste;
+	}
+
+
+	public void setEstadoDesgaste(int estado_desgaste) {
+		this.estado_desgaste = estado_desgaste;
+	}
+	
 	@Override
 	public void calcularDesgaste(int estado_desgaste) {
 		//CODIFICAR TEMA DESGASTE
 	}
-
+	
 }

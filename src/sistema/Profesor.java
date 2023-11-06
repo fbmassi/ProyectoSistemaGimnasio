@@ -4,6 +4,7 @@ public class Profesor {
 
     private String nombre;
     private int dni;
+    private long sueldo; 
     private int horario_clases;
     private Disciplina disciplina;
     private Clase ultima_clase;
@@ -45,7 +46,15 @@ public class Profesor {
     public int getDNI() {
         return this.dni;
     }
+    
+    public long getSueldo() {
+		return this.sueldo;
+	}
 
+	public void setSueldo(long sueldo) {
+		this.sueldo = sueldo;
+	}
+    
     public void setDisciplina(Disciplina disciplina) {
     	this.disciplina = disciplina;
     }

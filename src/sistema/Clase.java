@@ -10,6 +10,7 @@ public class Clase {
     private Disciplina disciplina;
     private String dia;
     private String horario;
+    private int duracion;
     private ArrayList<Socio> alumnos;
     private int cant_inscriptos;
     private String estado;
@@ -109,21 +110,34 @@ public class Clase {
         return this.cant_inscriptos < this.emplazamiento.getCapacidad();
     }
     
+    public long calcularCostos() {
+    	long costos = this.profesor.getSueldo()/90;
+    	if (emplazamiento.getNombre() == "AIRE LIBRE") {
+    		costos += 500*(emplazamiento.getSuperficie()/this.duracion);
+    	}
+    	
+		return costos;
+    	
+    }
     public void agregarAlumno(Socio alumno) {
-    	if (alumno.getNivelSuscripción() == this.sede.getNivelSuscripcion() && this.confirmarDisponibilidad()) {
-        	alumnos.add(alumno);
-        	this.cant_inscriptos += 1;
+    	if (alumno.getNivelSuscripción() == this.sede.getNivelSuscripcion() 
+    			&& alumno.getUltimaClase().getDia() != this.dia 
+    			&& this.confirmarDisponibilidad()) {
+    				alumno.setUltimaClase(this);
+		        	alumnos.add(alumno);
+		        	this.cant_inscriptos += 1;
     	} else {
     		System.out.println("NO SE PUEDE CONCRETAR LA INSCRIPCION.");
     	}
     }
 
     public void sacarAlumno(Socio alumno) { 
+    	alumno.setUltimaClase(null);
 	    alumnos.removeIf(socio -> socio == alumno);
 	    this.cant_inscriptos -= 1;
     }
     
-    public void grabarClase(int capacidad_de_grabación) {
-    	// CODIFICAR TEMA GRABACION
+    public void grabarClase() {
+    	//
     }
 }

@@ -4,8 +4,8 @@ public class ArticuloPersonalizado extends Articulo {
 	
     private String descripcion;
     
-    public ArticuloPersonalizado(String tipo, String descripcion, int estado_desgaste) {
-		super(tipo, estado_desgaste);
+    public ArticuloPersonalizado(String tipo, String descripcion) {
+		super(tipo);
 		this.setDescripcion(descripcion);
 	}
     

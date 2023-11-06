@@ -45,7 +45,21 @@ public class Sede {
 	public HashMap<Articulo, Integer> getCantidadStock() {
 		return this.cantidad_stock;
 	}
-
+	
+	public void agregar_articulo(Articulo articulo, int cantidad) {
+		if (this.cantidad_stock.containsKey(articulo)) {
+    		this.cantidad_stock.put(articulo, this.cantidad_stock.get(articulo) + cantidad);
+    	} else {
+    		this.cantidad_stock.put(articulo, cantidad);
+    	}
+	}
+	
+	public void eliminarArticulo(Articulo articulo) {
+		if (cantidad_stock.containsKey(articulo)) {
+			cantidad_stock.remove(articulo);
+		}
+	}
+	
 	public void setCantidadStock(HashMap<Articulo, Integer> cantidad_stock) {
 		//CODIFICAR TEMA CANTIDAD DE STOCK
 	}
