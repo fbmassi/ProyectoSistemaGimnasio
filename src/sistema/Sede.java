@@ -6,22 +6,22 @@ public class Sede {
 
     private String nombre;
     private String ubicacion;
-    private int nivel_suscripcion;
+    private String nivel_suscripcion;
     private ArrayList<Clase> clases_en_sede;
     private HashMap<Articulo, Integer> cantidad_stock = new HashMap<>();
 
-    public Sede(String nombre, String ubicacion, int nivel_suscripcion) {
+    public Sede(String nombre, String ubicacion, String nivel_suscripcion) {
     	this.setNombre(nombre);
     	this.setUbicacion(ubicacion);
     	this.setNivelSuscripcion(nivel_suscripcion);
     }
 
-	public int getNivelSuscripcion() {
+	public String getNivelSuscripcion() {
 		return this.nivel_suscripcion;
 	}
 
-	public void setNivelSuscripcion(int nivel_suscripcion) {
-		this.nivel_suscripcion = nivel_suscripcion;
+	public void setNivelSuscripcion(String nivel_suscripcion2) {
+		this.nivel_suscripcion = nivel_suscripcion2;
 	}
 
 	public String getUbicacion() {

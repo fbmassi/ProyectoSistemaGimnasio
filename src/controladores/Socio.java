@@ -4,7 +4,8 @@ import sistema.Clase;
 public class Socio extends Usuario {
 	
 	private Clase ultima_clase;
-	private int nivel_suscripción;
+	private String nivel_suscripción;
+	private boolean alta;
 
     public Socio(String correo_electronico, String contraseña) {
         super(correo_electronico, contraseña);
@@ -14,11 +15,11 @@ public class Socio extends Usuario {
     		clase.agregarAlumno(this);
     }
 
-	public int getNivelSuscripción() {
+	public String getNivelSuscripción() {
 		return this.nivel_suscripción;
 	}
 
-	public void setNivelSuscripción(int nivel_suscripción) {
+	public void setNivelSuscripción(String nivel_suscripción) {
 			this.nivel_suscripción = nivel_suscripción;
 	}
 	
@@ -30,9 +31,17 @@ public class Socio extends Usuario {
 			this.ultima_clase = ultima_clase;
 	}
 	
-	@Override
-	public void visualizarClases() {
-		// CODIFICAR VISUALIZACION DE CLASES
+	public boolean isAlta() {
+		return alta;
 	}
+
+	public void setAlta(boolean alta) {
+		this.alta = alta;
+	}
+	
+	@Override
+	public void visualizarClases(){
+		// CODIFICAR VISUALIZACION DE CLASES
+		}
 	
 }

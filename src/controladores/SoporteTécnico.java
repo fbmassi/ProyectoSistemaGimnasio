@@ -36,8 +36,16 @@ public class SoporteTécnico extends Usuario {
     	}
     }
     
+    public Grabaciones getGrabaciones() {
+		return grabaciones;
+	}
+
+	public void setGrabaciones(Grabaciones grabaciones) {
+		this.grabaciones = grabaciones;
+	}
+    
     //METODO PARA CREAR SEDES
-    public void crearNuevaSede(String nombre, String ubicacion, int nivel_suscripcion) {
+    public void crearNuevaSede(String nombre, String ubicacion, String nivel_suscripcion) {
     	Sede sede = new Sede (nombre,ubicacion,nivel_suscripcion);
     	sedes.add(sede);
     }

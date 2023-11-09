@@ -44,26 +44,28 @@ public class Administrador extends Usuario {
 
 	//METODO PARA ELIMINAR CLASES GRABADAS
 	public void eliminarClases(){
-		Scanner scanner = new Scanner(System.in);
-		System.out.println("Ingrese la cantidad de clases de Yoga y Gimnasia que quiere borrar" +
-															"o '0' si no quiere borrar ninguna: ");
-		String cant_clases_a_borrar = scanner.nextLine();
-		try {
-			int clases_a_borrar = Integer.parseInt(cant_clases_a_borrar);
-			grabaciones.eliminarClases(clases_a_borrar);
-		} catch (Exception e) {
-			System.out.println("INGRESO NO VALIDO");
+		try (Scanner scanner = new Scanner(System.in)) {
+			System.out.println("Ingrese la cantidad de clases de Yoga y Gimnasia que quiere borrar" +
+																"o '0' si no quiere borrar ninguna: ");
+			String cant_clases_a_borrar = scanner.nextLine();
+			try {
+				int clases_a_borrar = Integer.parseInt(cant_clases_a_borrar);
+				grabaciones.eliminarClases(clases_a_borrar);
+			} catch (Exception e) {
+				System.out.println("INGRESO NO VALIDO");
+			}
 		}
 	}
 
 	//METODO PARA GESTIONAR LAS GRABACIONES DE CLASES
 	public void gestionarGrabaciones() {
 		verClasesGrabadaas(grabaciones);
-		Scanner scanner = new Scanner(System.in);
-		System.out.println("Desea eliminar algunas grabaciones? (S/N): ");
-		String borrar = scanner.nextLine();
-		if (borrar.toUpperCase() == "S") {
-			eliminarClases();
+		try (Scanner scanner = new Scanner(System.in)) {
+			System.out.println("Desea eliminar algunas grabaciones? (S/N): ");
+			String borrar = scanner.nextLine();
+			if (borrar.toUpperCase() == "S") {
+				eliminarClases();
+			}
 		}
 	}
 
@@ -103,6 +105,34 @@ public class Administrador extends Usuario {
         return false;
     }
     
+    
+    //METODO PARA MODIFICAR PERFIL DE CLIENTES
+    public void gestionarCliente(Socio socio) {
+    	try (Scanner scanner = new Scanner(System.in)) {
+			System.out.println("Ingrese A si quiere dar de alta un perfil,"
+					+ "B si lo quiere dar de baja o "
+					+ "N si desea cambiar el nivel de suscripcion: ");
+			String entrada = scanner.nextLine();
+			if (entrada.toUpperCase() == "A") {
+				socio.setAlta(true);
+			} else if (entrada.toUpperCase() == "B") {
+				socio.setAlta(false);
+			} else if (entrada.toUpperCase() == "N") {
+				System.out.println("Ingrese P si quiere cambiar a nivel Platinum,"
+						+ "B si quiere cambiar a Black o "
+						+ "O si quiere cambiar a Oro: ");
+				entrada = scanner.nextLine();
+				if (entrada.toUpperCase() == "P") {
+					socio.setNivelSuscripción("Platinum");
+				} else if (entrada.toUpperCase() == "B") {
+					socio.setNivelSuscripción("Black");;
+				} else if (entrada.toUpperCase() == "O") {
+					socio.setNivelSuscripción("Oro");;
+				}
+			}
+    	}
+    }
+    
 	@Override
 	public void visualizarClases() {
 		//CODIFICAR VISUALIZACION
@@ -115,5 +145,5 @@ public class Administrador extends Usuario {
 	public void solicitarAdministracion(Sede sede) {
 		//VER QUE ONDA
     }
-
+	
 }
