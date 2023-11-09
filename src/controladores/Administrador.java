@@ -23,6 +23,18 @@ public class Administrador extends Usuario {
 	public void agregarAccesoAClase(Clase clase) {
 		clases_a_administrar.add(clase);
 	}
+	
+	//METODO PARA MONITORIEAR LA CANTIDAD DE ARTICULOS EN UNA SEDE Y SU ESTADO DE DESGASTE
+	public void mostrarArticulosSede(Sede sede) {
+		HashMap<Articulo, Integer> articulos_de_sede = sede.getCantidadStock();
+		for (Map.Entry<Articulo, Integer > parCV: articulos_de_sede.entrySet() ) {
+            System.out.println("Articulo: " + parCV.getKey().getTipo()
+            		+ ", Estado de desgaste: " + parCV.getKey().getEstadoDesgaste()
+            		+ ", Cantidad disponible: " + parCV.getValue());
+        }
+	}
+	
+	
 	//METODO PARA AGREGAR MODIFICAR LA CANTIDAD DE ARTICULOS DE UNA SEDE
     public void agregarArticulos(Sede sede, Articulo articulo, int cantidad) {
     	sede.agregar_articulo(articulo, cantidad);
@@ -37,7 +49,12 @@ public class Administrador extends Usuario {
     public void transicionarEstadoClase(Clase clase, String estado) {
     	clase.setEstado(estado);
     }
-
+    
+    //METODO PARA AGREGAR CLASES A UNA SEDE
+    public void agregarClaseASede(Sede sede, Clase clase) {
+    	sede.agregarClase(clase);
+    }
+    
     public boolean calcularRentabilidad(Clase clase) {
     	//CODIFICAR CALCULO DE RENTABILIDAD
         return false;

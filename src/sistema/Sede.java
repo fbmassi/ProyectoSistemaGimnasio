@@ -7,15 +7,13 @@ public class Sede {
     private String nombre;
     private String ubicacion;
     private int nivel_suscripcion;
+    private ArrayList<Clase> clases_en_sede;
     private HashMap<Articulo, Integer> cantidad_stock = new HashMap<>();
 
     public Sede(String nombre, String ubicacion, int nivel_suscripcion) {
     	this.setNombre(nombre);
     	this.setUbicacion(ubicacion);
     	this.setNivelSuscripcion(nivel_suscripcion);
-    }
-    
-    public void sacarStock(Articulo articulo, int cantidad_stock) {
     }
 
 	public int getNivelSuscripcion() {
@@ -60,12 +58,27 @@ public class Sede {
 		}
 	}
 	
+	public void agregarClase(Clase clase) {
+		this.clases_en_sede.add(clase);
+	}
+	
+	public void removerClasesFinalizadas() {
+		for (Clase clase: clases_en_sede) {
+			if (clase.getEstado()=="FINALIZADA") {
+				this.clases_en_sede.remove(clase);
+			}
+		}
+	}
+	
 	public void setCantidadStock(HashMap<Articulo, Integer> cantidad_stock) {
 		//CODIFICAR TEMA CANTIDAD DE STOCK
 	}
     
     public void alertarBajoStock(int CantidadStock, int cant_pesas, int cant_colchonetas) {
     	//CODIFICAR ALERTA DE BAJO STOCK
+    }
+    
+    public void sacarStock(Articulo articulo, int cantidad_stock) {
     }
 
 }
