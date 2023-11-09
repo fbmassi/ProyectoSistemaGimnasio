@@ -11,6 +11,7 @@ public class SoporteTécnico extends Usuario {
     private ArrayList<Sede> sedes;
     private ArrayList<Articulo> articulos;
     private ArrayList<Clase> clases;
+    private Grabaciones grabaciones;
     
     public SoporteTécnico(String correo_electronico, String contraseña) {
 		super(correo_electronico, contraseña);
