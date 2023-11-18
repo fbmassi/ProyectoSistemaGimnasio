@@ -1,9 +1,14 @@
 package sistema;
 import java.util.*;
+
+import controladores.Administrador;
 import controladores.Socio;
+import controladores.SoporteTécnico;
 
 public class Clase {
-
+	
+	private SoporteTécnico creador_ST;
+	private Administrador admin;
     private Profesor profesor;
     private Sede sede;
     private Emplazamiento emplazamiento;
@@ -14,27 +19,57 @@ public class Clase {
     private ArrayList<Socio> alumnos;
     private int cant_inscriptos;
     private String estado;
-
-    public Clase(Profesor profesor, Sede sede, Emplazamiento emplazamiento, Disciplina disciplina, String dia, String horario) {
+    
+    
+    
+    public Clase(SoporteTécnico creador_ST, Administrador administrador, String nombre_profesor, String nombre_sede, String nombre_emplazamiento, String nombre_disciplina, String dia, String horario) {
+		
+    	this.creador_ST = creador_ST;
+    	this.admin = administrador;
     	
-    	if (profesor.getDisciplina() != disciplina || !profesor.confirmarHorario()) {
-    		System.out.println("EL PROFESOR NO PUEDE SER ASIGNADO A ESTA CLASE: " 
-    				+ profesor.getDisciplina() 
-    				+ "DEBE ASIGNAR OTRO PROFFESOR MANUALMENTE.");
-    	} else {
-    		this.profesor = profesor;
-    		profesor.setUltimaClase(this);
+    	for (Disciplina disc: creador_ST.getDisciplinas()) {
+            if (disc.getNombre().equals(nombre_disciplina)) {
+                this.disciplina = disc;
+            }
     	}
-    	
-    	this.emplazamiento = emplazamiento;
-    	this.disciplina = disciplina;
+            
+    	for (Profesor prof: creador_ST.getProfesores()) {
+            if (prof.getNombre().equals(nombre_profesor)) {
+            	if (prof.getDisciplina() == disciplina && profesor.confirmarHorario()) {
+            		System.out.println("EL PROFESOR NO PUEDE SER ASIGNADO A ESTA CLASE: " 
+            				+ profesor.getDisciplina().getNombre()
+            				+ "DEBE ASIGNAR OTRO PROFFESOR MANUALMENTE.");
+            		this.profesor = prof;
+            		profesor.setUltimaClase(this);
+            	}	
+            }
+    	}
+            
+        for (Sede sed: admin.getSedes()) {
+            if (sed.getNombre().equals(nombre_sede)) {
+                this.sede = sed;
+            }
+        }
+            
+        for (Emplazamiento emp: creador_ST.getEmplazamientos()) {
+            if (emp.getNombre().equals(nombre_emplazamiento)) {
+                this.emplazamiento = emp;
+            }
+        }
+            
     	this.dia = dia;
     	this.horario = horario;
     	this.alumnos = new ArrayList<>();
     	this.cant_inscriptos = 0;
     	this.estado = "AGENDADA";
-    }
+    	
+    	}
 
+    	
+    public void setAdmin(Administrador administrador) {
+    	this.admin = administrador;
+    }
+    
     public void setProfesor(Profesor profesor) {
     	if (profesor.getDisciplina() != disciplina || !profesor.confirmarHorario()) {
     		System.out.println("EL PROFESOR NO PUEDE SER ASIGNADO A ESTA CLASE: " 

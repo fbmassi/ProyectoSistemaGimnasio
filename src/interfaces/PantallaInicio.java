@@ -1,5 +1,5 @@
 package interfaces;
-
+import controladores.*;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -38,7 +38,6 @@ public class PantallaInicio extends javax.swing.JFrame {
         contraseñaUsuario = new javax.swing.JTextField();
         ingresarUsuario = new javax.swing.JButton();
         personalDeSoporteTécnico = new javax.swing.JLabel();
-        correoElectronicoST = new javax.swing.JTextField();
         contraseñaST = new javax.swing.JTextField();
         ingresarSoporteTecnico = new javax.swing.JButton();
 
@@ -98,13 +97,6 @@ public class PantallaInicio extends javax.swing.JFrame {
         personalDeSoporteTécnico.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         personalDeSoporteTécnico.setText("Personal de Soporte Téctnico");
 
-        correoElectronicoST.setText("Correo Electrónico...");
-        correoElectronicoST.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                correoElectronicoSTActionPerformed(evt);
-            }
-        });
-
         contraseñaST.setText("Contraseña...");
         contraseñaST.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -130,14 +122,9 @@ public class PantallaInicio extends javax.swing.JFrame {
                         .addComponent(tituloPrincipal))
                     .addGroup(panelPrincipalLayout.createSequentialGroup()
                         .addGap(58, 58, 58)
-                        .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(correoElectronicoST)
-                                .addComponent(personalDeSoporteTécnico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(contraseñaST, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPrincipalLayout.createSequentialGroup()
-                                .addComponent(ingresarSoporteTecnico, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(44, 44, 44))))
+                        .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(personalDeSoporteTécnico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(contraseñaST, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(panelPrincipalLayout.createSequentialGroup()
                         .addGap(156, 156, 156)
                         .addComponent(ingresarAdministradores, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -155,7 +142,10 @@ public class PantallaInicio extends javax.swing.JFrame {
                             .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(correoElectronicoAdmin)
                                 .addComponent(administradores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(contraseñaAdmin)))))
+                                .addComponent(contraseñaAdmin))))
+                    .addGroup(panelPrincipalLayout.createSequentialGroup()
+                        .addGap(104, 104, 104)
+                        .addComponent(ingresarSoporteTecnico, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelPrincipalLayout.setVerticalGroup(
@@ -182,11 +172,10 @@ public class PantallaInicio extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                 .addComponent(personalDeSoporteTécnico)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(correoElectronicoST, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(contraseñaST, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(ingresarSoporteTecnico, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(ingresarSoporteTecnico, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -197,9 +186,7 @@ public class PantallaInicio extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 27, Short.MAX_VALUE))
+            .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -221,23 +208,18 @@ public class PantallaInicio extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_contraseñaUsuarioActionPerformed
 
-    private void correoElectronicoSTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_correoElectronicoSTActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_correoElectronicoSTActionPerformed
-
     private void contraseñaSTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contraseñaSTActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_contraseñaSTActionPerformed
 
     private void ingresarSoporteTecnicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingresarSoporteTecnicoActionPerformed
-        String email = correoElectronicoST.getText();
         String contraseña = contraseñaST.getText();
-        correoElectronicoST.setText("");
         contraseñaST.setText("");
+        SoporteTécnico personalST = new SoporteTécnico(contraseña);
     }//GEN-LAST:event_ingresarSoporteTecnicoActionPerformed
 
     private void ingresarAdministradoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingresarAdministradoresActionPerformed
-        String email = correoElectronicoAdmin.getText();
+        String username = correoElectronicoAdmin.getText();
         String contraseña = contraseñaAdmin.getText();
         correoElectronicoAdmin.setText("");
         contraseñaAdmin.setText("");
@@ -291,7 +273,6 @@ public class PantallaInicio extends javax.swing.JFrame {
     private javax.swing.JTextField contraseñaST;
     private javax.swing.JTextField contraseñaUsuario;
     private javax.swing.JTextField correoElectronicoAdmin;
-    private javax.swing.JTextField correoElectronicoST;
     private javax.swing.JTextField correoElectronicoUsuario;
     private javax.swing.JButton ingresarAdministradores;
     private javax.swing.JButton ingresarSoporteTecnico;

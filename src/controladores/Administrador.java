@@ -5,9 +5,9 @@ import sistema.*;
 
 public class Administrador extends Usuario {
 	
+	private SoporteTécnico creador_ST;
 	private ArrayList<Sede> sedes_asignadas;
 	private ArrayList<Clase> clases_a_administrar;
-	private Grabaciones grabaciones;
 
 	public Administrador(String correo_electronico, String contraseña) {
 		super(correo_electronico, contraseña);
@@ -16,7 +16,14 @@ public class Administrador extends Usuario {
 	public ArrayList<Sede> getSedes() {
 		return this.sedes_asignadas;
 	}
-
+	
+	
+	public void crearNuevaSede(String nombre, String ubicacion, String nivel_suscripcion) {
+		Sede sede = new Sede(nombre, ubicacion, nivel_suscripcion);
+		this.sedes_asignadas.add(sede);
+		this.creador_ST.agregarSede(sede);
+	}
+	
 	public void agregarSede(Sede sede) {
 		this.sedes_asignadas.add(sede);
 	}
@@ -25,15 +32,11 @@ public class Administrador extends Usuario {
 		clases_a_administrar.add(clase);
 	}
 
-	public void setAccesoAGrabaciones(Grabaciones clases_grabadas) {
-		this.grabaciones = clases_grabadas;
-	}
-	
-	public void crearNuevaClase(Profesor profesor, Emplazamiento emplazamiento, Sede sede, Disciplina disciplina, String horario, String dia) {
-    	Clase clase = new Clase(profesor, sede, emplazamiento, disciplina, dia, horario);
+	public void crearNuevaClase(String nombre_profesor, String nombre_sede, String nombre_emplazamiento, String nombre_disciplina, String dia, String horario) {
+    	Clase clase = new Clase(this.creador_ST, this, nombre_profesor, nombre_sede, nombre_emplazamiento, nombre_disciplina, dia, horario);
     	clases_a_administrar.add(clase);
 		if (clase.getDisciplina().getVirtualidad()) {
-            grabaciones.agregarClase(clase);
+            creador_ST.guardarGrabacion(clase);
         }
     }
 
@@ -50,7 +53,7 @@ public class Administrador extends Usuario {
 			String cant_clases_a_borrar = scanner.nextLine();
 			try {
 				int clases_a_borrar = Integer.parseInt(cant_clases_a_borrar);
-				grabaciones.eliminarClases(clases_a_borrar);
+				creador_ST.getGrabaciones().eliminarClases(clases_a_borrar);
 			} catch (Exception e) {
 				System.out.println("INGRESO NO VALIDO");
 			}
@@ -59,7 +62,7 @@ public class Administrador extends Usuario {
 
 	//METODO PARA GESTIONAR LAS GRABACIONES DE CLASES
 	public void gestionarGrabaciones() {
-		verClasesGrabadaas(grabaciones);
+		verClasesGrabadaas(creador_ST.getGrabaciones());
 		try (Scanner scanner = new Scanner(System.in)) {
 			System.out.println("Desea eliminar algunas grabaciones? (S/N): ");
 			String borrar = scanner.nextLine();
@@ -100,12 +103,6 @@ public class Administrador extends Usuario {
     	sede.agregarClase(clase);
     }
     
-    public boolean calcularRentabilidad(Clase clase) {
-    	//CODIFICAR CALCULO DE RENTABILIDAD
-        return false;
-    }
-    
-    
     //METODO PARA MODIFICAR PERFIL DE CLIENTES
     public void gestionarCliente(Socio socio) {
     	try (Scanner scanner = new Scanner(System.in)) {
@@ -137,6 +134,11 @@ public class Administrador extends Usuario {
 	public void visualizarClases() {
 		//CODIFICAR VISUALIZACION
 	}
+	
+	public boolean calcularRentabilidad(Clase clase) {
+    	//CODIFICAR CALCULO DE RENTABILIDAD
+        return false;
+    }
 	
 	public void gestionarSede(Sede sede) {
 		//VER QUE ONDA

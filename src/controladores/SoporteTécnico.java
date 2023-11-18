@@ -3,46 +3,41 @@ import java.util.*;
 import articulos.*;
 import sistema.*;
 
-public class SoporteTécnico extends Usuario {
+public class SoporteTécnico {
 
-	private ArrayList<Administrador> administradores;
+    private ArrayList<Administrador> administradores;
     private ArrayList<Socio> clientes;
     private ArrayList<Profesor> profesores;
     private ArrayList<Sede> sedes;
     private ArrayList<Articulo> articulos;
     private ArrayList<Clase> clases;
+    private ArrayList<Disciplina> disciplinas;
+    private ArrayList<Emplazamiento> emplazamientos;
     private Grabaciones grabaciones;
+    private String contraseña = "uade_TPO_POO";
     
-    public SoporteTécnico(String correo_electronico, String contraseña) {
-		super(correo_electronico, contraseña);
-    }  
+    public SoporteTécnico(String contraseña) {
+    }
+    
+    public boolean iniciarSesion(String contraseña) {
+        return contraseña.equals(this.contraseña);
+    }
     
     //METODOS PARA CREAR Y DAR DE BAJA A OTROS USUARIOS
     public void crearAdmin(String correo_electronico, String contraseña) {
-    	Administrador admin = new Administrador(correo_electronico, contraseña);
-    	administradores.add(admin);
+        Administrador admin = new Administrador(correo_electronico, contraseña);
+        administradores.add(admin);
     }
     
     public void crearCliente(String correo_electronico, String contraseña) {
-    	Socio socio = new Socio(correo_electronico, contraseña);
-    	clientes.add(socio);
+        Socio socio = new Socio(correo_electronico, contraseña);
+        clientes.add(socio);
     }
     
-    public void darDeBajaUsuarios(Usuario usuario){
-    	try {
-    		administradores.removeIf(administrador -> administrador == usuario);
-    	} catch (Exception e) {
-    		clientes.removeIf(cliente -> cliente == usuario);
-    	}
+    public void darDeBajaUsuarios(String username) {
+        administradores.removeIf(administrador -> administrador.getUsername().equals(username));
+        clientes.removeIf(cliente -> cliente.getUsername().equals(username));
     }
-    
-    public Grabaciones getGrabaciones() {
-		return grabaciones;
-	}
-
-	public void setGrabaciones(Grabaciones grabaciones) {
-		this.grabaciones = grabaciones;
-	}
     
     //METODO PARA CREAR SEDES
     public void crearNuevaSede(String nombre, String ubicacion, String nivel_suscripcion) {
@@ -51,16 +46,26 @@ public class SoporteTécnico extends Usuario {
     }
     
     //METODO PARA ASIGNAR LA SEDE A UN ADMINISTRADOR
-    public void asignarSede(Sede sede, Administrador administrador) {
- 	   administrador.agregarSede(sede);	
- 	}
+    public void asignarSede(String nombre_sede, String username_admin) {
+    	for (Administrador administrador: administradores) {
+    		if (administrador.getUsername().equals(username_admin)) {
+    			for (Sede sede: sedes) {
+    	    		if (sede.getNombre().equals(nombre_sede)) {
+    	    			administrador.agregarSede(sede);	
+    	    		}
+    			}
+    		}
+    	}
+    }
     
     //METODO PARA CREAR CLASES
-    public void crearNuevaClase(Profesor profesor, Emplazamiento emplazamiento, Sede sede, Disciplina disciplina, String horario, String dia) {
-    	Clase clase = new Clase(profesor, sede, emplazamiento, disciplina, dia, horario);
+    public void crearNuevaClase(String nombre_profesor, String nombre_sede, String nombre_emplazamiento, String nombre_disciplina, String dia, String horario) {
+    	Clase clase = new Clase(this, null, nombre_profesor, nombre_sede, nombre_emplazamiento, nombre_disciplina, dia, horario);
     	for (Administrador administrador: administradores) {
-    		if (administrador.getSedes().contains(sede)) {
-    			administrador.agregarAccesoAClase(clase);
+    		for (Sede sede: administrador.getSedes()) {
+	    		if (sede.getNombre().equals(nombre_sede)) {
+	    			administrador.agregarAccesoAClase(clase);
+	    		}
     		}
     	}
     	clases.add(clase);
@@ -111,18 +116,56 @@ public class SoporteTécnico extends Usuario {
         }
     }
     
-    public void crearProfesor(String nombre, int dni, Disciplina disciplina) {
-    	Profesor profesor = new Profesor(nombre, dni, disciplina);
-    	profesores.add(profesor);
-    }
-
-    public void darDeBajaProfesor(Profesor profesor) {
-    	profesores.removeIf(profe -> profe == profesor);
+    public void crearProfesor(String nombre, String disciplina) {
+        for (Disciplina disc: disciplinas) {
+            if (disc.getNombre().equals(disciplina)) {
+                Profesor profesor = new Profesor(nombre, disc);
+                profesores.add(profesor);
+            } else {
+                System.out.println("NO EXISTE LA DISCIPLINA INGRESADA.");
+            }
+        }
     }
     
-	@Override
-	public void visualizarClases() {
-		//CODIFICAR
+    
+     
+    
+    //AGRUPAR LOS SIGUIENTES METODOS
+    public void darDeBajaProfesor(String nombre_profesor) {
+    	profesores.removeIf(profe -> profe.getNombre().equals(nombre_profesor));
+    }
+    
+    public ArrayList<Profesor> getProfesores(){
+    	return this.profesores;
+    }
+
+	public ArrayList<Emplazamiento> getEmplazamientos() {
+		return emplazamientos;
+	}
+	
+	public ArrayList<Disciplina> getDisciplinas() {
+		return this.disciplinas;
+	}
+	
+	public void crearEmplazamiento(int capacidad, int superficie, String nombre) {
+		Emplazamiento emplazamiento = new Emplazamiento(capacidad, superficie, nombre);
+		this.emplazamientos.add(emplazamiento);
+	}
+	
+	public void agregarEmplazamientos(Emplazamiento emplazamiento) {
+		this.emplazamientos.add(emplazamiento);
 	}
 
+	public void agregarSede(Sede sede) {
+		this.sedes.add(sede);
+		
+	}
+	
+	public void guardarGrabacion(Clase clase) {
+    	grabaciones.agregarClase(clase);
+    }
+    
+    public Grabaciones getGrabaciones() {
+    	return this.grabaciones;
+    }
 }

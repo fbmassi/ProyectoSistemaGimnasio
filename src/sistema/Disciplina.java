@@ -6,35 +6,36 @@ public class Disciplina {
     private boolean virtualidad;
     private boolean capaciadad_de_grabación;
 
-    public Disciplina(String nombre, boolean virtualidad) {
+    public Disciplina(String nombre, String virtualidad) {
     	this.nombre = nombre;
     	if (nombre != "YOGA" && nombre != "GIMNASIA POSTURAL") {
-    			this.virtualidad = false;
-    			this.capaciadad_de_grabación = false;
+            this.virtualidad = false;
+            this.capaciadad_de_grabación = false;
     	} else if (nombre == "YOGA") {
-    		this.virtualidad = virtualidad;
-    		if (virtualidad) {
-    			this.capaciadad_de_grabación = true;
-    		} else {
-    			this.capaciadad_de_grabación = false;
-    		}
+            if (virtualidad == "V") {
+                this.capaciadad_de_grabación = true;
+                this.virtualidad = true;
+            } else {
+                this.capaciadad_de_grabación = false;
+                this.virtualidad = false;
+            }
     	} else {
-    		this.virtualidad = virtualidad;
-    		if (virtualidad) {
-    			this.capaciadad_de_grabación = true;
-    		} else {
-    			this.capaciadad_de_grabación = false;
-    		}
+            if (virtualidad == "V") {
+                this.capaciadad_de_grabación = true;
+                this.virtualidad = true;
+            } else {
+                this.capaciadad_de_grabación = false;
+                this.virtualidad = false;
+            }
     	}
-    	
     }
 
     public void setNombre(String nombre) {
     	this.nombre = nombre;
     	if (nombre != "YOGA" && nombre != "GIMNASIA POSTURAL") {
-			this.virtualidad = false;
-			this.capaciadad_de_grabación = false;
-		} 
+            this.virtualidad = false;
+            this.capaciadad_de_grabación = false;
+        } 
     }
 
     public String getNombre() {
@@ -43,32 +44,32 @@ public class Disciplina {
     
     public void setVirtualidad(boolean virtualidad) {
     	if (this.nombre == "YOGA") {
-			this.virtualidad = virtualidad;
-			if (virtualidad) {
-				this.capaciadad_de_grabación = true;
-			}
-			else {
-    			this.capaciadad_de_grabación = false;
-    		}
-		} else if (this.nombre == "GIMNASIA POSTURAL") {
-			this.virtualidad = virtualidad;
-			if (virtualidad) {
-				this.capaciadad_de_grabación = true;
-			}
-			else {
-    			this.capaciadad_de_grabación = false;
-    		}
-		} else {
-			this.virtualidad = false;
-			this.capaciadad_de_grabación = false;
-		}
+            this.virtualidad = virtualidad;
+            if (virtualidad) {
+                    this.capaciadad_de_grabación = true;
+            }
+            else {
+            this.capaciadad_de_grabación = false;
+        }
+        } else if (this.nombre == "GIMNASIA POSTURAL") {
+            this.virtualidad = virtualidad;
+            if (virtualidad) {
+                    this.capaciadad_de_grabación = true;
+            }
+            else {
+            this.capaciadad_de_grabación = false;
+        }
+        } else {
+            this.virtualidad = false;
+            this.capaciadad_de_grabación = false;
+        }
     }
     
     public boolean getVirtualidad() {
-		return this.virtualidad;
+        return this.virtualidad;
     }
     
     public boolean getCapacidadDeGrabacion() {
-		return this.capaciadad_de_grabación;
+        return this.capaciadad_de_grabación;
     }
 }

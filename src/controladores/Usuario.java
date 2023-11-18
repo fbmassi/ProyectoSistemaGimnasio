@@ -6,11 +6,11 @@ public abstract class Usuario {
     private String apellido;
     private int dni;
     protected String contraseña;
-    protected String correo_electronico;
+    protected String username;
     private boolean inicio_sesion;
 
-    public Usuario(String correo_electronico,String contraseña) {
-    	this.correo_electronico = correo_electronico;
+    public Usuario(String username,String contraseña) {
+    	this.username = username;
     	this.contraseña = contraseña;
     }
 
@@ -24,8 +24,8 @@ public abstract class Usuario {
         return this.nombre;
     }
     
-    public String getCorreoElectronico() {
-		return this.correo_electronico;
+    public String getUsername() {
+		return this.username;
     	
     }
     public void setApellido(String apellido) {
@@ -48,8 +48,8 @@ public abstract class Usuario {
         return this.dni;
     }
 
-    public void iniciarSesion(String correo_electronico, String contraseña) {
-    	if (this.correo_electronico ==  correo_electronico && this.contraseña == contraseña) {
+    public void iniciarSesion(String username, String contraseña) {
+    	if (this.username.equals(username) && this.contraseña.equals(contraseña)) {
     		this.inicio_sesion = true;
     	} else {
     		this.inicio_sesion = false;
@@ -93,8 +93,8 @@ public abstract class Usuario {
                     }
                 } else if (editar.equals("E")) {
                     System.out.print("Ingrese su nuevo correo electrónico: ");
-                    String correo_electronico = scanner.nextLine();
-                    this.correo_electronico = correo_electronico;
+                    String username = scanner.nextLine();
+                    this.username = username;
                 } else if (editar.equals("C")) {
                     System.out.print("Ingrese su nueva contraseña: ");
                     String contraseña = scanner.nextLine();

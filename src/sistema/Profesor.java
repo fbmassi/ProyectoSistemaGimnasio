@@ -3,24 +3,13 @@ package sistema;
 public class Profesor {
 
     private String nombre;
-    private int dni;
     private long sueldo; 
-    private int horario_clases;
     private Disciplina disciplina;
     private Clase ultima_clase;
 
-    public Profesor(String nombre, int dni, Disciplina disciplina) {
+    public Profesor(String nombre, Disciplina disciplina) {
     	this.nombre = nombre;
-    	this.dni = dni;
     	this.disciplina = disciplina;
-    }
-
-    public void setHorario(int horario_clases) {
-    	this.horario_clases = horario_clases;
-    }
-
-    public int getHorario() {
-        return this.horario_clases;
     }
 
     public void setUltimaClase(Clase clase) {
@@ -37,14 +26,6 @@ public class Profesor {
 
     public String getNombre() {
         return this.nombre;
-    }
-
-    public void setDNI(int dni) {
-    	this.dni = dni;
-    }
-
-    public int getDNI() {
-        return this.dni;
     }
     
     public long getSueldo() {

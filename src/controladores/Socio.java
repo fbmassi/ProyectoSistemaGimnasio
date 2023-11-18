@@ -1,8 +1,11 @@
 package controladores;
-import sistema.Clase;
+import java.util.*;
+
+import sistema.*;
 
 public class Socio extends Usuario {
 	
+	private SoporteTécnico creador_ST;
 	private Clase ultima_clase;
 	private String nivel_suscripción;
 	private boolean alta;
@@ -12,7 +15,7 @@ public class Socio extends Usuario {
     }
 	
     public void pedirReseva(Clase clase) {
-    		clase.agregarAlumno(this);
+    	clase.agregarAlumno(this);
     }
 
 	public String getNivelSuscripción() {
@@ -37,6 +40,10 @@ public class Socio extends Usuario {
 
 	public void setAlta(boolean alta) {
 		this.alta = alta;
+	}
+	
+	public void verGrabaciones() {
+		//CODIFICAR VISUALIZACION DE CLASES GRABADAS
 	}
 	
 	@Override

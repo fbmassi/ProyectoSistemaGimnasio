@@ -6,6 +6,8 @@
 		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="true"/>
 		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
 		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+			<item value="/Users/francobmassi/Documentos/FACULTAD/MATERIAS/2º SEGUNDO AÑO/2º SEMESTRE/Paradigma Orientado a Objetos/TPO"/>
+			<item value="/Users/francobmassi/Documentos/FACULTAD/MATERIAS/2º SEGUNDO AÑO/2º SEMESTRE/Paradigma Orientado a Objetos/TPO/Proyecto_Sistema_Gimnasio"/>
 			<item value="C:\Users\franc\OneDrive\Documents\GitHub\Proyecto_Sistema_Gimnasio"/>
 			<item value="C:\Users\franc\OneDrive\Documents\GitHub"/>
 		</list>

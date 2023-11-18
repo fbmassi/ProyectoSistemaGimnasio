@@ -1,9 +1,11 @@
 package sistema;
 import java.util.*;
 import articulos.Articulo;
+import controladores.Administrador;
 
 public class Sede {
-
+	
+	private Administrador admin;
     private String nombre;
     private String ubicacion;
     private String nivel_suscripcion;
@@ -15,7 +17,15 @@ public class Sede {
     	this.setUbicacion(ubicacion);
     	this.setNivelSuscripcion(nivel_suscripcion);
     }
+    
+    public Administrador getAdmin() {
+		return admin;
+	}
 
+	public void setAdmin(Administrador admin) {
+		this.admin = admin;
+	}
+	
 	public String getNivelSuscripcion() {
 		return this.nivel_suscripcion;
 	}
