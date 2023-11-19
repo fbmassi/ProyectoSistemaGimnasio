@@ -6,16 +6,16 @@ import controladores.Administrador;
 public class Sede {
 	
 	private Administrador admin;
-    private String nombre;
     private String ubicacion;
     private String nivel_suscripcion;
     private ArrayList<Clase> clases_en_sede;
-    private HashMap<Articulo, Integer> cantidad_stock = new HashMap<>();
+    private HashMap<Articulo, Integer> cantidad_stock;
 
-    public Sede(String nombre, String ubicacion, String nivel_suscripcion) {
-    	this.setNombre(nombre);
-    	this.setUbicacion(ubicacion);
-    	this.setNivelSuscripcion(nivel_suscripcion);
+    public Sede(String ubicacion, String nivel_suscripcion) {
+    	this.ubicacion = ubicacion.toUpperCase();
+    	this.nivel_suscripcion = nivel_suscripcion.toUpperCase();
+    	this.clases_en_sede = new ArrayList<Clase>();
+    	this.cantidad_stock = new HashMap<>();
     }
     
     public Administrador getAdmin() {
@@ -40,14 +40,6 @@ public class Sede {
 
 	public void setUbicacion(String ubicacion) {
 		this.ubicacion = ubicacion;
-	}
-
-	public String getNombre() {
-		return this.nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
 	}
 
 	public HashMap<Articulo, Integer> getCantidadStock() {

@@ -2,16 +2,16 @@ package sistema;
 
 public class Disciplina {
     
-    private String nombre;
+    private String tipo;
     private boolean virtualidad;
     private boolean capaciadad_de_grabación;
 
-    public Disciplina(String nombre, String virtualidad) {
-    	this.nombre = nombre;
-    	if (nombre != "YOGA" && nombre != "GIMNASIA POSTURAL") {
+    public Disciplina(String tipo, String virtualidad) {
+    	this.tipo = tipo.toUpperCase();
+    	if (tipo != "YOGA" && tipo != "GIMNASIA POSTURAL") {
             this.virtualidad = false;
             this.capaciadad_de_grabación = false;
-    	} else if (nombre == "YOGA") {
+    	} else if (tipo == "YOGA") {
             if (virtualidad == "V") {
                 this.capaciadad_de_grabación = true;
                 this.virtualidad = true;
@@ -31,19 +31,19 @@ public class Disciplina {
     }
 
     public void setNombre(String nombre) {
-    	this.nombre = nombre;
+    	this.tipo = nombre;
     	if (nombre != "YOGA" && nombre != "GIMNASIA POSTURAL") {
             this.virtualidad = false;
             this.capaciadad_de_grabación = false;
         } 
     }
 
-    public String getNombre() {
-        return this.nombre;
+    public String getTipo() {
+        return this.tipo;
     }
     
     public void setVirtualidad(boolean virtualidad) {
-    	if (this.nombre == "YOGA") {
+    	if (this.tipo == "YOGA") {
             this.virtualidad = virtualidad;
             if (virtualidad) {
                     this.capaciadad_de_grabación = true;
@@ -51,7 +51,7 @@ public class Disciplina {
             else {
             this.capaciadad_de_grabación = false;
         }
-        } else if (this.nombre == "GIMNASIA POSTURAL") {
+        } else if (this.tipo == "GIMNASIA POSTURAL") {
             this.virtualidad = virtualidad;
             if (virtualidad) {
                     this.capaciadad_de_grabación = true;

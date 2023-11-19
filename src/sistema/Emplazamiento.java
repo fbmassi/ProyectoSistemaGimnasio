@@ -4,12 +4,14 @@ public class Emplazamiento {
 
     private int capacidad;
     private int superficie;
-    private String nombre;
+    private String tipo;
     
-    public Emplazamiento(int capacidad, int superficie, String nombre) {
-    	this.setCapacidad(capacidad);
-    	this.setNombre(nombre);
-    	this.setSuperficie(superficie);
+    public Emplazamiento(String tipo, String capacidad, String superficie) {
+    	this.setTipo(tipo.toUpperCase());
+    	int capacidad_entero = Integer.parseInt(capacidad);
+    	this.capacidad = capacidad_entero;
+    	int superficie_entero = Integer.parseInt(superficie);
+    	this.superficie = superficie_entero;
     }
 
     public void setCapacidad(int capacidad) {
@@ -28,12 +30,12 @@ public class Emplazamiento {
         return this.superficie;
     }
 
-    public void setNombre(String nombre) {
-    	this.nombre = nombre;
-    }
+	public String getTipo() {
+		return this.tipo;
+	}
 
-    public String getNombre() {
-        return this.nombre;
-    }
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
     
 }

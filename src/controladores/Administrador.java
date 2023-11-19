@@ -5,21 +5,27 @@ import sistema.*;
 
 public class Administrador extends Usuario {
 	
-	private SoporteTécnico creador_ST;
+	public SoporteTécnico creador_ST;
 	private ArrayList<Sede> sedes_asignadas;
 	private ArrayList<Clase> clases_a_administrar;
 
-	public Administrador(String correo_electronico, String contraseña) {
-		super(correo_electronico, contraseña);
+	public Administrador(SoporteTécnico creador_ST, String username, String contraseña) {
+		super(username, contraseña);
+		this.creador_ST = creador_ST;
+		this.sedes_asignadas = new ArrayList<Sede>();
+		this.clases_a_administrar = new ArrayList<Clase>();
 	}
 	
 	public ArrayList<Sede> getSedes() {
 		return this.sedes_asignadas;
 	}
 	
+	public ArrayList<Clase> getClases() {
+		return this.clases_a_administrar;
+	}
 	
-	public void crearNuevaSede(String nombre, String ubicacion, String nivel_suscripcion) {
-		Sede sede = new Sede(nombre, ubicacion, nivel_suscripcion);
+	public void crearNuevaSede(String ubicacion, String nivel_suscripcion) {
+		Sede sede = new Sede(ubicacion, nivel_suscripcion);
 		this.sedes_asignadas.add(sede);
 		this.creador_ST.agregarSede(sede);
 	}
@@ -32,8 +38,8 @@ public class Administrador extends Usuario {
 		clases_a_administrar.add(clase);
 	}
 
-	public void crearNuevaClase(String nombre_profesor, String nombre_sede, String nombre_emplazamiento, String nombre_disciplina, String dia, String horario) {
-    	Clase clase = new Clase(this.creador_ST, this, nombre_profesor, nombre_sede, nombre_emplazamiento, nombre_disciplina, dia, horario);
+	public void crearNuevaClase(String nombre_profesor, String ubicacion_sede, String nombre_emplazamiento, String nombre_disciplina, String dia, String horario, String duracion) {
+    	Clase clase = new Clase(this.creador_ST, this.username, nombre_profesor, ubicacion_sede, nombre_emplazamiento, nombre_disciplina, dia, horario, duracion);
     	clases_a_administrar.add(clase);
 		if (clase.getDisciplina().getVirtualidad()) {
             creador_ST.guardarGrabacion(clase);

@@ -14,56 +14,75 @@ public class Clase {
     private Emplazamiento emplazamiento;
     private Disciplina disciplina;
     private String dia;
-    private String horario;
+    private int horario;
     private int duracion;
     private ArrayList<Socio> alumnos;
     private int cant_inscriptos;
     private String estado;
     
-    
-    
-    public Clase(SoporteTécnico creador_ST, Administrador administrador, String nombre_profesor, String nombre_sede, String nombre_emplazamiento, String nombre_disciplina, String dia, String horario) {
-		
+    public Clase(SoporteTécnico creador_ST, String username_administrador, String nombre_profesor, String ubicacion_sede, String nombre_emplazamiento, String nombre_disciplina, String dia, String horario, String duracion) {
+        
+    	int objNecesarios = 0;
     	this.creador_ST = creador_ST;
-    	this.admin = administrador;
     	
-    	for (Disciplina disc: creador_ST.getDisciplinas()) {
-            if (disc.getNombre().equals(nombre_disciplina)) {
+    	for (Administrador administrador : creador_ST.getAdministradores()) {
+            if (administrador.getUsername().equals(username_administrador.toUpperCase())) {
+                this.admin = administrador;
+                objNecesarios+=1;
+                break;
+            }
+        }
+        
+        
+        for (Disciplina disc : creador_ST.getDisciplinas()) {
+            if (disc.getTipo().equals(nombre_disciplina.toUpperCase())) {
                 this.disciplina = disc;
-            }
-    	}
-            
-    	for (Profesor prof: creador_ST.getProfesores()) {
-            if (prof.getNombre().equals(nombre_profesor)) {
-            	if (prof.getDisciplina() == disciplina && profesor.confirmarHorario()) {
-            		System.out.println("EL PROFESOR NO PUEDE SER ASIGNADO A ESTA CLASE: " 
-            				+ profesor.getDisciplina().getNombre()
-            				+ "DEBE ASIGNAR OTRO PROFFESOR MANUALMENTE.");
-            		this.profesor = prof;
-            		profesor.setUltimaClase(this);
-            	}	
-            }
-    	}
-            
-        for (Sede sed: admin.getSedes()) {
-            if (sed.getNombre().equals(nombre_sede)) {
-                this.sede = sed;
+                objNecesarios+=1;
+                break;
             }
         }
-            
-        for (Emplazamiento emp: creador_ST.getEmplazamientos()) {
-            if (emp.getNombre().equals(nombre_emplazamiento)) {
+
+        for (Profesor prof : creador_ST.getProfesores()) {
+            if (prof.getNombre().equals(nombre_profesor.toUpperCase()) && prof.confirmarHorario(dia, horario) && prof.getDisciplina() == disciplina) {
+                this.profesor = prof;
+                profesor.setUltimaClase(this);
+                objNecesarios+=1;
+                break;
+            }
+        }
+        
+        if (admin != null) {
+	        for (Sede sed : admin.getSedes()) {
+	            if (sed.getUbicacion().equals(ubicacion_sede.toUpperCase())) {
+	                this.sede = sed;
+	                objNecesarios+=1;
+	                break;
+	            }
+	        }
+        }
+        
+        for (Emplazamiento emp : creador_ST.getEmplazamientos()) {
+            if (emp.getTipo().equals(nombre_emplazamiento.toUpperCase())) {
                 this.emplazamiento = emp;
+                objNecesarios+=1;
+                break;
             }
         }
-            
-    	this.dia = dia;
-    	this.horario = horario;
-    	this.alumnos = new ArrayList<>();
-    	this.cant_inscriptos = 0;
-    	this.estado = "AGENDADA";
-    	
-    	}
+
+        if (objNecesarios >= 5) {
+            this.dia = dia.toUpperCase();
+            int horario_entero = Integer.parseInt(horario);
+            this.horario = horario_entero;
+            int duracion_entero = Integer.parseInt(duracion);
+            this.duracion = duracion_entero;
+            this.alumnos = new ArrayList<>();
+            this.cant_inscriptos = 0;
+            this.estado = "AGENDADA";
+        } else {
+        	this.estado = "FALTA OBJETO";
+        }
+    }
+
 
     	
     public void setAdmin(Administrador administrador) {
@@ -71,7 +90,7 @@ public class Clase {
     }
     
     public void setProfesor(Profesor profesor) {
-    	if (profesor.getDisciplina() != disciplina || !profesor.confirmarHorario()) {
+    	if (profesor.getDisciplina() != disciplina || !profesor.confirmarHorario(this.dia, this.horario)) {
     		System.out.println("EL PROFESOR NO PUEDE SER ASIGNADO A ESTA CLASE: " 
     				+ profesor.getDisciplina() 
     				+ "DEBE ASIGNAR OTRO PROFFESOR MANUALMENTE.");
@@ -126,10 +145,11 @@ public class Clase {
     }
 
     public void setHorario(String horario) {
-    	this.horario = horario;
+    	int horario_entero = Integer.parseInt(horario);
+    	this.horario = horario_entero;
     }
     
-    public String getHorario(){
+    public int getHorario(){
     	return this.horario;
     }
     
@@ -141,28 +161,32 @@ public class Clase {
     	return this.dia;
     }
     
+    public int getDuracion() {
+    	return this.duracion;
+    }
     public boolean confirmarDisponibilidad() {
         return this.cant_inscriptos < this.emplazamiento.getCapacidad();
     }
     
     public long calcularCostos() {
     	long costos = this.profesor.getSueldo()/90;
-    	if (emplazamiento.getNombre() == "AIRE LIBRE") {
+    	if (emplazamiento.getTipo() == "AIRE LIBRE") {
     		costos += 500*(emplazamiento.getSuperficie()/this.duracion);
     	}
     	
 		return costos;
-    	
     }
+    
     public void agregarAlumno(Socio alumno) {
-    	if (alumno.getNivelSuscripción() == this.sede.getNivelSuscripcion() 
-    			&& alumno.getUltimaClase().getDia() != this.dia 
+    	if (alumno.getNivelSuscripción().equals(this.sede.getNivelSuscripcion())
     			&& this.confirmarDisponibilidad()) {
-    				alumno.setUltimaClase(this);
-		        	alumnos.add(alumno);
-		        	this.cant_inscriptos += 1;
+    		if (alumno.getUltimaClase() != null && !alumno.getUltimaClase().getDia().equals(this.dia))
+				alumno.setUltimaClase(this);
+	        	alumnos.add(alumno);
+	        	this.cant_inscriptos += 1;
+	        	System.out.println("SE HIZO EFECTIVA LA INSCRIPCION");
     	} else {
-    		System.out.println("NO SE PUEDE CONCRETAR LA INSCRIPCION.");
+    		System.out.println("NO POSEE EL NIVEL DE SUSCRIPCION NECESARIO PARA LA SEDE.");
     	}
     }
 

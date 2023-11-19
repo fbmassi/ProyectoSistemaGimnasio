@@ -5,17 +5,30 @@ import sistema.*;
 
 public class Socio extends Usuario {
 	
-	private SoporteTécnico creador_ST;
+	public SoporteTécnico creador_ST;
 	private Clase ultima_clase;
 	private String nivel_suscripción;
 	private boolean alta;
 
-    public Socio(String correo_electronico, String contraseña) {
-        super(correo_electronico, contraseña);
+    public Socio(SoporteTécnico creador_ST, String username, String contraseña) {
+        super(username, contraseña);
+        this.creador_ST = creador_ST;
+        this.alta = true;
     }
 	
-    public void pedirReseva(Clase clase) {
-    	clase.agregarAlumno(this);
+    public void pedirReseva(String tipo_disciplina, String dia, String horario) {
+    	for (Clase clase: this.creador_ST.getClases()) {
+    		int horario_entero = Integer.parseInt(horario);
+    		if (clase.getDisciplina().getTipo().equals(tipo_disciplina.toUpperCase())
+    				&& clase.getDia().equals(dia.toUpperCase())
+    				&& clase.getHorario() == horario_entero) {
+    			clase.agregarAlumno(this);
+    		} else {
+    			System.out.println("NO SE ENCONTRO LA CLASE EN EL DIA Y HORARIO SOLICITADO.");
+    		}
+    	}
+    	
+    	
     }
 
 	public String getNivelSuscripción() {
@@ -23,7 +36,7 @@ public class Socio extends Usuario {
 	}
 
 	public void setNivelSuscripción(String nivel_suscripción) {
-			this.nivel_suscripción = nivel_suscripción;
+		this.nivel_suscripción = nivel_suscripción.toUpperCase();
 	}
 	
 	public Clase getUltimaClase() {
@@ -31,7 +44,7 @@ public class Socio extends Usuario {
 	}
 
 	public void setUltimaClase(Clase ultima_clase) {
-			this.ultima_clase = ultima_clase;
+		this.ultima_clase = ultima_clase;
 	}
 	
 	public boolean isAlta() {
