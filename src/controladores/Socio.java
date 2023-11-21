@@ -16,19 +16,21 @@ public class Socio extends Usuario {
         this.alta = true;
     }
 	
-    public void pedirReseva(String tipo_disciplina, String dia, String horario) {
+    public void pedirReseva(String ubicacion, String tipo_disciplina, String dia, String horario) {
+    	boolean inscipcion_no_exitosa = true;
     	for (Clase clase: this.creador_ST.getClases()) {
     		int horario_entero = Integer.parseInt(horario);
-    		if (clase.getDisciplina().getTipo().equals(tipo_disciplina.toUpperCase())
-    				&& clase.getDia().equals(dia.toUpperCase())
-    				&& clase.getHorario() == horario_entero) {
-    			clase.agregarAlumno(this);
-    		} else {
-    			System.out.println("NO SE ENCONTRO LA CLASE EN EL DIA Y HORARIO SOLICITADO.");
+    		if (clase.getSede().getUbicacion().equals(ubicacion.toUpperCase()) 
+				&& clase.getDisciplina().getTipo().equals(tipo_disciplina.toUpperCase())
+				&& clase.getDia().equals(dia.toUpperCase())
+				&& clase.getHorario() == horario_entero) {
+	    			clase.agregarAlumno(this);
+	    			inscipcion_no_exitosa = false;
     		}
     	}
-    	
-    	
+    	if (inscipcion_no_exitosa) {
+    		System.out.println("NO SE ENCONTRO LA CLASE EN EL DIA Y HORARIO SOLICITADO.");
+    	}
     }
 
 	public String getNivelSuscripción() {

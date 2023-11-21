@@ -5,7 +5,7 @@ import sistema.*;
 import articulos.*;
 
 public class Main {
-
+	
 	public static void main(String[] args) {
 		
 		/*
@@ -123,14 +123,14 @@ public class Main {
 		    - Desde el perfil, reservar lugares para clases presenciales o virtuales según corresponda.
 		*/
 		
-		String nombreUsuarioBuscado = "FBM";
+		String nombreUsuarioBuscado = "LEM";
 		Socio socioBuscado = null;
 
 		for (Socio socio : st.getClientes()) {
 		    if (nombreUsuarioBuscado.equals(socio.getUsername())) {
 		        socioBuscado = socio;
 		        socioBuscado.setNivelSuscripción("BLACK");
-			    socioBuscado.pedirReseva("CROSSFIT", "JUEVES", "18");
+			    socioBuscado.pedirReseva("BELGRANO", "CROSSFIT", "JUEVES", "18");
 		    }
 		}
 
@@ -150,7 +150,29 @@ public class Main {
 				socio.setNivelSuscripción("Gold");
 			}
 			*/
+		
+		
+		/*
+		 Administrativo:
+			Agendar clases para sedes asignadas.
+			Gestionar estados de clases y agregar nuevos artículos.
+			Administrar alta, baja y modificación de clientes.
+			Monitorear artículos (disponibilidad, desgaste) y dar de baja anticipada.
+			Monitorear clases almacenadas en el sistema de streaming.
+		 */
+		st.crearAdmin("cgabaglio", "Mora");
+		String nombreAdmoinBuscado = "cgabaglio";
+		st.crearNuevaClase("fbmassi", "Julieta", "Devoto", "AIRE LIBRE", "yoga", "MIERCOLES", "18", "3");
+		Administrador adminBuscado = null;
+		for (Administrador admin: st.getAdministradores()) {
+		    if (nombreAdmoinBuscado.equals(admin.getUsername())) {
+		    	adminBuscado = admin;
+		    	adminBuscado.agregarClaseASede("BELGRANO", "CROSSFIT", "JUEVES", "18");
+		    }
 		}
+		
+		
+		
 		
 		/*
 		PantallaInicio interfazInicio = new PantallaInicio();
@@ -161,4 +183,5 @@ public class Main {
             
 	}
 
+}
 

@@ -45,7 +45,36 @@ public class Administrador extends Usuario {
             creador_ST.guardarGrabacion(clase);
         }
     }
-
+	
+	/*
+    //METODO PARA AGREGAR CLASES A UNA SEDE
+    public void agregarClaseASede(String ubicacion_sede, Clase clase) {
+    	Sede sede_a_asignar = null;
+    	boolean existe_sede = false;
+    	for (Sede sede: this.creador_ST.getSedes()) {
+    		if (sede.getUbicacion().equals(ubicacion_sedeTO)) {
+    			sede_a_asignar = sede;
+    			existe_sede = true;
+    		}
+    	} if (existe_sede) {
+    		boolean existe_clase = false;
+    		for (Clase clase: this.creador_ST.getClases()) {
+        		if (clase.getDisciplina().getTipo().equals(ubicacion_sede.toUpperCase())
+        				&&
+        				&&
+        				&&) {
+        			sede_a_asignar = sede;
+        			existe_clase = true;
+        		}
+        
+        		
+    		sede_a_asignar.agregarClase(clase);
+    	} else {
+    		System.out.println("NO EXISTE LA SEDE");
+    	}
+    }
+    */
+	
 	//METODO PARA MOSTRAR CLASES GRABADAS
 	public void verClasesGrabadaas(Grabaciones grabaciones) {
 		grabaciones.mostrarGrabaciones();
@@ -80,13 +109,17 @@ public class Administrador extends Usuario {
 
 
 	//METODO PARA MONITORIEAR LA CANTIDAD DE ARTICULOS EN UNA SEDE Y SU ESTADO DE DESGASTE
-	public void mostrarArticulosSede(Sede sede) {
-		HashMap<Articulo, Integer> articulos_de_sede = sede.getCantidadStock();
-		for (Map.Entry<Articulo, Integer > parCV: articulos_de_sede.entrySet() ) {
-            System.out.println("Articulo: " + parCV.getKey().getTipo()
-            		+ ", Estado de desgaste: " + parCV.getKey().getEstadoDesgaste()
-            		+ ", Cantidad disponible: " + parCV.getValue());
-        }
+	public void mostrarArticulosSede(String ubicacion_sede) {
+		for (Sede sede: this.creador_ST.getSedes()) {
+    		if (sede.getUbicacion().equals(ubicacion_sede.toUpperCase())) {
+    			HashMap<Articulo, Integer> articulos_de_sede = sede.getCantidadStock();
+    			for (Map.Entry<Articulo, Integer > parCV: articulos_de_sede.entrySet() ) {
+    	            System.out.println("Articulo: " + parCV.getKey().getTipo()
+			    	            		+ ", Estado de desgaste: " + parCV.getKey().getEstadoDesgaste()
+			    	            		+ ", Cantidad disponible: " + parCV.getValue());
+    	        }
+    		}
+		}
 	}
 
 	//METODO PARA AGREGAR MODIFICAR LA CANTIDAD DE ARTICULOS DE UNA SEDE
@@ -102,11 +135,6 @@ public class Administrador extends Usuario {
     //METODO PARA TRANSICIONAR ESTADO DE LAS CLASES
     public void transicionarEstadoClase(Clase clase, String estado) {
     	clase.setEstado(estado);
-    }
-    
-    //METODO PARA AGREGAR CLASES A UNA SEDE
-    public void agregarClaseASede(Sede sede, Clase clase) {
-    	sede.agregarClase(clase);
     }
     
     //METODO PARA MODIFICAR PERFIL DE CLIENTES

@@ -82,6 +82,58 @@ public class Clase {
         	this.estado = "FALTA OBJETO";
         }
     }
+    
+    public Clase(SoporteTécnico creador_ST, String username_administrador, String nombre_profesor, String nombre_emplazamiento, String nombre_disciplina, String dia, String horario, String duracion) {
+    	int objNecesarios = 0;
+    	this.creador_ST = creador_ST;
+    	
+    	for (Administrador administrador : creador_ST.getAdministradores()) {
+            if (administrador.getUsername().equals(username_administrador.toUpperCase())) {
+                this.admin = administrador;
+                objNecesarios+=1;
+                break;
+            }
+        }
+        
+        
+        for (Disciplina disc : creador_ST.getDisciplinas()) {
+            if (disc.getTipo().equals(nombre_disciplina.toUpperCase())) {
+                this.disciplina = disc;
+                objNecesarios+=1;
+                break;
+            }
+        }
+
+        for (Profesor prof : creador_ST.getProfesores()) {
+            if (prof.getNombre().equals(nombre_profesor.toUpperCase()) && prof.confirmarHorario(dia, horario) && prof.getDisciplina() == disciplina) {
+                this.profesor = prof;
+                profesor.setUltimaClase(this);
+                objNecesarios+=1;
+                break;
+            }
+        
+        for (Emplazamiento emp : creador_ST.getEmplazamientos()) {
+            if (emp.getTipo().equals(nombre_emplazamiento.toUpperCase())) {
+                this.emplazamiento = emp;
+                objNecesarios+=1;
+                break;
+            }
+        }
+
+        if (objNecesarios >= 4) {
+            this.dia = dia.toUpperCase();
+            int horario_entero = Integer.parseInt(horario);
+            this.horario = horario_entero;
+            int duracion_entero = Integer.parseInt(duracion);
+            this.duracion = duracion_entero;
+            this.alumnos = new ArrayList<>();
+            this.cant_inscriptos = 0;
+            this.estado = "AGENDADA";
+        } else {
+        	this.estado = "FALTA OBJETO";
+        }
+    }
+    }
 
 
     	
