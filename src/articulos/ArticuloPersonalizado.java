@@ -14,7 +14,7 @@ public class ArticuloPersonalizado extends Articulo {
 	}
 
 	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+		this.descripcion = descripcion.toUpperCase();
 	}
 	
 	@Override

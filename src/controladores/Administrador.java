@@ -1,6 +1,6 @@
 package controladores;
 import java.util.*;
-import articulos.Articulo;
+import articulos.*;
 import sistema.*;
 
 public class Administrador extends Usuario {
@@ -45,41 +45,41 @@ public class Administrador extends Usuario {
             creador_ST.guardarGrabacion(clase);
         }
     }
-	
-	/*
+		
     //METODO PARA AGREGAR CLASES A UNA SEDE
-    public void agregarClaseASede(String ubicacion_sede, Clase clase) {
-    	Sede sede_a_asignar = null;
-    	boolean existe_sede = false;
-    	for (Sede sede: this.creador_ST.getSedes()) {
-    		if (sede.getUbicacion().equals(ubicacion_sedeTO)) {
-    			sede_a_asignar = sede;
-    			existe_sede = true;
+    public void agregarClaseASedeAsignada(String nombre_profesor, String nombre_emplazamiento, String nombre_disciplina, String dia, String horario, String duracion, String ubicacion_sede) {
+    	Clase clase = new Clase(creador_ST, this.username, nombre_profesor, nombre_emplazamiento, nombre_disciplina, dia, horario, duracion);
+    	boolean asignacion_realizada = false;
+    	for (Sede sede: sedes_asignadas) {
+    		if (sede.getUbicacion().equals(ubicacion_sede.toUpperCase())) {
+    			clase.setSede(sede);
+    			sede.agregarClase(clase);
+    			asignacion_realizada = true;
+    			System.out.println("SE CONCRETÓ LA INSCRIPCION.");
     		}
-    	} if (existe_sede) {
-    		boolean existe_clase = false;
-    		for (Clase clase: this.creador_ST.getClases()) {
-        		if (clase.getDisciplina().getTipo().equals(ubicacion_sede.toUpperCase())
-        				&&
-        				&&
-        				&&) {
-        			sede_a_asignar = sede;
-        			existe_clase = true;
-        		}
-        
-        		
-    		sede_a_asignar.agregarClase(clase);
-    	} else {
-    		System.out.println("NO EXISTE LA SEDE");
+    	}
+    	if (!asignacion_realizada) {
+    		System.out.println("LA SEDE SOLICITADA NO EXISTE, DEBE SOLICITAR SU CREACION AL SOPORTE TECNICO.");
     	}
     }
-    */
-	
+    	
 	//METODO PARA MOSTRAR CLASES GRABADAS
 	public void verClasesGrabadaas(Grabaciones grabaciones) {
 		grabaciones.mostrarGrabaciones();
 	}
-
+	
+	//METODO PARA GESTIONAR LAS GRABACIONES DE CLASES
+	public void gestionarGrabaciones() {
+		verClasesGrabadaas(creador_ST.getGrabaciones());
+		try (Scanner scanner = new Scanner(System.in)) {
+			System.out.println("Desea eliminar algunas grabaciones? (S/N): ");
+			String borrar = scanner.nextLine();
+			if (borrar.toUpperCase() == "S") {
+				eliminarClases();
+			}
+		}
+	}
+		
 	//METODO PARA ELIMINAR CLASES GRABADAS
 	public void eliminarClases(){
 		try (Scanner scanner = new Scanner(System.in)) {
@@ -95,75 +95,214 @@ public class Administrador extends Usuario {
 		}
 	}
 
-	//METODO PARA GESTIONAR LAS GRABACIONES DE CLASES
-	public void gestionarGrabaciones() {
-		verClasesGrabadaas(creador_ST.getGrabaciones());
-		try (Scanner scanner = new Scanner(System.in)) {
-			System.out.println("Desea eliminar algunas grabaciones? (S/N): ");
-			String borrar = scanner.nextLine();
-			if (borrar.toUpperCase() == "S") {
-				eliminarClases();
-			}
-		}
-	}
-
-
 	//METODO PARA MONITORIEAR LA CANTIDAD DE ARTICULOS EN UNA SEDE Y SU ESTADO DE DESGASTE
 	public void mostrarArticulosSede(String ubicacion_sede) {
+		HashMap<Pesa, Integer> tipos_de_pesa = new HashMap<>();
+		HashMap<Colchoneta, Integer> tipos_de_colchoneta = new HashMap<>();
+		HashMap<ArticuloPersonalizado, Integer> tipos_de_personalizados = new HashMap<>();
 		for (Sede sede: this.creador_ST.getSedes()) {
     		if (sede.getUbicacion().equals(ubicacion_sede.toUpperCase())) {
     			HashMap<Articulo, Integer> articulos_de_sede = sede.getCantidadStock();
-    			for (Map.Entry<Articulo, Integer > parCV: articulos_de_sede.entrySet() ) {
-    	            System.out.println("Articulo: " + parCV.getKey().getTipo()
-			    	            		+ ", Estado de desgaste: " + parCV.getKey().getEstadoDesgaste()
-			    	            		+ ", Cantidad disponible: " + parCV.getValue());
+    			for (Map.Entry<Articulo, Integer > parCV: articulos_de_sede.entrySet()) {
+    				if (parCV.getKey() instanceof Pesa) {
+    					tipos_de_pesa.put((Pesa) parCV.getKey(), parCV.getValue());
+    				} else if (parCV.getKey() instanceof Colchoneta) {
+    					tipos_de_colchoneta.put((Colchoneta) parCV.getKey(), parCV.getValue());
+    				} else if (parCV.getKey() instanceof ArticuloPersonalizado) {
+    					tipos_de_personalizados.put((ArticuloPersonalizado) parCV.getKey(), parCV.getValue());
+    				}	
     	        }
     		}
 		}
+		System.out.println("PESAS: ");
+		for (Map.Entry<Pesa, Integer > parCV: tipos_de_pesa.entrySet() ) {
+			System.out.println("Articulo: " + parCV.getKey().getTipo() + " "
+	        		+ parCV.getKey().getUso()  + " - "
+	        		+ "Peso: " + parCV.getKey().getPeso() + "kg - "
+	        		+ "Estado de desgaste: " + parCV.getKey().getEstadoDesgaste()
+	        		+ " - Cantidad disponible: " + parCV.getValue());
+		}
+		System.out.println("COLCHONETAS: ");
+		for (Map.Entry<Colchoneta, Integer > parCV: tipos_de_colchoneta.entrySet() ) {
+			System.out.println("Articulo: " + parCV.getKey().getTipo() + " - "
+					+ "Dimensiones: "
+	        		+ parCV.getKey().getLargo() + "mts de largo,  "
+	        		+ parCV.getKey().getAncho() + "mts de ancho"
+	        		+ " -  Estado de desgaste: " + parCV.getKey().getEstadoDesgaste() + " - "
+	        		+ "Cantidad disponible: " + parCV.getValue());
+		}
+		System.out.println("PERSONALIZADOS: ");
+		for (Map.Entry<ArticuloPersonalizado, Integer > parCV: tipos_de_personalizados.entrySet() ) {
+			System.out.println("Articulo: " + parCV.getKey().getTipo() + " - "
+					+ parCV.getKey().getDescripcion()
+	        		+ " - Estado de desgaste: " + parCV.getKey().getEstadoDesgaste()
+	        		+ " - Cantidad disponible: " + parCV.getValue());
+		}
+		/*
+		System.out.println("Articulo: " + parCV.getKey().getTipo()
+        		+ ", Estado de desgaste: " + parCV.getKey().getEstadoDesgaste()
+        		+ ", Cantidad disponible: " + parCV.getValue());
+        */
+		
 	}
 
 	//METODO PARA AGREGAR MODIFICAR LA CANTIDAD DE ARTICULOS DE UNA SEDE
-    public void agregarArticulos(Sede sede, Articulo articulo, int cantidad) {
-    	sede.agregar_articulo(articulo, cantidad);
-    }
+    public void agregarArticulos(String ubicacion_sede, String tipo, String pesoSTR, String uso, String largoSTR, String anchoSTR, String descripcion, String cantidad_a_agregar) {
+    	
+    	int cantidad = Integer.parseInt(cantidad_a_agregar);
+    	boolean existe_articulo = false;
+    	boolean existe_sede = false;
+    	
+    	ArrayList<Pesa> tipos_de_pesa = new ArrayList<Pesa>();
+    	ArrayList<Colchoneta> tipos_de_colchoneta = new ArrayList<Colchoneta>();
+    	ArrayList<ArticuloPersonalizado> tipos_de_personalizados = new ArrayList<ArticuloPersonalizado>();
+    	
+    	for (Articulo articulo1: this.creador_ST.getArticulos()) {
+			if (articulo1 instanceof Pesa) {
+				tipos_de_pesa.add((Pesa) articulo1);
+			} else if (articulo1 instanceof Colchoneta) {
+				tipos_de_colchoneta.add((Colchoneta) articulo1);
+			} else if (articulo1 instanceof ArticuloPersonalizado && this.creador_ST.getArticulos().contains(articulo1)) {
+				tipos_de_personalizados.add((ArticuloPersonalizado) articulo1);
+			}
+    	}
+    	
+    	for (Sede sede: creador_ST.getSedes()) {
+    		if (sede.getUbicacion().equals(ubicacion_sede.toUpperCase())) {
+    			existe_sede = true;
+    			if (tipo.toUpperCase().equals("PESA")) {
+    				int peso = Integer.parseInt(pesoSTR);
+    				for (Pesa pesa:tipos_de_pesa) {
+        				if(peso == pesa.getPeso() && uso.toUpperCase().equals(pesa.getUso())) {
+        					sede.agregarArticulo(pesa, cantidad);
+        					existe_articulo = true;
+        				}
+    				}
+    			} else if (tipo.toUpperCase().equals("COLCHONETA")) {
+    				int largo = Integer.parseInt(largoSTR);
+    				int ancho = Integer.parseInt(anchoSTR);
+    				for (Colchoneta colchoneta:tipos_de_colchoneta) {
+        				if(largo == colchoneta.getLargo() && ancho == colchoneta.getAncho()) {
+        					sede.agregarArticulo(colchoneta, cantidad);
+        					existe_articulo = true;
+        				}
+    				}
+    			} else if ((tipo.toUpperCase().equals("PERSONALIZADO")))
+					for (ArticuloPersonalizado articulo_personalizado: tipos_de_personalizados) {
+	    				if(descripcion.toUpperCase().equals(articulo_personalizado.getDescripcion())) {
+	    					sede.agregarArticulo(articulo_personalizado, cantidad);
+	    					existe_articulo = true;
+	    				}
+					}
+    		}
+    	}
+    	
+    	if (!existe_articulo && existe_sede) {
+    		System.out.println("NO EXISTE EL ARTICULO INGRESADO, PRIMERO DEBE CREARLA EL ST.");
+    		
+    	} else if (!existe_sede) {
+    		System.out.println("NO EXISTE LA SEDE SELECCIONADA, PRIMERO DEBE CREARLA EL ST.");
+    	}
+    } 	
+    
     
     //METODO PARA DAR DE BAJA ARTICULOS
-    public void eliminarArticuloDeSede(Sede sede, Articulo articulo_a_eliminar) {
-    	sede.eliminarArticulo(articulo_a_eliminar);
-    }
+    public void eliminarArticuloDeSede(String ubicacion_sede, String tipo, String pesoSTR, String uso, String largoSTR, String anchoSTR, String descripcion) {
+
+    	boolean existe_articulo = false;
+    	boolean existe_sede = false;
+    	
+    	ArrayList<Pesa> tipos_de_pesa = new ArrayList<Pesa>();
+    	ArrayList<Colchoneta> tipos_de_colchoneta = new ArrayList<Colchoneta>();
+    	ArrayList<ArticuloPersonalizado> tipos_de_personalizados = new ArrayList<ArticuloPersonalizado>();
+    	
+    	for (Articulo articulo1: this.creador_ST.getArticulos()) {
+			if (articulo1 instanceof Pesa) {
+				tipos_de_pesa.add((Pesa) articulo1);
+			} else if (articulo1 instanceof Colchoneta) {
+				tipos_de_colchoneta.add((Colchoneta) articulo1);
+			} else if (articulo1 instanceof ArticuloPersonalizado && this.creador_ST.getArticulos().contains(articulo1)) {
+				tipos_de_personalizados.add((ArticuloPersonalizado) articulo1);
+			}
+    	}
+    	
+    	for (Sede sede: creador_ST.getSedes()) {
+    		if (sede.getUbicacion().equals(ubicacion_sede.toUpperCase())) {
+    			existe_sede = true;
+    			if (tipo.toUpperCase().equals("PESA")) {
+    				int peso = Integer.parseInt(pesoSTR);
+    				for (Pesa pesa:tipos_de_pesa) {
+        				if(peso == pesa.getPeso() && uso.toUpperCase().equals(pesa.getUso())) {
+        					sede.eliminarArticulo(pesa);
+        					existe_articulo = true;
+        				}
+    				}
+    			} else if (tipo.toUpperCase().equals("COLCHONETA")) {
+    				int largo = Integer.parseInt(largoSTR);
+    				int ancho = Integer.parseInt(anchoSTR);
+    				for (Colchoneta colchoneta:tipos_de_colchoneta) {
+        				if(largo == colchoneta.getLargo() && ancho == colchoneta.getAncho()) {
+        					sede.eliminarArticulo(colchoneta);
+        					existe_articulo = true;
+        				}
+    				}
+    			} else if ((tipo.toUpperCase().equals("PERSONALIZADO")))
+					for (ArticuloPersonalizado articulo_personalizado: tipos_de_personalizados) {
+	    				if(descripcion.toUpperCase().equals(articulo_personalizado.getDescripcion())) {
+	    					sede.eliminarArticulo(articulo_personalizado);
+	    					existe_articulo = true;
+	    				}
+					}
+    		}
+    	}
+    	
+    	if (!existe_articulo && existe_sede) {
+    		System.out.println("NO EXISTE EL ARTICULO INGRESADO.");
+    		
+    	} else if (!existe_sede) {
+    		System.out.println("NO EXISTE LA SEDE SELECCIONADA.");
+    	}
+    } 	
+    
     
     //METODO PARA TRANSICIONAR ESTADO DE LAS CLASES
     public void transicionarEstadoClase(Clase clase, String estado) {
     	clase.setEstado(estado);
     }
     
-    //METODO PARA MODIFICAR PERFIL DE CLIENTES
-    public void gestionarCliente(Socio socio) {
-    	try (Scanner scanner = new Scanner(System.in)) {
-			System.out.println("Ingrese A si quiere dar de alta un perfil,"
-					+ "B si lo quiere dar de baja o "
-					+ "N si desea cambiar el nivel de suscripcion: ");
-			String entrada = scanner.nextLine();
-			if (entrada.toUpperCase() == "A") {
-				socio.setAlta(true);
-			} else if (entrada.toUpperCase() == "B") {
-				socio.setAlta(false);
-			} else if (entrada.toUpperCase() == "N") {
-				System.out.println("Ingrese P si quiere cambiar a nivel Platinum,"
-						+ "B si quiere cambiar a Black o "
-						+ "O si quiere cambiar a Oro: ");
-				entrada = scanner.nextLine();
-				if (entrada.toUpperCase() == "P") {
-					socio.setNivelSuscripción("Platinum");
-				} else if (entrada.toUpperCase() == "B") {
-					socio.setNivelSuscripción("Black");;
-				} else if (entrada.toUpperCase() == "O") {
-					socio.setNivelSuscripción("Oro");;
-				}
-			}
+    //METODO PARA MODIFICAR EL ALTA DEL PERFIL DE CLIENTES
+    public void gestionarAltaCliente(String username, String alta) {
+    	for (Socio socio: this.creador_ST.getClientes()) {
+    		if (socio.getUsername().equals(username.toUpperCase())){
+    			if (alta.toUpperCase().equals("ALTA")){
+    				socio.setAlta(true);
+    			} else if (alta.toUpperCase().equals("BAJA")) {
+    				socio.setAlta(false);
+    			} else {
+    				System.out.println("Lo siento, el estado ingresado no existe.");
+    			}
+    		}
     	}
     }
     
+    //METODO PARA GESTIONAR NIVEL DE SUSCRIPCION
+    public void gestionarNivelSuscripcionCliente(String username, String nivel_suscripcion) {
+    	for (Socio socio: this.creador_ST.getClientes()) {
+    		if (socio.getUsername().equals(username.toUpperCase())){
+    			if (nivel_suscripcion.toUpperCase().equals("PLATINUM")) {
+    				socio.setNivelSuscripción("Platinum");
+    			} else if (nivel_suscripcion.toUpperCase().equals("BLACK")) {
+    				socio.setNivelSuscripción("Black");;
+    			} else if (nivel_suscripcion.toUpperCase().equals("ORO")) {
+    				socio.setNivelSuscripción("Oro");;
+    			} else {
+    				System.out.println("Lo siento, el nivel de suscripcion deseado no existe.");
+    			}
+    		}
+    	}
+    }
+    
+    	
 	@Override
 	public void visualizarClases() {
 		//CODIFICAR VISUALIZACION

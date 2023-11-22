@@ -109,7 +109,7 @@ public class Main {
 		st.crearArticulo("PESA", "8", "DE TOBILLERA", null, null, null);
 		st.crearArticulo("PESA", "15", "DE MANO", null, null, null);
 		st.crearArticulo("COLCHONETA", null, null, "2", "1", null);
-		st.crearArticulo("COLCHONETA", null, null, "2", "1", null);
+		st.crearArticulo("COLCHONETA", null, null, "4", "1", null);
 		for (Articulo art: st.getArticulos()) {
 			System.out.println(art.getTipo());
 		}
@@ -122,10 +122,9 @@ public class Main {
 		Cliente:
 		    - Desde el perfil, reservar lugares para clases presenciales o virtuales según corresponda.
 		*/
-		
+		System.out.println("NOS INSCRIBIMOS A UNA CLASE");
 		String nombreUsuarioBuscado = "LEM";
 		Socio socioBuscado = null;
-
 		for (Socio socio : st.getClientes()) {
 		    if (nombreUsuarioBuscado.equals(socio.getUsername())) {
 		        socioBuscado = socio;
@@ -133,55 +132,79 @@ public class Main {
 			    socioBuscado.pedirReseva("BELGRANO", "CROSSFIT", "JUEVES", "18");
 		    }
 		}
-
-		/*
-		for (Socio socio: st.getClientes()) {
-			System.out.println(socio.getUsername());
-		}
-		
-		for (Socio socio: st.getClientes()) {
-			System.out.println(socio.getUsername()=="FBM");
-			if (socio.getUsername() == "FBM") {
-				socio.setNivelSuscripción("BLACK");
-				socio.pedirReseva("CROSSFIT", "JUEVES", "18");
-		}
-			/*
-			if (socio.getUsername() == "LEM") {
-				socio.setNivelSuscripción("Gold");
-			}
-			*/
-		
+		System.out.println("\n");
 		
 		/*
 		 Administrativo:
-			Agendar clases para sedes asignadas.
+			Agendar clases para sedes.
 			Gestionar estados de clases y agregar nuevos artículos.
 			Administrar alta, baja y modificación de clientes.
 			Monitorear artículos (disponibilidad, desgaste) y dar de baja anticipada.
 			Monitorear clases almacenadas en el sistema de streaming.
 		 */
+		
+		//METODO PARA AGENDAR CLASES PARA SEDES.
 		st.crearAdmin("cgabaglio", "Mora");
+		st.crearNuevaSede("Recoleta", "Black");
+		st.asignarSede("Recoleta", "cgabaglio");
 		String nombreAdmoinBuscado = "cgabaglio";
-		st.crearNuevaClase("fbmassi", "Julieta", "Devoto", "AIRE LIBRE", "yoga", "MIERCOLES", "18", "3");
-		Administrador adminBuscado = null;
+		st.crearNuevaClase("cgabaglio", "Julieta", "Recoleta", "AIRE LIBRE", "yoga", "Lunes", "18", "3");
 		for (Administrador admin: st.getAdministradores()) {
-		    if (nombreAdmoinBuscado.equals(admin.getUsername())) {
-		    	adminBuscado = admin;
-		    	adminBuscado.agregarClaseASede("BELGRANO", "CROSSFIT", "JUEVES", "18");
+		    if (nombreAdmoinBuscado.toUpperCase().equals(admin.getUsername())) {
+		    	System.out.println("ASIGNAMOS UNA CLASE A UNA SEDE");
+		    	admin.agregarClaseASedeAsignada("julieta", "AIRE LIBRE", "yoga", "Lunes", "18", "3", "Recoleta");
+		    	System.out.println(admin.getSedes().get(0).getClases().get(0).getSede().getUbicacion());
+		    	
+		    	
+		    	System.out.println("\n");
+		    	System.out.println("CAMBIAMOS EL ALTA Y EL NIVEL DE SUSCRICION");
+		    	admin.gestionarAltaCliente("lem", "baja");
+		    	admin.gestionarNivelSuscripcionCliente("fbm", "platinum");
+		    	admin.gestionarAltaCliente("fbm", "baja");
+		    	admin.gestionarNivelSuscripcionCliente("lem", "platinum");
+				for (Socio socio : st.getClientes()) {
+					System.out.println(socio.getUsername() + " " + socio.getNivelSuscripción() + " " + socio.isAlta());
+				}
+				admin.gestionarAltaCliente("lem", "alta");
+		    	admin.gestionarNivelSuscripcionCliente("fbm", "oro");
+		    	admin.gestionarAltaCliente("fbm", "alta");
+		    	admin.gestionarNivelSuscripcionCliente("lem", "black");
+		    	for (Socio socio : st.getClientes()) {
+					System.out.println(socio.getUsername() + " " + socio.getNivelSuscripción() + " " + socio.isAlta());
+				}
+		    	
+		    	
+		    	System.out.println("\n");
+		    	System.out.println("AGREGAR ARTICULOS A SEDES:");
+		    	admin.agregarArticulos("Recoleta", "PESA", "8", "DE TOBILLERA", null, null, null, "1");
+		    	admin.agregarArticulos("Recoleta", "COLCHONETA", null, null, "4", "1", null, "6");
+		    	admin.agregarArticulos("Recoleta", "PESA", "8", "DE TOBILLERA", null, null, null, "10");
+		    	admin.agregarArticulos("Recoleta", "PESA", "15", "DE MANO", null, null, null, "1");
+		    	for (Sede sede: st.getSedes()) {
+		    		if (sede.getUbicacion().equals("RECOLETA")) {
+		    			admin.mostrarArticulosSede("RECOLETA");
+		    		}
+		    	}
+		    	
+		    	System.out.println("\n");
+		    	System.out.println("ELIMINAR ARTICULOS A SEDES:");
+		    	admin.eliminarArticuloDeSede("Recoleta", "PESA", "8", "DE TOBILLERA", null, null, null);
+		    	for (Sede sede: st.getSedes()) {
+		    		if (sede.getUbicacion().equals("RECOLETA")) {
+		    			admin.mostrarArticulosSede("RECOLETA");
+		    		}
+		    	}
 		    }
+		    
 		}
-		
-		
-		
 		
 		/*
 		PantallaInicio interfazInicio = new PantallaInicio();
         interfazInicio.setVisible(true);
         interfazInicio.setLocationRelativeTo(null);
 		 */
-        
-            
+		
 	}
-
+		
 }
 

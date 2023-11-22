@@ -50,7 +50,7 @@ public class Socio extends Usuario {
 	}
 	
 	public boolean isAlta() {
-		return alta;
+		return this.alta;
 	}
 
 	public void setAlta(boolean alta) {

@@ -46,7 +46,7 @@ public class Sede {
 		return this.cantidad_stock;
 	}
 	
-	public void agregar_articulo(Articulo articulo, int cantidad) {
+	public void agregarArticulo(Articulo articulo, int cantidad) {
 		if (this.cantidad_stock.containsKey(articulo)) {
     		this.cantidad_stock.put(articulo, this.cantidad_stock.get(articulo) + cantidad);
     	} else {
@@ -70,6 +70,10 @@ public class Sede {
 				this.clases_en_sede.remove(clase);
 			}
 		}
+	}
+	
+	public ArrayList<Clase> getClases(){
+		return this.clases_en_sede;
 	}
 	
 	public void setCantidadStock(HashMap<Articulo, Integer> cantidad_stock) {

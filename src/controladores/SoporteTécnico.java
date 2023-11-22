@@ -153,7 +153,7 @@ public class SoporteTécnico {
 		this.emplazamientos.add(emplazamiento);
 	}
     
-    //AGRUPAR LOS SIGUIENTES METODOS
+    //OTROS METODOS
     public ArrayList<Profesor> getProfesores(){
     	return this.profesores;
     }
@@ -172,7 +172,6 @@ public class SoporteTécnico {
 	public ArrayList<Articulo> getArticulos() {
 		return this.articulos;
 	}
-	
 	
 	public void agregarEmplazamientos(Emplazamiento emplazamiento) {
 		this.emplazamientos.add(emplazamiento);

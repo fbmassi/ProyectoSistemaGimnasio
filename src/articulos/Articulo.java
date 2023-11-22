@@ -17,7 +17,7 @@ public abstract class Articulo {
 	}
 
 	public void setTipo(String tipo) {
-		this.tipo = tipo;
+		this.tipo = tipo.toUpperCase();
 	}
 	
 	public int getEstadoDesgaste() {

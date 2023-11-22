@@ -8,7 +8,7 @@ public class Pesa extends Articulo {
     public Pesa(String tipo, int peso, String uso) {
 		super(tipo);
 		this.peso = peso;
-		this.uso = uso;
+		this.uso = uso.toUpperCase();
 	}
     
 	public int getPeso() {
@@ -20,11 +20,11 @@ public class Pesa extends Articulo {
 	}
 
 	public String getUso() {
-		return uso;
+		return this.uso;
 	}
 
 	public void setUso(String uso) {
-		this.uso = uso;
+		this.uso = uso.toUpperCase();
 	}
 
 	public int getEstadDesgaste() {
