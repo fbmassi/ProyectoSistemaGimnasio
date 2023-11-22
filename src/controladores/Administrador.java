@@ -62,213 +62,6 @@ public class Administrador extends Usuario {
     		System.out.println("LA SEDE SOLICITADA NO EXISTE, DEBE SOLICITAR SU CREACION AL SOPORTE TECNICO.");
     	}
     }
-    	
-	//METODO PARA MOSTRAR CLASES GRABADAS
-	public void verClasesGrabadaas(Grabaciones grabaciones) {
-		grabaciones.mostrarGrabaciones();
-	}
-	
-	//METODO PARA GESTIONAR LAS GRABACIONES DE CLASES
-	public void gestionarGrabaciones() {
-		verClasesGrabadaas(creador_ST.getGrabaciones());
-		try (Scanner scanner = new Scanner(System.in)) {
-			System.out.println("Desea eliminar algunas grabaciones? (S/N): ");
-			String borrar = scanner.nextLine();
-			if (borrar.toUpperCase() == "S") {
-				eliminarClases();
-			}
-		}
-	}
-		
-	//METODO PARA ELIMINAR CLASES GRABADAS
-	public void eliminarClases(){
-		try (Scanner scanner = new Scanner(System.in)) {
-			System.out.println("Ingrese la cantidad de clases de Yoga y Gimnasia que quiere borrar" +
-																"o '0' si no quiere borrar ninguna: ");
-			String cant_clases_a_borrar = scanner.nextLine();
-			try {
-				int clases_a_borrar = Integer.parseInt(cant_clases_a_borrar);
-				creador_ST.getGrabaciones().eliminarClases(clases_a_borrar);
-			} catch (Exception e) {
-				System.out.println("INGRESO NO VALIDO");
-			}
-		}
-	}
-
-	//METODO PARA MONITORIEAR LA CANTIDAD DE ARTICULOS EN UNA SEDE Y SU ESTADO DE DESGASTE
-	public void mostrarArticulosSede(String ubicacion_sede) {
-		HashMap<Pesa, Integer> tipos_de_pesa = new HashMap<>();
-		HashMap<Colchoneta, Integer> tipos_de_colchoneta = new HashMap<>();
-		HashMap<ArticuloPersonalizado, Integer> tipos_de_personalizados = new HashMap<>();
-		for (Sede sede: this.creador_ST.getSedes()) {
-    		if (sede.getUbicacion().equals(ubicacion_sede.toUpperCase())) {
-    			HashMap<Articulo, Integer> articulos_de_sede = sede.getCantidadStock();
-    			for (Map.Entry<Articulo, Integer > parCV: articulos_de_sede.entrySet()) {
-    				if (parCV.getKey() instanceof Pesa) {
-    					tipos_de_pesa.put((Pesa) parCV.getKey(), parCV.getValue());
-    				} else if (parCV.getKey() instanceof Colchoneta) {
-    					tipos_de_colchoneta.put((Colchoneta) parCV.getKey(), parCV.getValue());
-    				} else if (parCV.getKey() instanceof ArticuloPersonalizado) {
-    					tipos_de_personalizados.put((ArticuloPersonalizado) parCV.getKey(), parCV.getValue());
-    				}	
-    	        }
-    		}
-		}
-		System.out.println("PESAS: ");
-		for (Map.Entry<Pesa, Integer > parCV: tipos_de_pesa.entrySet() ) {
-			System.out.println("Articulo: " + parCV.getKey().getTipo() + " "
-	        		+ parCV.getKey().getUso()  + " - "
-	        		+ "Peso: " + parCV.getKey().getPeso() + "kg - "
-	        		+ "Estado de desgaste: " + parCV.getKey().getEstadoDesgaste()
-	        		+ " - Cantidad disponible: " + parCV.getValue());
-		}
-		System.out.println("COLCHONETAS: ");
-		for (Map.Entry<Colchoneta, Integer > parCV: tipos_de_colchoneta.entrySet() ) {
-			System.out.println("Articulo: " + parCV.getKey().getTipo() + " - "
-					+ "Dimensiones: "
-	        		+ parCV.getKey().getLargo() + "mts de largo,  "
-	        		+ parCV.getKey().getAncho() + "mts de ancho"
-	        		+ " -  Estado de desgaste: " + parCV.getKey().getEstadoDesgaste() + " - "
-	        		+ "Cantidad disponible: " + parCV.getValue());
-		}
-		System.out.println("PERSONALIZADOS: ");
-		for (Map.Entry<ArticuloPersonalizado, Integer > parCV: tipos_de_personalizados.entrySet() ) {
-			System.out.println("Articulo: " + parCV.getKey().getTipo() + " - "
-					+ parCV.getKey().getDescripcion()
-	        		+ " - Estado de desgaste: " + parCV.getKey().getEstadoDesgaste()
-	        		+ " - Cantidad disponible: " + parCV.getValue());
-		}
-		/*
-		System.out.println("Articulo: " + parCV.getKey().getTipo()
-        		+ ", Estado de desgaste: " + parCV.getKey().getEstadoDesgaste()
-        		+ ", Cantidad disponible: " + parCV.getValue());
-        */
-		
-	}
-
-	//METODO PARA AGREGAR MODIFICAR LA CANTIDAD DE ARTICULOS DE UNA SEDE
-    public void agregarArticulos(String ubicacion_sede, String tipo, String pesoSTR, String uso, String largoSTR, String anchoSTR, String descripcion, String cantidad_a_agregar) {
-    	
-    	int cantidad = Integer.parseInt(cantidad_a_agregar);
-    	boolean existe_articulo = false;
-    	boolean existe_sede = false;
-    	
-    	ArrayList<Pesa> tipos_de_pesa = new ArrayList<Pesa>();
-    	ArrayList<Colchoneta> tipos_de_colchoneta = new ArrayList<Colchoneta>();
-    	ArrayList<ArticuloPersonalizado> tipos_de_personalizados = new ArrayList<ArticuloPersonalizado>();
-    	
-    	for (Articulo articulo1: this.creador_ST.getArticulos()) {
-			if (articulo1 instanceof Pesa) {
-				tipos_de_pesa.add((Pesa) articulo1);
-			} else if (articulo1 instanceof Colchoneta) {
-				tipos_de_colchoneta.add((Colchoneta) articulo1);
-			} else if (articulo1 instanceof ArticuloPersonalizado && this.creador_ST.getArticulos().contains(articulo1)) {
-				tipos_de_personalizados.add((ArticuloPersonalizado) articulo1);
-			}
-    	}
-    	
-    	for (Sede sede: creador_ST.getSedes()) {
-    		if (sede.getUbicacion().equals(ubicacion_sede.toUpperCase())) {
-    			existe_sede = true;
-    			if (tipo.toUpperCase().equals("PESA")) {
-    				int peso = Integer.parseInt(pesoSTR);
-    				for (Pesa pesa:tipos_de_pesa) {
-        				if(peso == pesa.getPeso() && uso.toUpperCase().equals(pesa.getUso())) {
-        					sede.agregarArticulo(pesa, cantidad);
-        					existe_articulo = true;
-        				}
-    				}
-    			} else if (tipo.toUpperCase().equals("COLCHONETA")) {
-    				int largo = Integer.parseInt(largoSTR);
-    				int ancho = Integer.parseInt(anchoSTR);
-    				for (Colchoneta colchoneta:tipos_de_colchoneta) {
-        				if(largo == colchoneta.getLargo() && ancho == colchoneta.getAncho()) {
-        					sede.agregarArticulo(colchoneta, cantidad);
-        					existe_articulo = true;
-        				}
-    				}
-    			} else if ((tipo.toUpperCase().equals("PERSONALIZADO")))
-					for (ArticuloPersonalizado articulo_personalizado: tipos_de_personalizados) {
-	    				if(descripcion.toUpperCase().equals(articulo_personalizado.getDescripcion())) {
-	    					sede.agregarArticulo(articulo_personalizado, cantidad);
-	    					existe_articulo = true;
-	    				}
-					}
-    		}
-    	}
-    	
-    	if (!existe_articulo && existe_sede) {
-    		System.out.println("NO EXISTE EL ARTICULO INGRESADO, PRIMERO DEBE CREARLA EL ST.");
-    		
-    	} else if (!existe_sede) {
-    		System.out.println("NO EXISTE LA SEDE SELECCIONADA, PRIMERO DEBE CREARLA EL ST.");
-    	}
-    } 	
-    
-    
-    //METODO PARA DAR DE BAJA ARTICULOS
-    public void eliminarArticuloDeSede(String ubicacion_sede, String tipo, String pesoSTR, String uso, String largoSTR, String anchoSTR, String descripcion) {
-
-    	boolean existe_articulo = false;
-    	boolean existe_sede = false;
-    	
-    	ArrayList<Pesa> tipos_de_pesa = new ArrayList<Pesa>();
-    	ArrayList<Colchoneta> tipos_de_colchoneta = new ArrayList<Colchoneta>();
-    	ArrayList<ArticuloPersonalizado> tipos_de_personalizados = new ArrayList<ArticuloPersonalizado>();
-    	
-    	for (Articulo articulo1: this.creador_ST.getArticulos()) {
-			if (articulo1 instanceof Pesa) {
-				tipos_de_pesa.add((Pesa) articulo1);
-			} else if (articulo1 instanceof Colchoneta) {
-				tipos_de_colchoneta.add((Colchoneta) articulo1);
-			} else if (articulo1 instanceof ArticuloPersonalizado && this.creador_ST.getArticulos().contains(articulo1)) {
-				tipos_de_personalizados.add((ArticuloPersonalizado) articulo1);
-			}
-    	}
-    	
-    	for (Sede sede: creador_ST.getSedes()) {
-    		if (sede.getUbicacion().equals(ubicacion_sede.toUpperCase())) {
-    			existe_sede = true;
-    			if (tipo.toUpperCase().equals("PESA")) {
-    				int peso = Integer.parseInt(pesoSTR);
-    				for (Pesa pesa:tipos_de_pesa) {
-        				if(peso == pesa.getPeso() && uso.toUpperCase().equals(pesa.getUso())) {
-        					sede.eliminarArticulo(pesa);
-        					existe_articulo = true;
-        				}
-    				}
-    			} else if (tipo.toUpperCase().equals("COLCHONETA")) {
-    				int largo = Integer.parseInt(largoSTR);
-    				int ancho = Integer.parseInt(anchoSTR);
-    				for (Colchoneta colchoneta:tipos_de_colchoneta) {
-        				if(largo == colchoneta.getLargo() && ancho == colchoneta.getAncho()) {
-        					sede.eliminarArticulo(colchoneta);
-        					existe_articulo = true;
-        				}
-    				}
-    			} else if ((tipo.toUpperCase().equals("PERSONALIZADO")))
-					for (ArticuloPersonalizado articulo_personalizado: tipos_de_personalizados) {
-	    				if(descripcion.toUpperCase().equals(articulo_personalizado.getDescripcion())) {
-	    					sede.eliminarArticulo(articulo_personalizado);
-	    					existe_articulo = true;
-	    				}
-					}
-    		}
-    	}
-    	
-    	if (!existe_articulo && existe_sede) {
-    		System.out.println("NO EXISTE EL ARTICULO INGRESADO.");
-    		
-    	} else if (!existe_sede) {
-    		System.out.println("NO EXISTE LA SEDE SELECCIONADA.");
-    	}
-    } 	
-    
-    
-    //METODO PARA TRANSICIONAR ESTADO DE LAS CLASES
-    public void transicionarEstadoClase(Clase clase, String estado) {
-    	clase.setEstado(estado);
-    }
     
     //METODO PARA MODIFICAR EL ALTA DEL PERFIL DE CLIENTES
     public void gestionarAltaCliente(String username, String alta) {
@@ -302,23 +95,193 @@ public class Administrador extends Usuario {
     	}
     }
     
-    	
+    //METODO PARA MONITORIEAR LA CANTIDAD DE ARTICULOS EN UNA SEDE Y SU ESTADO DE DESGASTE
+  	public void mostrarArticulosSede(String ubicacion_sede) {
+  		HashMap<Pesa, Integer> tipos_de_pesa = new HashMap<>();
+  		HashMap<Colchoneta, Integer> tipos_de_colchoneta = new HashMap<>();
+  		HashMap<ArticuloPersonalizado, Integer> tipos_de_personalizados = new HashMap<>();
+  		for (Sede sede: this.creador_ST.getSedes()) {
+      		if (sede.getUbicacion().equals(ubicacion_sede.toUpperCase())) {
+      			HashMap<Articulo, Integer> articulos_de_sede = sede.getCantidadStock();
+      			for (Map.Entry<Articulo, Integer > parCV: articulos_de_sede.entrySet()) {
+      				if (parCV.getKey() instanceof Pesa) {
+      					tipos_de_pesa.put((Pesa) parCV.getKey(), parCV.getValue());
+      				} else if (parCV.getKey() instanceof Colchoneta) {
+      					tipos_de_colchoneta.put((Colchoneta) parCV.getKey(), parCV.getValue());
+      				} else if (parCV.getKey() instanceof ArticuloPersonalizado) {
+      					tipos_de_personalizados.put((ArticuloPersonalizado) parCV.getKey(), parCV.getValue());
+      				}	
+      	        }
+      		}
+  		}
+  		System.out.println("PESAS: ");
+  		for (Map.Entry<Pesa, Integer > parCV: tipos_de_pesa.entrySet() ) {
+  			System.out.println("Articulo: " + parCV.getKey().getTipo() + " "
+  	        		+ parCV.getKey().getUso()  + " - "
+  	        		+ "Peso: " + parCV.getKey().getPeso() + "kg - "
+  	        		+ "Estado de desgaste: " + parCV.getKey().getEstadoDesgaste()
+  	        		+ " - Cantidad disponible: " + parCV.getValue());
+  		}
+  		System.out.println("COLCHONETAS: ");
+  		for (Map.Entry<Colchoneta, Integer > parCV: tipos_de_colchoneta.entrySet() ) {
+  			System.out.println("Articulo: " + parCV.getKey().getTipo() + " - "
+  					+ "Dimensiones: "
+  	        		+ parCV.getKey().getLargo() + "mts de largo,  "
+  	        		+ parCV.getKey().getAncho() + "mts de ancho"
+  	        		+ " -  Estado de desgaste: " + parCV.getKey().getEstadoDesgaste() + " - "
+  	        		+ "Cantidad disponible: " + parCV.getValue());
+  		}
+  		System.out.println("PERSONALIZADOS: ");
+  		for (Map.Entry<ArticuloPersonalizado, Integer > parCV: tipos_de_personalizados.entrySet() ) {
+  			System.out.println("Articulo: " + parCV.getKey().getTipo() + " - "
+  					+ parCV.getKey().getDescripcion()
+  	        		+ " - Estado de desgaste: " + parCV.getKey().getEstadoDesgaste()
+  	        		+ " - Cantidad disponible: " + parCV.getValue());
+  		}
+	  	}
+
+	    //METODO PARA AGREGAR MODIFICAR LA CANTIDAD DE ARTICULOS DE UNA SEDE
+	    public void agregarArticulos(String ubicacion_sede, String tipo, String pesoSTR, String uso, String largoSTR, String anchoSTR, String descripcion, String cantidad_a_agregar) {
+      	
+      	int cantidad = Integer.parseInt(cantidad_a_agregar);
+      	boolean existe_articulo = false;
+      	boolean existe_sede = false;
+      	
+      	ArrayList<Pesa> tipos_de_pesa = new ArrayList<Pesa>();
+      	ArrayList<Colchoneta> tipos_de_colchoneta = new ArrayList<Colchoneta>();
+      	ArrayList<ArticuloPersonalizado> tipos_de_personalizados = new ArrayList<ArticuloPersonalizado>();
+      	
+      	for (Articulo articulo1: this.creador_ST.getArticulos()) {
+  			if (articulo1 instanceof Pesa) {
+  				tipos_de_pesa.add((Pesa) articulo1);
+  			} else if (articulo1 instanceof Colchoneta) {
+  				tipos_de_colchoneta.add((Colchoneta) articulo1);
+  			} else if (articulo1 instanceof ArticuloPersonalizado && this.creador_ST.getArticulos().contains(articulo1)) {
+  				tipos_de_personalizados.add((ArticuloPersonalizado) articulo1);
+  			}
+      	}
+      	
+      	for (Sede sede: creador_ST.getSedes()) {
+      		if (sede.getUbicacion().equals(ubicacion_sede.toUpperCase())) {
+      			existe_sede = true;
+      			if (tipo.toUpperCase().equals("PESA")) {
+      				int peso = Integer.parseInt(pesoSTR);
+      				for (Pesa pesa:tipos_de_pesa) {
+          				if(peso == pesa.getPeso() && uso.toUpperCase().equals(pesa.getUso())) {
+          					sede.agregarArticulo(pesa, cantidad);
+          					existe_articulo = true;
+          				}
+      				}
+      			} else if (tipo.toUpperCase().equals("COLCHONETA")) {
+      				int largo = Integer.parseInt(largoSTR);
+      				int ancho = Integer.parseInt(anchoSTR);
+      				for (Colchoneta colchoneta:tipos_de_colchoneta) {
+          				if(largo == colchoneta.getLargo() && ancho == colchoneta.getAncho()) {
+          					sede.agregarArticulo(colchoneta, cantidad);
+          					existe_articulo = true;
+          				}
+      				}
+      			} else if ((tipo.toUpperCase().equals("PERSONALIZADO")))
+  					for (ArticuloPersonalizado articulo_personalizado: tipos_de_personalizados) {
+  	    				if(descripcion.toUpperCase().equals(articulo_personalizado.getDescripcion())) {
+  	    					sede.agregarArticulo(articulo_personalizado, cantidad);
+  	    					existe_articulo = true;
+  	    				}
+  					}
+      		}
+      	}
+      	
+      	if (!existe_articulo && existe_sede) {
+      		System.out.println("NO EXISTE EL ARTICULO INGRESADO, PRIMERO DEBE CREARLA EL ST.");
+      		
+      	} else if (!existe_sede) {
+      		System.out.println("NO EXISTE LA SEDE SELECCIONADA, PRIMERO DEBE CREARLA EL ST.");
+      	}
+      } 	
+      
+      
+      //METODO PARA DAR DE BAJA ARTICULOS
+      public void eliminarArticuloDeSede(String ubicacion_sede, String tipo, String pesoSTR, String uso, String largoSTR, String anchoSTR, String descripcion) {
+
+      	boolean existe_articulo = false;
+      	boolean existe_sede = false;
+      	
+      	ArrayList<Pesa> tipos_de_pesa = new ArrayList<Pesa>();
+      	ArrayList<Colchoneta> tipos_de_colchoneta = new ArrayList<Colchoneta>();
+      	ArrayList<ArticuloPersonalizado> tipos_de_personalizados = new ArrayList<ArticuloPersonalizado>();
+      	
+      	for (Articulo articulo1: this.creador_ST.getArticulos()) {
+  			if (articulo1 instanceof Pesa) {
+  				tipos_de_pesa.add((Pesa) articulo1);
+  			} else if (articulo1 instanceof Colchoneta) {
+  				tipos_de_colchoneta.add((Colchoneta) articulo1);
+  			} else if (articulo1 instanceof ArticuloPersonalizado && this.creador_ST.getArticulos().contains(articulo1)) {
+  				tipos_de_personalizados.add((ArticuloPersonalizado) articulo1);
+  			}
+      	}
+      	
+      	for (Sede sede: creador_ST.getSedes()) {
+      		if (sede.getUbicacion().equals(ubicacion_sede.toUpperCase())) {
+      			existe_sede = true;
+      			if (tipo.toUpperCase().equals("PESA")) {
+      				int peso = Integer.parseInt(pesoSTR);
+      				for (Pesa pesa:tipos_de_pesa) {
+          				if(peso == pesa.getPeso() && uso.toUpperCase().equals(pesa.getUso())) {
+          					sede.eliminarArticulo(pesa);
+          					existe_articulo = true;
+          				}
+      				}
+      			} else if (tipo.toUpperCase().equals("COLCHONETA")) {
+      				int largo = Integer.parseInt(largoSTR);
+      				int ancho = Integer.parseInt(anchoSTR);
+      				for (Colchoneta colchoneta:tipos_de_colchoneta) {
+          				if(largo == colchoneta.getLargo() && ancho == colchoneta.getAncho()) {
+          					sede.eliminarArticulo(colchoneta);
+          					existe_articulo = true;
+          				}
+      				}
+      			} else if ((tipo.toUpperCase().equals("PERSONALIZADO")))
+  					for (ArticuloPersonalizado articulo_personalizado: tipos_de_personalizados) {
+  	    				if(descripcion.toUpperCase().equals(articulo_personalizado.getDescripcion())) {
+  	    					sede.eliminarArticulo(articulo_personalizado);
+  	    					existe_articulo = true;
+  	    				}
+  					}
+      		}
+      	}
+      	
+      	if (!existe_articulo && existe_sede) {
+      		System.out.println("NO EXISTE EL ARTICULO INGRESADO.");
+      		
+      	} else if (!existe_sede) {
+      		System.out.println("NO EXISTE LA SEDE SELECCIONADA.");
+      	}
+  	}
+    
+	//METODO PARA MOSTRAR CLASES GRABADAS
+	public void monitorearGrabaciones() {
+		creador_ST.getGrabaciones().mostrarGrabaciones();
+	}
+		
+	//METODO PARA ELIMINAR CLASES GRABADAS
+	public void eliminarClases(String cantidad_a_eliminar) {
+		try {
+			int clases_a_borrar = Integer.parseInt(cantidad_a_eliminar);
+			creador_ST.getGrabaciones().eliminarClases(clases_a_borrar);
+		} catch (Exception e) {
+			System.out.println("INGRESO NO VALIDO");
+		}
+	}
+	
+    //METODO PARA TRANSICIONAR ESTADO DE LAS CLASES
+    public void transicionarEstadoClase(Clase clase, String estado) {
+    	clase.setEstado(estado);
+    	this.creador_ST.getGrabaciones().agregarClase(clase);
+    }
+    
 	@Override
 	public void visualizarClases() {
 		//CODIFICAR VISUALIZACION
 	}
-	
-	public boolean calcularRentabilidad(Clase clase) {
-    	//CODIFICAR CALCULO DE RENTABILIDAD
-        return false;
-    }
-	
-	public void gestionarSede(Sede sede) {
-		//VER QUE ONDA
-    }
-	
-	public void solicitarAdministracion(Sede sede) {
-		//VER QUE ONDA
-    }
 	
 }

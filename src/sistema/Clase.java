@@ -111,6 +111,7 @@ public class Clase {
                 objNecesarios+=1;
                 break;
             }
+        }
         
         for (Emplazamiento emp : creador_ST.getEmplazamientos()) {
             if (emp.getTipo().equals(nombre_emplazamiento.toUpperCase())) {
@@ -133,9 +134,6 @@ public class Clase {
         	this.estado = "FALTA OBJETO";
         }
     }
-    }
-
-
     	
     public void setAdmin(Administrador administrador) {
     	this.admin = administrador;
@@ -220,15 +218,6 @@ public class Clase {
         return this.cant_inscriptos < this.emplazamiento.getCapacidad();
     }
     
-    public long calcularCostos() {
-    	long costos = this.profesor.getSueldo()/90;
-    	if (emplazamiento.getTipo() == "AIRE LIBRE") {
-    		costos += 500*(emplazamiento.getSuperficie()/this.duracion);
-    	}
-    	
-		return costos;
-    }
-    
     public void agregarAlumno(Socio alumno) {
     	if (alumno.getNivelSuscripción().equals(this.sede.getNivelSuscripcion())
     			&& this.confirmarDisponibilidad()) {
@@ -237,6 +226,9 @@ public class Clase {
 	        	alumnos.add(alumno);
 	        	this.cant_inscriptos += 1;
 	        	System.out.println("SE HIZO EFECTIVA LA INSCRIPCION");
+	        	if (calcularRentabilidad(this)) {
+	        		this.estado = "CONFIRMADA";
+	        	}
     	} else {
     		System.out.println("NO POSEE EL NIVEL DE SUSCRIPCION NECESARIO PARA LA SEDE.");
     	}
@@ -248,7 +240,18 @@ public class Clase {
 	    this.cant_inscriptos -= 1;
     }
     
-    public void grabarClase() {
-    	//CODIFICAR TEMA 
+    public long calcularCostos() {
+    	long costos = this.profesor.getSueldo()/90;
+    	if (emplazamiento.getTipo().equals("AIRE LIBRE")) {
+    		costos += 500*(emplazamiento.getSuperficie()/this.duracion);
+    	}
+    	
+		return costos;
     }
+    
+	public boolean calcularRentabilidad(Clase clase) {
+    	//CODIFICAR CALCULO DE RENTABILIDAD
+        return false;
+    }
+    
 }
