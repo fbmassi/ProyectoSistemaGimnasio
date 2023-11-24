@@ -14,9 +14,10 @@ public class SoporteTécnico {
     private ArrayList<Disciplina> disciplinas;
     private ArrayList<Emplazamiento> emplazamientos;
     private Grabaciones grabaciones;
-    private String contraseña = "uade_TPO_POO";
+    private String contraseña;
     
     public SoporteTécnico(String contraseña) {
+        this.contraseña = contraseña;
     	administradores = new ArrayList<Administrador>();
     	clientes = new ArrayList<Socio>();
     	profesores = new ArrayList<Profesor>();

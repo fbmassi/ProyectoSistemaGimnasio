@@ -4,19 +4,26 @@
  */
 package interfaces;
 
+import controladores.SoporteTécnico;
+
 /**
  *
  * @author francobmassi
  */
 public class PanelDeControlST extends javax.swing.JFrame {
-
+    
+    private SoporteTécnico soporteTécnico;
+    
+    public void setST(SoporteTécnico soporteTécnico){
+        this.soporteTécnico = soporteTécnico;
+    }
     /**
      * Creates new form PanelDeControlST
      */
     public PanelDeControlST() {
         initComponents();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,57 +34,157 @@ public class PanelDeControlST extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        botonCrearSede = new javax.swing.JButton();
+        botonGestionarClientes = new javax.swing.JButton();
+        botonGestionarAdministrador = new javax.swing.JButton();
+        botonCrearClases = new javax.swing.JButton();
+        botonAsignarSedes = new javax.swing.JButton();
+        botonCrearArticulos = new javax.swing.JButton();
+        botonVolverAtras = new javax.swing.JButton();
+        botonCrearDisciplina = new javax.swing.JButton();
+        botonCrearProfesores = new javax.swing.JButton();
+        botonCrearSede1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 36)); // NOI18N
-        jLabel1.setText("Gestionar Administradores");
+        botonCrearSede.setText("CREAR SEDES");
+        botonCrearSede.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCrearSedeActionPerformed(evt);
+            }
+        });
 
-        jLabel2.setFont(new java.awt.Font("Helvetica Neue", 0, 36)); // NOI18N
-        jLabel2.setText("Gestionar Clientes");
+        botonGestionarClientes.setText("GESTIONAR USUARIOS CLIENTES");
+        botonGestionarClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonGestionarClientesActionPerformed(evt);
+            }
+        });
+
+        botonGestionarAdministrador.setText("GESTIONAR USUARIOS ADMINISTRADORES");
+
+        botonCrearClases.setText("CREAR CLASES");
+
+        botonAsignarSedes.setText("ASIGNAR SEDES");
+
+        botonCrearArticulos.setText("CREAR ARTICULOS");
+
+        botonVolverAtras.setText("VOLVER ATRÁS");
+        botonVolverAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonVolverAtrasActionPerformed(evt);
+            }
+        });
+
+        botonCrearDisciplina.setText("CREAR DISCIPLINA");
+        botonCrearDisciplina.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCrearDisciplinaActionPerformed(evt);
+            }
+        });
+
+        botonCrearProfesores.setText("CREAR PROFESORES");
+        botonCrearProfesores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCrearProfesoresActionPerformed(evt);
+            }
+        });
+
+        botonCrearSede1.setText("VER SEDES DE LA CADENA");
+        botonCrearSede1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCrearSede1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(260, 260, 260)
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(73, 73, 73)
-                        .addComponent(jLabel2)))
-                .addContainerGap(291, Short.MAX_VALUE))
+                    .addComponent(botonCrearSede, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(botonCrearClases, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE)
+                    .addComponent(botonGestionarAdministrador, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE)
+                    .addComponent(botonGestionarClientes, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE)
+                    .addComponent(botonAsignarSedes, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE)
+                    .addComponent(botonCrearArticulos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE)
+                    .addComponent(botonVolverAtras, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE)
+                    .addComponent(botonCrearDisciplina, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE)
+                    .addComponent(botonCrearProfesores, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE)
+                    .addComponent(botonCrearSede1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(106, 106, 106)
-                .addComponent(jLabel2)
-                .addContainerGap(495, Short.MAX_VALUE))
+                .addComponent(botonCrearSede, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(botonCrearSede1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 150, Short.MAX_VALUE)
+                .addComponent(botonGestionarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(botonGestionarAdministrador, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(botonAsignarSedes, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(botonCrearArticulos, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(botonCrearDisciplina, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(botonCrearProfesores, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(botonCrearClases, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(72, 72, 72)
+                .addComponent(botonVolverAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void botonCrearSedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearSedeActionPerformed
+        CreacionDeSedes crearSedes = new CreacionDeSedes();
+        crearSedes.setST(soporteTécnico);
+        crearSedes.setVisible(true);
+        crearSedes.setLocationRelativeTo(null);
+    }//GEN-LAST:event_botonCrearSedeActionPerformed
+
+    private void botonGestionarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGestionarClientesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonGestionarClientesActionPerformed
+
+    private void botonVolverAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVolverAtrasActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_botonVolverAtrasActionPerformed
+
+    private void botonCrearDisciplinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearDisciplinaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonCrearDisciplinaActionPerformed
+
+    private void botonCrearProfesoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearProfesoresActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonCrearProfesoresActionPerformed
+
+    private void botonCrearSede1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearSede1ActionPerformed
+        VerSedes verSedes = new VerSedes();
+        verSedes.setST(soporteTécnico);
+        verSedes.setVisible(true);
+        verSedes.setLocationRelativeTo(null);
+    }//GEN-LAST:event_botonCrearSede1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -115,8 +222,16 @@ public class PanelDeControlST extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton botonAsignarSedes;
+    private javax.swing.JButton botonCrearArticulos;
+    private javax.swing.JButton botonCrearClases;
+    private javax.swing.JButton botonCrearDisciplina;
+    private javax.swing.JButton botonCrearProfesores;
+    private javax.swing.JButton botonCrearSede;
+    private javax.swing.JButton botonCrearSede1;
+    private javax.swing.JButton botonGestionarAdministrador;
+    private javax.swing.JButton botonGestionarClientes;
+    private javax.swing.JButton botonVolverAtras;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

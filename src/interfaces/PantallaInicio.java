@@ -17,6 +17,12 @@ public class PantallaInicio extends javax.swing.JFrame {
     public PantallaInicio() {
         initComponents();
     }
+    
+    private SoporteTécnico soporteTécnico;
+    
+    public void setST(SoporteTécnico soporteTécnico){
+        this.soporteTécnico = soporteTécnico;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -215,7 +221,16 @@ public class PantallaInicio extends javax.swing.JFrame {
     private void ingresarSoporteTecnicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingresarSoporteTecnicoActionPerformed
         String contraseña = contraseñaST.getText();
         contraseñaST.setText("");
-        SoporteTécnico personalST = new SoporteTécnico(contraseña);
+        PanelDeControlST panelCst = new PanelDeControlST();
+        IngresoErroneo ingresoErroneo = new IngresoErroneo();
+        if (this.soporteTécnico.iniciarSesion(contraseña)) {
+            panelCst.setST(soporteTécnico);
+            panelCst.setVisible(true);
+            panelCst.setLocationRelativeTo(null);
+        } else{
+            ingresoErroneo.setVisible(true);
+            ingresoErroneo.setLocationRelativeTo(null);
+        }
     }//GEN-LAST:event_ingresarSoporteTecnicoActionPerformed
 
     private void ingresarAdministradoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingresarAdministradoresActionPerformed
@@ -266,7 +281,7 @@ public class PantallaInicio extends javax.swing.JFrame {
             }
         });
     }
-
+  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel administradores;
     private javax.swing.JTextField contraseñaAdmin;

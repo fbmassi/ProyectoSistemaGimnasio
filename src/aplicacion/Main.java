@@ -7,15 +7,16 @@ import articulos.*;
 public class Main {
 	
 	public static void main(String[] args) {
-		
 		/*
+                
+            
 		  Soporte Técnico:
 	    	- Crear sedes.
 	    	- Crear usuarios con perfiles 
 	    	- Asignar sedes a administrativos.
 	    	- Cargar tipos de clases.
 	    	- Crear tipos de artículos.
-		 */
+		
 		
 		SoporteTécnico st = new SoporteTécnico("uade_TPO_POO");
 		
@@ -121,7 +122,7 @@ public class Main {
 		/*
 		Cliente:
 		    - Desde el perfil, reservar lugares para clases presenciales o virtuales según corresponda.
-		*/
+		
 		System.out.println("NOS INSCRIBIMOS A UNA CLASE");
 		String nombreUsuarioBuscado = "LEM";
 		Socio socioBuscado = null;
@@ -141,7 +142,7 @@ public class Main {
 			Administrar alta, baja y modificación de clientes.
 			Monitorear artículos (disponibilidad, desgaste) y dar de baja anticipada.
 			Monitorear clases almacenadas en el sistema de streaming.
-		 */
+		
 		
 		//METODO PARA AGENDAR CLASES PARA SEDES.
 		st.crearAdmin("cgabaglio", "Mora");
@@ -197,12 +198,14 @@ public class Main {
 		    }
 		    
 		}
+                */
 		
-		/*
+		SoporteTécnico soporteTécnico = new SoporteTécnico("uade_TPO_POO");
+                
 		PantallaInicio interfazInicio = new PantallaInicio();
-        interfazInicio.setVisible(true);
-        interfazInicio.setLocationRelativeTo(null);
-		 */
+                interfazInicio.setST(soporteTécnico);
+                interfazInicio.setVisible(true);
+                interfazInicio.setLocationRelativeTo(null);
 		
 	}
 		
