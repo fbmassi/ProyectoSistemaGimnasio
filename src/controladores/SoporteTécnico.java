@@ -50,6 +50,7 @@ public class SoporteTécnico {
     }
     
     public void crearCliente(String username, String contraseña, String nivel_suscripcion) {
+    	nivel_suscripcion = nivel_suscripcion.toUpperCase();
         if (!nivel_suscripcion.equals("BLACK") && !nivel_suscripcion.equals("PLATINUM") && !nivel_suscripcion.equals("GOLD")){
             IngresoErroneo ingresoErroneo = new IngresoErroneo();
             ingresoErroneo.setVisible(true);

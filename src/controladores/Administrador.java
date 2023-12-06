@@ -331,9 +331,10 @@ public class Administrador extends Usuario {
     	this.creador_ST.getGrabaciones().agregarClase(clase);
     }
     
-	@Override
-	public void visualizarClases() {
-		//CODIFICAR VISUALIZACION
-	}
+    @Override
+    public String visualizarClases() {
+            //CODIFICAR VISUALIZACION
+        return "";
+    }
 	
 }

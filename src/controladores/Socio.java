@@ -1,4 +1,5 @@
 package controladores;
+import interfaces.IngresoErroneo;
 import java.util.*;
 
 import sistema.*;
@@ -14,11 +15,13 @@ public class Socio extends Usuario {
         super(username, contraseña);
         this.creador_ST = creador_ST;
         this.alta = true;
+        this.nivel_suscripción = "";
         this.setNivelSuscripción(nivel_suscripción);
     }
 	
     public void pedirReseva(String ubicacion, String tipo_disciplina, String dia, String horario) {
     	boolean inscipcion_no_exitosa = true;
+        IngresoErroneo ingresoErroneo = new IngresoErroneo();
     	for (Clase clase: this.creador_ST.getClases()) {
     		int horario_entero = Integer.parseInt(horario);
     		if (clase.getSede().getUbicacion().equals(ubicacion.toUpperCase()) 
@@ -30,7 +33,8 @@ public class Socio extends Usuario {
     		}
     	}
     	if (inscipcion_no_exitosa) {
-    		System.out.println("NO SE ENCONTRO LA CLASE EN EL DIA Y HORARIO SOLICITADO.");
+    		ingresoErroneo.setVisible(true);
+            ingresoErroneo.setLocationRelativeTo(null);
     	}
     }
 
@@ -63,8 +67,19 @@ public class Socio extends Usuario {
     }
 
     @Override
-    public void visualizarClases(){
-            // CODIFICAR VISUALIZACION DE CLASES
+    public String visualizarClases(){
+        String devolver = "";
+        for (Clase clase: this.creador_ST.getClases()) {
+            if (clase.getSede().getNivelSuscripcion().equals(this.getNivelSuscripción()) && !clase.getEstado().equals("FINALIZADA"))
+                devolver += "<p>CLASE: " + clase.getSede().getUbicacion() + " - " + clase.getDisciplina().getTipo() 
+                    + " - "  + clase.getDia() + " " + clase.getHorario() + "hs. - ESTADO: " + clase.getEstado() +".</p>";
+            }
+        devolver = strHTML(devolver);
+        return devolver;
+    }
+    
+    private String strHTML(String texto) {
+        return "<html>" + texto + "</html>";
     }
 	
 }

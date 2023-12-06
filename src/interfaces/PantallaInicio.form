@@ -62,7 +62,7 @@
                                   <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                                   <Component id="usuario" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="correoElectronicoUsuario" alignment="0" min="-2" pref="175" max="-2" attributes="0"/>
+                              <Component id="UsernameUsuario" alignment="0" min="-2" pref="175" max="-2" attributes="0"/>
                               <Component id="contraseñaUsuario" alignment="0" min="-2" pref="175" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
@@ -100,7 +100,7 @@
                   <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
                   <Component id="usuario" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="correoElectronicoUsuario" min="-2" pref="35" max="-2" attributes="0"/>
+                  <Component id="UsernameUsuario" min="-2" pref="35" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="contraseñaUsuario" min="-2" pref="35" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -135,7 +135,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="correoElectronicoAdmin">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Correo Electr&#xf3;nico..."/>
+            <Property name="text" type="java.lang.String" value="Username..."/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="correoElectronicoAdminActionPerformed"/>
@@ -165,12 +165,12 @@
             <Property name="text" type="java.lang.String" value="Usuarios"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="correoElectronicoUsuario">
+        <Component class="javax.swing.JTextField" name="UsernameUsuario">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Correo Electr&#xf3;nico..."/>
+            <Property name="text" type="java.lang.String" value="Username..."/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="correoElectronicoUsuarioActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="UsernameUsuarioActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="contrase&#xf1;aUsuario">

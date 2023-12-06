@@ -240,7 +240,7 @@ public class GestionDeClientes extends javax.swing.JFrame {
     private void crearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearUsuarioActionPerformed
         String username = newUserName.getText();
         String contraseña = newPassword.getText();
-        String nivel_suscripcion = newSuscriptionLevel.getText();
+        String nivel_suscripcion = newSuscriptionLevel.getText().toUpperCase();
         boolean existe_username = false;
         for (Administrador admin: soporteTécnico.getAdministradores()){
             if (admin.getUsername().equals(username.toUpperCase())){

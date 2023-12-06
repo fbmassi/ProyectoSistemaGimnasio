@@ -7,8 +7,8 @@ import controladores.SoporteTécnico;
 
 public class Clase {
 	
-	private SoporteTécnico creador_ST;
-	private Administrador admin;
+    private SoporteTécnico creador_ST;
+    private Administrador admin;
     private Profesor profesor;
     private Sede sede;
     private Emplazamiento emplazamiento;
@@ -253,5 +253,4 @@ public class Clase {
     	//CODIFICAR CALCULO DE RENTABILIDAD
         return false;
     }
-    
 }

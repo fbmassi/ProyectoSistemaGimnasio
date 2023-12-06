@@ -18,6 +18,10 @@ public abstract class Usuario {
     }
     
     public boolean iniciarSesion(String contraseña) {
+        contraseña = contraseña.toUpperCase();
+        if (contraseña.equals(this.contraseña)) {
+            this.inicio_sesion = true;
+        }
         return contraseña.equals(this.contraseña);
     }
 
@@ -25,7 +29,7 @@ public abstract class Usuario {
     	this.inicio_sesion = false;
     }
 
-    public abstract void visualizarClases();
+    public abstract String visualizarClases();
     
     
     public void gestionarPerfil() {

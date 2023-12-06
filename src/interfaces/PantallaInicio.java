@@ -40,7 +40,7 @@ public class PantallaInicio extends javax.swing.JFrame {
         contraseñaAdmin = new javax.swing.JTextField();
         ingresarAdministradores = new javax.swing.JButton();
         usuario = new javax.swing.JLabel();
-        correoElectronicoUsuario = new javax.swing.JTextField();
+        UsernameUsuario = new javax.swing.JTextField();
         contraseñaUsuario = new javax.swing.JTextField();
         ingresarUsuario = new javax.swing.JButton();
         personalDeSoporteTécnico = new javax.swing.JLabel();
@@ -55,7 +55,7 @@ public class PantallaInicio extends javax.swing.JFrame {
         administradores.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         administradores.setText("Administradores");
 
-        correoElectronicoAdmin.setText("Correo Electrónico...");
+        correoElectronicoAdmin.setText("Username...");
         correoElectronicoAdmin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 correoElectronicoAdminActionPerformed(evt);
@@ -79,10 +79,10 @@ public class PantallaInicio extends javax.swing.JFrame {
         usuario.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         usuario.setText("Usuarios");
 
-        correoElectronicoUsuario.setText("Correo Electrónico...");
-        correoElectronicoUsuario.addActionListener(new java.awt.event.ActionListener() {
+        UsernameUsuario.setText("Username...");
+        UsernameUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                correoElectronicoUsuarioActionPerformed(evt);
+                UsernameUsuarioActionPerformed(evt);
             }
         });
 
@@ -140,7 +140,7 @@ public class PantallaInicio extends javax.swing.JFrame {
                             .addGroup(panelPrincipalLayout.createSequentialGroup()
                                 .addGap(41, 41, 41)
                                 .addComponent(usuario))
-                            .addComponent(correoElectronicoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(UsernameUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(contraseñaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(panelPrincipalLayout.createSequentialGroup()
                                 .addGap(29, 29, 29)
@@ -170,7 +170,7 @@ public class PantallaInicio extends javax.swing.JFrame {
                 .addGap(60, 60, 60)
                 .addComponent(usuario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(correoElectronicoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(UsernameUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(contraseñaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -206,9 +206,9 @@ public class PantallaInicio extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_contraseñaAdminActionPerformed
 
-    private void correoElectronicoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_correoElectronicoUsuarioActionPerformed
+    private void UsernameUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsernameUsuarioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_correoElectronicoUsuarioActionPerformed
+    }//GEN-LAST:event_UsernameUsuarioActionPerformed
 
     private void contraseñaUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contraseñaUsuarioActionPerformed
         // TODO add your handling code here:
@@ -241,20 +241,35 @@ public class PantallaInicio extends javax.swing.JFrame {
     }//GEN-LAST:event_ingresarAdministradoresActionPerformed
 
     private void ingresarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingresarUsuarioActionPerformed
-        String email = correoElectronicoUsuario.getText();
-        String contraseña = contraseñaUsuario.getText();
-        correoElectronicoUsuario.setText("");
+        String username = UsernameUsuario.getText().toUpperCase();
+        String contraseña = contraseñaUsuario.getText().toUpperCase();
+        PanelDeControlCliente panelCliente = new PanelDeControlCliente();
+        IngresoErroneo ingresoErroneo = new IngresoErroneo();
+        boolean existe_socio = false;
+        for (Socio socio : soporteTécnico.getClientes()) {
+            if (username.equals(socio.getUsername()) && socio.iniciarSesion(contraseña)) {
+                panelCliente.setVisible(true);
+                panelCliente.setLocationRelativeTo(null);
+                panelCliente.setCliente(socio);
+                existe_socio = true;
+            }
+        }
+        if (!existe_socio) {
+            ingresoErroneo.setVisible(true);
+            ingresoErroneo.setLocationRelativeTo(null);
+        }
+        UsernameUsuario.setText("");
         contraseñaUsuario.setText("");
     }//GEN-LAST:event_ingresarUsuarioActionPerformed
 
   
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField UsernameUsuario;
     private javax.swing.JLabel administradores;
     private javax.swing.JTextField contraseñaAdmin;
     private javax.swing.JTextField contraseñaST;
     private javax.swing.JTextField contraseñaUsuario;
     private javax.swing.JTextField correoElectronicoAdmin;
-    private javax.swing.JTextField correoElectronicoUsuario;
     private javax.swing.JButton ingresarAdministradores;
     private javax.swing.JButton ingresarSoporteTecnico;
     private javax.swing.JButton ingresarUsuario;
