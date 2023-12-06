@@ -1,14 +1,19 @@
 package articulos;
+import java.time.*;
 
 public class Pesa extends Articulo {
 
 	private int peso;
     private String uso;
     
-    public Pesa(String tipo, int peso, String uso) {
+    public Pesa(String tipo, int peso, String uso, String marca, String amortizacion, String duracionSTR) {
 		super(tipo);
 		this.peso = peso;
 		this.uso = uso.toUpperCase();
+		this.marca = marca.toUpperCase();
+		this.tipo_amortizacion = amortizacion.toUpperCase();
+		int duracion = Integer.parseInt(duracionSTR);
+		this.duracion = duracion;
 	}
     
 	public int getPeso() {
@@ -27,15 +32,6 @@ public class Pesa extends Articulo {
 		this.uso = uso.toUpperCase();
 	}
 
-	public int getEstadDesgaste() {
-		return this.estado_desgaste;
-	}
-
-
-	public void setEstadoDesgaste(int estado_desgaste) {
-		this.estado_desgaste = estado_desgaste;
-	}
-	
 	@Override
 	public void calcularDesgaste(int estado_desgaste) {
 		//CODIFICAR TEMA DESGASTE

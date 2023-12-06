@@ -14,15 +14,11 @@ public abstract class Usuario {
     }
 
     public String getUsername() {
-		return this.username;
+        return this.username;
     }
     
-    public void iniciarSesion(String username, String contraseña) {
-    	if (this.username.equals(username) && this.contraseña.equals(contraseña)) {
-    		this.inicio_sesion = true;
-    	} else {
-    		this.inicio_sesion = false;
-    	}
+    public boolean iniciarSesion(String contraseña) {
+        return contraseña.equals(this.contraseña);
     }
 
     public void cerrarSesion() {

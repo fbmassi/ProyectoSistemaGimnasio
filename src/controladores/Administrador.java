@@ -1,5 +1,7 @@
 package controladores;
 import java.util.*;
+import java.util.Map.Entry;
+
 import articulos.*;
 import sistema.*;
 
@@ -97,13 +99,13 @@ public class Administrador extends Usuario {
     
     //METODO PARA MONITORIEAR LA CANTIDAD DE ARTICULOS EN UNA SEDE Y SU ESTADO DE DESGASTE
   	public void mostrarArticulosSede(String ubicacion_sede) {
-  		HashMap<Pesa, Integer> tipos_de_pesa = new HashMap<>();
-  		HashMap<Colchoneta, Integer> tipos_de_colchoneta = new HashMap<>();
-  		HashMap<ArticuloPersonalizado, Integer> tipos_de_personalizados = new HashMap<>();
+  		HashMap<Pesa, ArrayList<LoteDeArticulos>> tipos_de_pesa = new HashMap<>();
+  		HashMap<Colchoneta, ArrayList<LoteDeArticulos>> tipos_de_colchoneta = new HashMap<>();
+  		HashMap<ArticuloPersonalizado, ArrayList<LoteDeArticulos>> tipos_de_personalizados = new HashMap<>();
   		for (Sede sede: this.creador_ST.getSedes()) {
       		if (sede.getUbicacion().equals(ubicacion_sede.toUpperCase())) {
-      			HashMap<Articulo, Integer> articulos_de_sede = sede.getCantidadStock();
-      			for (Map.Entry<Articulo, Integer > parCV: articulos_de_sede.entrySet()) {
+      			HashMap<Articulo, ArrayList<LoteDeArticulos>> articulos_de_sede = sede.getCantidadStock();
+      			for (Entry<Articulo, ArrayList<LoteDeArticulos>> parCV: articulos_de_sede.entrySet()) {
       				if (parCV.getKey() instanceof Pesa) {
       					tipos_de_pesa.put((Pesa) parCV.getKey(), parCV.getValue());
       				} else if (parCV.getKey() instanceof Colchoneta) {
@@ -115,33 +117,83 @@ public class Administrador extends Usuario {
       		}
   		}
   		System.out.println("PESAS: ");
-  		for (Map.Entry<Pesa, Integer > parCV: tipos_de_pesa.entrySet() ) {
+  		for (Entry<Pesa, ArrayList<LoteDeArticulos>> parCV: tipos_de_pesa.entrySet() ) {
   			System.out.println("Articulo: " + parCV.getKey().getTipo() + " "
   	        		+ parCV.getKey().getUso()  + " - "
-  	        		+ "Peso: " + parCV.getKey().getPeso() + "kg - "
-  	        		+ "Estado de desgaste: " + parCV.getKey().getEstadoDesgaste()
-  	        		+ " - Cantidad disponible: " + parCV.getValue());
+  	        		+ "Peso: " + parCV.getKey().getPeso() + "kg.");
+  			ArrayList<LoteDeArticulos> artPesas = parCV.getValue();
+  			int numero_de_lote = 1;
+  			if (parCV.getKey().getTipoAmortizacion().equals("POR USO")) {
+	  			for (LoteDeArticulos lote: artPesas) {
+					System.out.println( "Lote nº: " + numero_de_lote + " - "
+		  	        		+ "Cantidad disponible: " + lote.getCantidad() + " - " 
+		  	        		+ "Duracion Máxima: " + lote.getMaxDuracion() + " - " 
+							+ "Estado de desgaste: " + lote.getDesgastePorUso());
+					 numero_de_lote += 1;
+	  			}
+  			} else if (parCV.getKey().getTipoAmortizacion().equals("POR FECHA")) {
+  				for (LoteDeArticulos lote: artPesas) {
+					System.out.println( "Lote nº: " + numero_de_lote + " - "
+		  	        		+ "Cantidad disponible: " + lote.getCantidad() + " - " 
+		  	        		+ "Fecha de caducidad: " + lote.getFechaDeVencimiento());
+					 numero_de_lote += 1;
+	  			}
+  			}
   		}
   		System.out.println("COLCHONETAS: ");
-  		for (Map.Entry<Colchoneta, Integer > parCV: tipos_de_colchoneta.entrySet() ) {
+  		for (Entry<Colchoneta, ArrayList<LoteDeArticulos>> parCV: tipos_de_colchoneta.entrySet() ) {
   			System.out.println("Articulo: " + parCV.getKey().getTipo() + " - "
   					+ "Dimensiones: "
   	        		+ parCV.getKey().getLargo() + "mts de largo,  "
-  	        		+ parCV.getKey().getAncho() + "mts de ancho"
-  	        		+ " -  Estado de desgaste: " + parCV.getKey().getEstadoDesgaste() + " - "
-  	        		+ "Cantidad disponible: " + parCV.getValue());
+  	        		+ parCV.getKey().getAncho() + "mts de ancho");
+  			ArrayList<LoteDeArticulos> artColchonetas = parCV.getValue();
+  			int numero_de_lote = 1;
+  			if (parCV.getKey().getTipoAmortizacion().equals("POR USO")) {
+	  			for (LoteDeArticulos lote: artColchonetas) {
+					System.out.println( "Lote nº: " + numero_de_lote + " - "
+		  	        		+ "Cantidad disponible: " + lote.getCantidad() + " - " 
+		  	        		+ "Duracion Máxima: " + lote.getMaxDuracion() + " - " 
+							+ "Estado de desgaste: " + lote.getDesgastePorUso());
+					 numero_de_lote += 1;
+	  			}
+  			} else if (parCV.getKey().getTipoAmortizacion().equals("POR FECHA")) {
+  				for (LoteDeArticulos lote: artColchonetas) {
+					System.out.println( "Lote nº: " + numero_de_lote + " - "
+		  	        		+ "Cantidad disponible: " + lote.getCantidad() + " - " 
+		  	        		+ "Fecha de caducidad: " + lote.getFechaDeVencimiento());
+					 numero_de_lote += 1;
+	  			}
+  			}
   		}
   		System.out.println("PERSONALIZADOS: ");
-  		for (Map.Entry<ArticuloPersonalizado, Integer > parCV: tipos_de_personalizados.entrySet() ) {
-  			System.out.println("Articulo: " + parCV.getKey().getTipo() + " - "
-  					+ parCV.getKey().getDescripcion()
-  	        		+ " - Estado de desgaste: " + parCV.getKey().getEstadoDesgaste()
-  	        		+ " - Cantidad disponible: " + parCV.getValue());
+  		for (Entry<ArticuloPersonalizado, ArrayList<LoteDeArticulos>> parCV: tipos_de_personalizados.entrySet() ) {
+  			System.out.println("Articulo: " + parCV.getKey().getTipo() + " - " + parCV.getKey().getDescripcion());
+  			ArrayList<LoteDeArticulos> artPersonalizados = parCV.getValue();
+  			int numero_de_lote = 1;
+  			if (parCV.getKey().getTipoAmortizacion().equals("POR USO")) {
+	  			for (LoteDeArticulos lote: artPersonalizados) {
+					System.out.println( "Lote nº: " + numero_de_lote + " - "
+		  	        		+ "Cantidad disponible: " + lote.getCantidad() + " - " 
+		  	        		+ "Duracion Máxima: " + lote.getMaxDuracion() + " - " 
+							+ "Estado de desgaste: " + lote.getDesgastePorUso());
+					 numero_de_lote += 1;
+	  			}
+  			} else if (parCV.getKey().getTipoAmortizacion().equals("POR FECHA")) {
+  				for (LoteDeArticulos lote: artPersonalizados) {
+					System.out.println( "Lote nº: " + numero_de_lote + " - "
+		  	        		+ "Cantidad disponible: " + lote.getCantidad() + " - " 
+		  	        		+ "Fecha de caducidad: " + lote.getFechaDeVencimiento());
+					 numero_de_lote += 1;
+	  			}
+  			}
   		}
 	  	}
 
 	    //METODO PARA AGREGAR MODIFICAR LA CANTIDAD DE ARTICULOS DE UNA SEDE
-	    public void agregarArticulos(String ubicacion_sede, String tipo, String pesoSTR, String uso, String largoSTR, String anchoSTR, String descripcion, String cantidad_a_agregar) {
+	    public void agregarArticulos(String ubicacion_sede, String tipo, String tipo_amortizacion, String fecha_de_creacion, String cantidad_a_agregar,
+	    		String pesoSTR, String uso, 
+	    		String largoSTR, String anchoSTR, 
+	    		String descripcion) {
       	
       	int cantidad = Integer.parseInt(cantidad_a_agregar);
       	boolean existe_articulo = false;
@@ -167,8 +219,8 @@ public class Administrador extends Usuario {
       			if (tipo.toUpperCase().equals("PESA")) {
       				int peso = Integer.parseInt(pesoSTR);
       				for (Pesa pesa:tipos_de_pesa) {
-          				if(peso == pesa.getPeso() && uso.toUpperCase().equals(pesa.getUso())) {
-          					sede.agregarArticulo(pesa, cantidad);
+          				if(peso == pesa.getPeso() && tipo_amortizacion.equals(pesa.getTipoAmortizacion()) && uso.toUpperCase().equals(pesa.getUso())) {
+          					sede.agregarArticulos(pesa, cantidad, fecha_de_creacion);
           					existe_articulo = true;
           				}
       				}
@@ -177,14 +229,14 @@ public class Administrador extends Usuario {
       				int ancho = Integer.parseInt(anchoSTR);
       				for (Colchoneta colchoneta:tipos_de_colchoneta) {
           				if(largo == colchoneta.getLargo() && ancho == colchoneta.getAncho()) {
-          					sede.agregarArticulo(colchoneta, cantidad);
+          					sede.agregarArticulos(colchoneta, cantidad, fecha_de_creacion);
           					existe_articulo = true;
           				}
       				}
       			} else if ((tipo.toUpperCase().equals("PERSONALIZADO")))
   					for (ArticuloPersonalizado articulo_personalizado: tipos_de_personalizados) {
   	    				if(descripcion.toUpperCase().equals(articulo_personalizado.getDescripcion())) {
-  	    					sede.agregarArticulo(articulo_personalizado, cantidad);
+  	    					sede.agregarArticulos(articulo_personalizado, cantidad, fecha_de_creacion);
   	    					existe_articulo = true;
   	    				}
   					}

@@ -2,8 +2,8 @@ package sistema;
 import controladores.*;
 
 public class Profesor {
-	
-	private SoporteTécnico creador_ST;
+    
+    private SoporteTécnico creador_ST;
     private String nombre;
     private long sueldo; 
     private Disciplina disciplina;
@@ -32,12 +32,12 @@ public class Profesor {
     }
     
     public long getSueldo() {
-		return this.sueldo;
-	}
+        return this.sueldo;
+    }
 
-	public void setSueldo(long sueldo) {
-		this.sueldo = sueldo;
-	}
+    public void setSueldo(long sueldo) {
+            this.sueldo = sueldo;
+    }
     
     public void setDisciplina(Disciplina disciplina) {
     	this.disciplina = disciplina;
@@ -49,7 +49,7 @@ public class Profesor {
 
     public boolean confirmarHorario(String dia, String horario) {
     	boolean disponibilidad = true;
-    	if (ultima_clase != null && dia == ultima_clase.getDia()) {
+    	if (ultima_clase != null && dia.equals(ultima_clase.getDia())) {
     		int horario_entero = Integer.parseInt(horario);
     		if (horario_entero >= ultima_clase.getHorario()) {
 	    		int diferencia_horaria = horario_entero - ultima_clase.getHorario() + ultima_clase.getDuracion();
@@ -63,7 +63,7 @@ public class Profesor {
     
     public boolean confirmarHorario(String dia, int horario) {
     	boolean disponibilidad = true;
-    	if (ultima_clase != null && dia == ultima_clase.getDia()) {
+    	if (ultima_clase != null && dia.equals(ultima_clase.getDia())) {
     		if (horario >= ultima_clase.getHorario()) {
 	    		int diferencia_horaria = horario - ultima_clase.getHorario() + ultima_clase.getDuracion();
 	    		if (diferencia_horaria <= 3) {

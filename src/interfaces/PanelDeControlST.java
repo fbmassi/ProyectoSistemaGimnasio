@@ -43,7 +43,8 @@ public class PanelDeControlST extends javax.swing.JFrame {
         botonVolverAtras = new javax.swing.JButton();
         botonCrearDisciplina = new javax.swing.JButton();
         botonCrearProfesores = new javax.swing.JButton();
-        botonCrearSede1 = new javax.swing.JButton();
+        botonVerSedes = new javax.swing.JButton();
+        botonCrearEmplazamiento = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -62,12 +63,32 @@ public class PanelDeControlST extends javax.swing.JFrame {
         });
 
         botonGestionarAdministrador.setText("GESTIONAR USUARIOS ADMINISTRADORES");
+        botonGestionarAdministrador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonGestionarAdministradorActionPerformed(evt);
+            }
+        });
 
         botonCrearClases.setText("CREAR CLASES");
+        botonCrearClases.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCrearClasesActionPerformed(evt);
+            }
+        });
 
         botonAsignarSedes.setText("ASIGNAR SEDES");
+        botonAsignarSedes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonAsignarSedesActionPerformed(evt);
+            }
+        });
 
         botonCrearArticulos.setText("CREAR ARTICULOS");
+        botonCrearArticulos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCrearArticulosActionPerformed(evt);
+            }
+        });
 
         botonVolverAtras.setText("VOLVER ATRÁS");
         botonVolverAtras.addActionListener(new java.awt.event.ActionListener() {
@@ -90,10 +111,17 @@ public class PanelDeControlST extends javax.swing.JFrame {
             }
         });
 
-        botonCrearSede1.setText("VER SEDES DE LA CADENA");
-        botonCrearSede1.addActionListener(new java.awt.event.ActionListener() {
+        botonVerSedes.setText("VER SEDES DE LA CADENA");
+        botonVerSedes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonCrearSede1ActionPerformed(evt);
+                botonVerSedesActionPerformed(evt);
+            }
+        });
+
+        botonCrearEmplazamiento.setText("CREAR EMPLAZAMIENTO");
+        botonCrearEmplazamiento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCrearEmplazamientoActionPerformed(evt);
             }
         });
 
@@ -113,7 +141,8 @@ public class PanelDeControlST extends javax.swing.JFrame {
                     .addComponent(botonVolverAtras, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE)
                     .addComponent(botonCrearDisciplina, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE)
                     .addComponent(botonCrearProfesores, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE)
-                    .addComponent(botonCrearSede1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(botonVerSedes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(botonCrearEmplazamiento, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -122,8 +151,8 @@ public class PanelDeControlST extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(botonCrearSede, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(botonCrearSede1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 150, Short.MAX_VALUE)
+                .addComponent(botonVerSedes, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(botonGestionarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(botonGestionarAdministrador, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -135,11 +164,13 @@ public class PanelDeControlST extends javax.swing.JFrame {
                 .addComponent(botonCrearDisciplina, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(botonCrearProfesores, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(botonCrearEmplazamiento, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(botonCrearClases, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(72, 72, 72)
+                .addGap(36, 36, 36)
                 .addComponent(botonVolverAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -164,7 +195,10 @@ public class PanelDeControlST extends javax.swing.JFrame {
     }//GEN-LAST:event_botonCrearSedeActionPerformed
 
     private void botonGestionarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGestionarClientesActionPerformed
-        // TODO add your handling code here:
+        GestionDeClientes gestionDeClientes = new GestionDeClientes();
+        gestionDeClientes.setST(soporteTécnico);
+        gestionDeClientes.setVisible(true);
+        gestionDeClientes.setLocationRelativeTo(null);
     }//GEN-LAST:event_botonGestionarClientesActionPerformed
 
     private void botonVolverAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVolverAtrasActionPerformed
@@ -172,65 +206,72 @@ public class PanelDeControlST extends javax.swing.JFrame {
     }//GEN-LAST:event_botonVolverAtrasActionPerformed
 
     private void botonCrearDisciplinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearDisciplinaActionPerformed
-        // TODO add your handling code here:
+        CreacionDisciplina crearDisciplina = new CreacionDisciplina();
+        crearDisciplina.setST(soporteTécnico);
+        crearDisciplina.setVisible(true);
+        crearDisciplina.setLocationRelativeTo(null);
     }//GEN-LAST:event_botonCrearDisciplinaActionPerformed
 
     private void botonCrearProfesoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearProfesoresActionPerformed
-        // TODO add your handling code here:
+        CreacionProfesores creacionProfesor = new CreacionProfesores();
+        creacionProfesor.setST(soporteTécnico);
+        creacionProfesor.setVisible(true);
+        creacionProfesor.setLocationRelativeTo(null);
     }//GEN-LAST:event_botonCrearProfesoresActionPerformed
 
-    private void botonCrearSede1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearSede1ActionPerformed
+    private void botonVerSedesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVerSedesActionPerformed
         VerSedes verSedes = new VerSedes();
         verSedes.setST(soporteTécnico);
         verSedes.setVisible(true);
         verSedes.setLocationRelativeTo(null);
-    }//GEN-LAST:event_botonCrearSede1ActionPerformed
+    }//GEN-LAST:event_botonVerSedesActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PanelDeControlST.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PanelDeControlST.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PanelDeControlST.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PanelDeControlST.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void botonGestionarAdministradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGestionarAdministradorActionPerformed
+        GestionDeAdministradores gestionDeAdministradores = new GestionDeAdministradores();
+        gestionDeAdministradores.setST(soporteTécnico);
+        gestionDeAdministradores.setVisible(true);
+        gestionDeAdministradores.setLocationRelativeTo(null);
+    }//GEN-LAST:event_botonGestionarAdministradorActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new PanelDeControlST().setVisible(true);
-            }
-        });
-    }
+    private void botonAsignarSedesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAsignarSedesActionPerformed
+        AsignarSedes asignarSedes = new AsignarSedes();
+        asignarSedes.setST(soporteTécnico);
+        asignarSedes.setVisible(true);
+        asignarSedes.setLocationRelativeTo(null);
+    }//GEN-LAST:event_botonAsignarSedesActionPerformed
+
+    private void botonCrearEmplazamientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearEmplazamientoActionPerformed
+        CreacionEmplazamientos crearEmplazamientos = new CreacionEmplazamientos();
+        crearEmplazamientos.setST(soporteTécnico);
+        crearEmplazamientos.setVisible(true);
+        crearEmplazamientos.setLocationRelativeTo(null);
+    }//GEN-LAST:event_botonCrearEmplazamientoActionPerformed
+
+    private void botonCrearArticulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearArticulosActionPerformed
+        CreacionDeArticulos crearArticulos = new CreacionDeArticulos();
+        crearArticulos.setST(soporteTécnico);
+        crearArticulos.setVisible(true);
+        crearArticulos.setLocationRelativeTo(null);
+    }//GEN-LAST:event_botonCrearArticulosActionPerformed
+
+    private void botonCrearClasesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearClasesActionPerformed
+        CreacionClases crearClases = new CreacionClases();
+        crearClases.setST(soporteTécnico);
+        crearClases.setVisible(true);
+        crearClases.setLocationRelativeTo(null);
+    }//GEN-LAST:event_botonCrearClasesActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonAsignarSedes;
     private javax.swing.JButton botonCrearArticulos;
     private javax.swing.JButton botonCrearClases;
     private javax.swing.JButton botonCrearDisciplina;
+    private javax.swing.JButton botonCrearEmplazamiento;
     private javax.swing.JButton botonCrearProfesores;
     private javax.swing.JButton botonCrearSede;
-    private javax.swing.JButton botonCrearSede1;
     private javax.swing.JButton botonGestionarAdministrador;
     private javax.swing.JButton botonGestionarClientes;
+    private javax.swing.JButton botonVerSedes;
     private javax.swing.JButton botonVolverAtras;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

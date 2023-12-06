@@ -1,13 +1,14 @@
 package articulos;
 
 public abstract class Articulo {
-
-    protected int estado_desgaste;
-    private String tipo;
+	
+    protected String tipo;
+    protected String marca;
+	protected String tipo_amortizacion;
+	protected int duracion;
 
     public Articulo(String tipo) {
     	this.setTipo(tipo);
-    	this.estado_desgaste = 100;
     }
 
     public abstract void calcularDesgaste(int estado_desgaste);
@@ -20,7 +21,16 @@ public abstract class Articulo {
 		this.tipo = tipo.toUpperCase();
 	}
 	
-	public int getEstadoDesgaste() {
-		return this.estado_desgaste;
+	public String getMarca() {
+		return marca;
+		
+	}
+	
+	public int getDuracion() {
+		return this.duracion;
+	}
+	
+	public String getTipoAmortizacion() {
+		return this.tipo_amortizacion;
 	}
 }

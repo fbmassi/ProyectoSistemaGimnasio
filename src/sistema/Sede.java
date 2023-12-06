@@ -1,7 +1,10 @@
 package sistema;
 import java.util.*;
 import articulos.Articulo;
+import articulos.Pesa;
 import controladores.Administrador;
+import java.time.*;
+import java.time.format.*;
 
 public class Sede {
 	
@@ -9,7 +12,7 @@ public class Sede {
     private String ubicacion;
     private String nivel_suscripcion;
     private ArrayList<Clase> clases_en_sede;
-    private HashMap<Articulo, Integer> cantidad_stock;
+    private HashMap<Articulo, ArrayList<LoteDeArticulos>> cantidad_stock;
 
     public Sede(String ubicacion, String nivel_suscripcion) {
     	this.ubicacion = ubicacion.toUpperCase();
@@ -42,15 +45,20 @@ public class Sede {
 		this.ubicacion = ubicacion;
 	}
 
-	public HashMap<Articulo, Integer> getCantidadStock() {
+	public HashMap<Articulo, ArrayList<LoteDeArticulos>> getCantidadStock() {
 		return this.cantidad_stock;
 	}
 	
-	public void agregarArticulo(Articulo articulo, int cantidad) {
+	public void agregarArticulos(Articulo articulo, int cantidad, String fecha_de_creacion) {
+		LoteDeArticulos lote  = new LoteDeArticulos(articulo, cantidad, fecha_de_creacion);
 		if (this.cantidad_stock.containsKey(articulo)) {
-    		this.cantidad_stock.put(articulo, this.cantidad_stock.get(articulo) + cantidad);
+			ArrayList<LoteDeArticulos> agregar = this.cantidad_stock.get(articulo);
+			agregar.add(lote);
+    		this.cantidad_stock.put(articulo, agregar);
     	} else {
-    		this.cantidad_stock.put(articulo, cantidad);
+    		ArrayList<LoteDeArticulos> agregar = new ArrayList<LoteDeArticulos>();
+			agregar.add(lote);
+    		this.cantidad_stock.put(articulo, agregar);
     	}
 	}
 	
@@ -75,16 +83,12 @@ public class Sede {
 	public ArrayList<Clase> getClases(){
 		return this.clases_en_sede;
 	}
-	
-	public void setCantidadStock(HashMap<Articulo, Integer> cantidad_stock) {
-		//CODIFICAR TEMA CANTIDAD DE STOCK
-	}
     
     public void alertarBajoStock(int CantidadStock, int cant_pesas, int cant_colchonetas) {
     	//CODIFICAR ALERTA DE BAJO STOCK
     }
     
     public void sacarStock(Articulo articulo, int cantidad_stock) {
+    	
     }
-
 }

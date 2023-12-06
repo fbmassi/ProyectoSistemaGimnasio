@@ -3,10 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/francobmassi/Documentos/FACULTAD/MATERIAS/2º%20SEGUNDO%20AÑO/2º%20SEMESTRE/Paradigma%20Orientado%20a%20Objetos/Trabajo%20Práctico%20Obligatorio/Proyecto_Sistema_Gimnasio/src/interfaces/PantallaInicio.java</file>
-            <file>file:/Users/francobmassi/Documentos/FACULTAD/MATERIAS/2º%20SEGUNDO%20AÑO/2º%20SEMESTRE/Paradigma%20Orientado%20a%20Objetos/Trabajo%20Práctico%20Obligatorio/Proyecto_Sistema_Gimnasio/src/aplicacion/Main.java</file>
-            <file>file:/Users/francobmassi/Documentos/FACULTAD/MATERIAS/2º%20SEGUNDO%20AÑO/2º%20SEMESTRE/Paradigma%20Orientado%20a%20Objetos/Trabajo%20Práctico%20Obligatorio/Proyecto_Sistema_Gimnasio/src/interfaces/VerSedes.java</file>
-            <file>file:/Users/francobmassi/Documentos/FACULTAD/MATERIAS/2º%20SEGUNDO%20AÑO/2º%20SEMESTRE/Paradigma%20Orientado%20a%20Objetos/Trabajo%20Práctico%20Obligatorio/Proyecto_Sistema_Gimnasio/src/interfaces/CreacionDeSedes.java</file>
+            <file>file:/Users/francobmassi/Documentos/FACULTAD/MATERIAS/2º%20SEGUNDO%20AÑO/2º%20SEMESTRE/Paradigma%20Orientado%20a%20Objetos/Trabajo%20Práctico%20Obligatorio/Proyecto_Sistema_Gimnasio/src/interfaces/CrearNuevaColchoneta.java</file>
+            <file>file:/Users/francobmassi/Documentos/FACULTAD/MATERIAS/2º%20SEGUNDO%20AÑO/2º%20SEMESTRE/Paradigma%20Orientado%20a%20Objetos/Trabajo%20Práctico%20Obligatorio/Proyecto_Sistema_Gimnasio/src/interfaces/CreacionDeArticulos.java</file>
+            <file>file:/Users/francobmassi/Documentos/FACULTAD/MATERIAS/2º%20SEGUNDO%20AÑO/2º%20SEMESTRE/Paradigma%20Orientado%20a%20Objetos/Trabajo%20Práctico%20Obligatorio/Proyecto_Sistema_Gimnasio/src/interfaces/CrearNuevoArtPers.java</file>
+            <file>file:/Users/francobmassi/Documentos/FACULTAD/MATERIAS/2º%20SEGUNDO%20AÑO/2º%20SEMESTRE/Paradigma%20Orientado%20a%20Objetos/Trabajo%20Práctico%20Obligatorio/Proyecto_Sistema_Gimnasio/src/interfaces/CrearNuevaPesa.java</file>
+            <file>file:/Users/francobmassi/Documentos/FACULTAD/MATERIAS/2º%20SEGUNDO%20AÑO/2º%20SEMESTRE/Paradigma%20Orientado%20a%20Objetos/Trabajo%20Práctico%20Obligatorio/Proyecto_Sistema_Gimnasio/src/interfazPrincipal/Main.java</file>
             <file>file:/Users/francobmassi/Documentos/FACULTAD/MATERIAS/2º%20SEGUNDO%20AÑO/2º%20SEMESTRE/Paradigma%20Orientado%20a%20Objetos/Trabajo%20Práctico%20Obligatorio/Proyecto_Sistema_Gimnasio/src/interfaces/PanelDeControlST.java</file>
         </group>
     </open-files>

@@ -50,7 +50,8 @@
                       <Component id="botonVolverAtras" alignment="0" pref="519" max="32767" attributes="0"/>
                       <Component id="botonCrearDisciplina" alignment="0" pref="519" max="32767" attributes="0"/>
                       <Component id="botonCrearProfesores" alignment="0" pref="519" max="32767" attributes="0"/>
-                      <Component id="botonCrearSede1" alignment="0" max="32767" attributes="0"/>
+                      <Component id="botonVerSedes" alignment="0" max="32767" attributes="0"/>
+                      <Component id="botonCrearEmplazamiento" alignment="0" pref="519" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -62,8 +63,8 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="botonCrearSede" min="-2" pref="55" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="botonCrearSede1" min="-2" pref="55" max="-2" attributes="0"/>
-                  <EmptySpace pref="150" max="32767" attributes="0"/>
+                  <Component id="botonVerSedes" min="-2" pref="55" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="botonGestionarClientes" min="-2" pref="55" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="botonGestionarAdministrador" min="-2" pref="55" max="-2" attributes="0"/>
@@ -75,11 +76,13 @@
                   <Component id="botonCrearDisciplina" min="-2" pref="55" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="botonCrearProfesores" min="-2" pref="55" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="botonCrearEmplazamiento" min="-2" pref="55" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="botonCrearClases" min="-2" pref="55" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                   <Component id="botonVolverAtras" min="-2" pref="55" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -105,21 +108,33 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="GESTIONAR USUARIOS ADMINISTRADORES"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonGestionarAdministradorActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="botonCrearClases">
           <Properties>
             <Property name="text" type="java.lang.String" value="CREAR CLASES"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonCrearClasesActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="botonAsignarSedes">
           <Properties>
             <Property name="text" type="java.lang.String" value="ASIGNAR SEDES"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonAsignarSedesActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="botonCrearArticulos">
           <Properties>
             <Property name="text" type="java.lang.String" value="CREAR ARTICULOS"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonCrearArticulosActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="botonVolverAtras">
           <Properties>
@@ -145,12 +160,20 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonCrearProfesoresActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="botonCrearSede1">
+        <Component class="javax.swing.JButton" name="botonVerSedes">
           <Properties>
             <Property name="text" type="java.lang.String" value="VER SEDES DE LA CADENA"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonCrearSede1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonVerSedesActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="botonCrearEmplazamiento">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="CREAR EMPLAZAMIENTO"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonCrearEmplazamientoActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
