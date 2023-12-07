@@ -39,7 +39,11 @@ public class LoteDeArticulos {
 	public int getDesgastePorUso() {
 		return desgaste_por_uso;
 	}
-
+        
+        public void aumentarDesgaste(){
+            desgaste_por_uso += 1;
+        }
+        
 	public void setDesgastePorUso(int desgaste_por_uso) {
 		this.desgaste_por_uso = desgaste_por_uso;
 	}

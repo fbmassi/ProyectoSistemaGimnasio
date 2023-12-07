@@ -326,15 +326,17 @@ public class Administrador extends Usuario {
       	if (!existe_articulo && existe_sede) {
       		IngresoErroneo ingresoErroneo = new IngresoErroneo();
       		ingresoErroneo.setVisible(true);
-            ingresoErroneo.setLocationRelativeTo(null);
+                ingresoErroneo.setLocationRelativeTo(null);
       	} else if (!existe_sede) {
-      		System.out.println("NO EXISTE LA SEDE SELECCIONADA.");
+      		IngresoErroneo ingresoErroneo = new IngresoErroneo();
+      		ingresoErroneo.setVisible(true);
+                ingresoErroneo.setLocationRelativeTo(null);
       	}
   	}
     
 	//METODO PARA MOSTRAR CLASES GRABADAS
-	public void monitorearGrabaciones() {
-		creador_ST.getGrabaciones().mostrarGrabaciones();
+	public String monitorearGrabaciones() {
+            return creador_ST.getGrabaciones().mostrarGrabaciones();
 	}
 		
 	//METODO PARA ELIMINAR CLASES GRABADAS
@@ -342,8 +344,10 @@ public class Administrador extends Usuario {
 		try {
 			int clases_a_borrar = Integer.parseInt(cantidad_a_eliminar);
 			creador_ST.getGrabaciones().eliminarClases(clases_a_borrar);
-		} catch (Exception e) {
-			System.out.println("INGRESO NO VALIDO");
+		} catch (NumberFormatException e) {
+			IngresoErroneo ingresoErroneo = new IngresoErroneo();
+                        ingresoErroneo.setVisible(true);
+                        ingresoErroneo.setLocationRelativeTo(null);
 		}
 	}
 	

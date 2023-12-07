@@ -1,4 +1,8 @@
 package sistema;
+import articulos.Articulo;
+import articulos.ArticuloPersonalizado;
+import java.time.*;
+import java.time.format.*;
 import java.util.*;
 
 import controladores.Administrador;
@@ -200,6 +204,43 @@ public class Clase {
                 || this.getDisciplina().getTipo().equals("GIMNASIA POSTURAL VIRTUAL");
         if (estado.equals("FINALIZADA") && virtualidad){
             creador_ST.getGrabaciones().agregarClase(this);
+            HashMap<Articulo, ArrayList<LoteDeArticulos>> articulos_de_sede = sede.getCantidadStock();
+            for (Map.Entry<Articulo, ArrayList<LoteDeArticulos>> parCV: articulos_de_sede.entrySet()) {
+                if (parCV.getKey().getTipoAmortizacion().equals("POR USO")) {
+                    for (LoteDeArticulos lote: parCV.getValue()){
+                        lote.aumentarDesgaste(); 
+                        if (lote.getMaxDuracion() == lote.getDesgastePorUso()) {
+                            parCV.getValue().remove(lote);
+                        }
+                    }
+                } else if (parCV.getKey().getTipoAmortizacion().equals("POR FECHA")) {
+                    for (LoteDeArticulos lote: parCV.getValue()){
+                        LocalDate fechaDeHoy = LocalDate.now(); 
+                        if (fechaDeHoy.isAfter(lote.getFechaDeVencimiento())) {
+                            parCV.getValue().remove(lote);
+                        }
+                    }
+                }  
+            }
+        } else if (estado.equals("FINALIZADA")) {
+            HashMap<Articulo, ArrayList<LoteDeArticulos>> articulos_de_sede = sede.getCantidadStock();
+            for (Map.Entry<Articulo, ArrayList<LoteDeArticulos>> parCV: articulos_de_sede.entrySet()) {
+                if (parCV.getKey().getTipoAmortizacion().equals("POR USO")) {
+                    for (LoteDeArticulos lote: parCV.getValue()){
+                        lote.aumentarDesgaste(); 
+                        if (lote.getMaxDuracion() == lote.getDesgastePorUso()) {
+                            parCV.getValue().remove(lote);
+                        }
+                    }
+                } else if (parCV.getKey().getTipoAmortizacion().equals("POR FECHA")) {
+                    for (LoteDeArticulos lote: parCV.getValue()){
+                        LocalDate fechaDeHoy = LocalDate.now(); 
+                        if (fechaDeHoy.isAfter(lote.getFechaDeVencimiento())) {
+                            parCV.getValue().remove(lote);
+                        }
+                    }
+                }  
+            } 
         }
     	this.estado = estado;
     }
@@ -271,15 +312,40 @@ public class Clase {
     
     public long calcularCostos() {
     	long costos = this.profesor.getSueldo()/90;
+        
     	if (emplazamiento.getTipo().equals("AIRE LIBRE")) {
-    		costos += 500*(emplazamiento.getSuperficie()/this.duracion);
-    	}
-    	
-		return costos;
+            costos += 500*(emplazamiento.getSuperficie()/this.duracion);
+    	} else if (emplazamiento.getTipo().equals("PILETA")) {
+            costos += 150000/150;
+        } else if (emplazamiento.getTipo().equals("SALON")) {
+            costos += 150000/300;
+        }
+        
+        return costos;
+    }
+    
+    public long calcularIngresos() {
+        
+        long ingresos = 0;
+        
+        long membresíaGold = 10000;
+        long membresíaBlack = 15000;
+        long membresíaPlatinum = 20000;
+        
+        for(Socio alumno: alumnos) {
+            if (alumno.getNivelSuscripción().equals("GOLD")) {
+                ingresos += membresíaGold/30;
+            } else if (alumno.getNivelSuscripción().equals("BLACK")) {
+                ingresos += membresíaBlack/30;
+            } else if (alumno.getNivelSuscripción().equals("PLATINUM")) {
+                ingresos += membresíaPlatinum/30;
+            }
+        }
+        
+        return ingresos;
     }
     
     public boolean calcularRentabilidad(Clase clase) {
-    	//CODIFICAR CALCULO DE RENTABILIDAD
-        return false;
+        return this.calcularIngresos() > this.calcularCostos();
     }
 }

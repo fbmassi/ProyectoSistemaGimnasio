@@ -153,7 +153,11 @@ public class PanelDeControlAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_botonVolverAtrasActionPerformed
 
     private void botonMonitoriearGrabacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonMonitoriearGrabacionesActionPerformed
-        
+        GestionDeGrabaciones gestionDeGrabaciones = new GestionDeGrabaciones();
+        gestionDeGrabaciones.setST(soporteTécnico);
+        gestionDeGrabaciones.setAdmin(admin);
+        gestionDeGrabaciones.setVisible(true);
+        gestionDeGrabaciones.setLocationRelativeTo(null);
     }//GEN-LAST:event_botonMonitoriearGrabacionesActionPerformed
 
     private void botonGestionarArticulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGestionarArticulosActionPerformed

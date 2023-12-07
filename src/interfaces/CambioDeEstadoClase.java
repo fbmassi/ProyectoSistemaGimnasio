@@ -6,7 +6,7 @@ package interfaces;
 
 import controladores.Administrador;
 import controladores.SoporteTécnico;
-import sistema.*;
+import sistema.*; 
 
 /**
  *
@@ -26,7 +26,7 @@ public class CambioDeEstadoClase extends javax.swing.JFrame {
     }
     
     /**
-     * Creates new form CambioDeEstadoClase
+     * Creates new form GestionDeGrabaciones
      */
     public CambioDeEstadoClase() {
         initComponents();
@@ -75,7 +75,7 @@ public class CambioDeEstadoClase extends javax.swing.JFrame {
             }
         });
 
-        botonVerClases.setText("MOSTRAR CLASES PARA ADMINISTRAR");
+        botonVerClases.setText("MOSTRAR GRABACIONES");
         botonVerClases.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonVerClasesActionPerformed(evt);

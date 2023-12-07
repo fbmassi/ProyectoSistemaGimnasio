@@ -84,11 +84,4 @@ public class Sede {
 		return this.clases_en_sede;
 	}
     
-    public void alertarBajoStock(int CantidadStock, int cant_pesas, int cant_colchonetas) {
-    	//CODIFICAR ALERTA DE BAJO STOCK
-    }
-    
-    public void sacarStock(Articulo articulo, int cantidad_stock) {
-    	
-    }
 }

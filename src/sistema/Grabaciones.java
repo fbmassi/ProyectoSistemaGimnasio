@@ -8,12 +8,12 @@ public class Grabaciones {
 	private ArrayList<Clase> gimnasia_virtual = new ArrayList<>();
 	
 	public void agregarClase(Clase clase){
-		if (clase.getDisciplina().getTipo() == "YOGA") {
+		if (clase.getDisciplina().getTipo() == "YOGA VIRTUAL") {
 			if (yoga_virtual.size() >= 10) {
 				yoga_virtual.remove(0);
 				}
 			yoga_virtual.add(clase);
-			} else if (clase.getDisciplina().getTipo() == "GIMNASIA POSTURAL") {
+			} else if (clase.getDisciplina().getTipo() == "GIMNASIA POSTURAL VIRTUAL") {
 			if (gimnasia_virtual.size() >= 15) {
 				gimnasia_virtual.remove(0);
 				} 
@@ -21,13 +21,15 @@ public class Grabaciones {
 			}
 		}
 
-	public void mostrarGrabaciones() {
+	public String mostrarGrabaciones() {
+            String devolver = "";
 		for (Clase clase: yoga_virtual) {
-			System.out.println("Clase: " + clase.getDisciplina().getTipo() + ", Dia" + clase.getDia() + ", " + clase.getHorario());
+			devolver += "<p>Clase: " + clase.getDisciplina().getTipo() + ", Dia" + clase.getDia() + ", " + clase.getHorario() + ".</p>";
 		}
 		for (Clase clase: gimnasia_virtual) {
-			System.out.println("Clase: " + clase.getDisciplina().getTipo() + ", Dia" + clase.getDia() + ", " + clase.getHorario());
+			devolver += "<p>Clase: " + clase.getDisciplina().getTipo() + ", Dia" + clase.getDia() + ", " + clase.getHorario()+ ".</p>";
 		}
+            return strHTML(devolver);
 	}
 
 	public void eliminarClases(int cantidad_clases_a_eliminar) {
@@ -36,4 +38,10 @@ public class Grabaciones {
 			gimnasia_virtual.remove(0);
 		}
 	}
+        private String strHTML(String texto) {
+            return "<html>" + texto + "</html>";
+        }
+        
 	}
+
+        
