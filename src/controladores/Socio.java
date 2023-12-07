@@ -21,7 +21,6 @@ public class Socio extends Usuario {
 	
     public void pedirReseva(String ubicacion, String tipo_disciplina, String dia, String horario) {
     	boolean inscipcion_no_exitosa = true;
-        IngresoErroneo ingresoErroneo = new IngresoErroneo();
     	for (Clase clase: this.creador_ST.getClases()) {
     		int horario_entero = Integer.parseInt(horario);
     		if (clase.getSede().getUbicacion().equals(ubicacion.toUpperCase()) 
@@ -33,6 +32,7 @@ public class Socio extends Usuario {
     		}
     	}
     	if (inscipcion_no_exitosa) {
+    		IngresoErroneo ingresoErroneo = new IngresoErroneo();
     		ingresoErroneo.setVisible(true);
                 ingresoErroneo.setLocationRelativeTo(null);
     	}
@@ -70,7 +70,7 @@ public class Socio extends Usuario {
     public String visualizarClases(){
         String devolver = "";
         for (Clase clase: this.creador_ST.getClases()) {
-            if (clase.getSede().getNivelSuscripcion().equals(this.getNivelSuscripción()) && !clase.getEstado().equals("FINALIZADA"))
+            if (clase.getSede().getNivelSuscripcion().equals(this.getNivelSuscripción()) && !clase.getEstado().equals("FINALIZADA") && this.isAlta())
                 devolver += "<p>CLASE: " + clase.getSede().getUbicacion() + " - " + clase.getDisciplina().getTipo() 
                     + " - "  + clase.getDia() + " " + clase.getHorario() + "hs. - ESTADO: " + clase.getEstado() +".</p>";
             }

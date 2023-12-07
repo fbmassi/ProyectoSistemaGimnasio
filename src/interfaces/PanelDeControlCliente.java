@@ -227,26 +227,21 @@ public class PanelDeControlCliente extends javax.swing.JFrame {
         String horario = hora.getText();
         try {
             int hourInt = Integer.parseInt(horario);
-            cliente.pedirReseva(ubicacion, disc, day, horario);
             boolean inscripcion_exitosa = false; 
             for (Clase clase: soporteTécnico.getClases()) {
                 if (!clase.getEstado().equals("FINALIZADA") && clase.getSede().getUbicacion().equals(ubicacion) 
                     && clase.getDisciplina().getTipo().equals(disc) && clase.getDia().equals(day)
                     && clase.getHorario()==hourInt && clase.getListaInscriptos().contains(cliente)) {
                         inscripcion_exitosa = true;
+                        cliente.pedirReseva(ubicacion, disc, day, horario);
                     }      
             }
-            /*
-            if (inscripcion_exitosa){
-                InscripcionExitosa iscEx = new InscripcionExitosa();
-                iscEx.setVisible(true);
-                iscEx.setLocationRelativeTo(null);
-            } else {
+            
+            if (!inscripcion_exitosa){
                 InscripcionFallida iscFall = new InscripcionFallida();
                 iscFall.setVisible(true);
                 iscFall.setLocationRelativeTo(null);
             }
-        */
         } catch (NumberFormatException e){
             IngresoErroneo ingresoErroneo = new IngresoErroneo();
             ingresoErroneo.setVisible(true);

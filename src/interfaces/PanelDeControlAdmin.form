@@ -38,16 +38,15 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="botonCambiarEstadoDeClase" max="32767" attributes="0"/>
                       <Component id="botonAgendarClaseASede" alignment="0" max="32767" attributes="0"/>
                       <Component id="botonAdministrarAltaDeClientes" alignment="1" pref="388" max="32767" attributes="0"/>
-                      <Component id="botonGestionarClientes" alignment="0" pref="388" max="32767" attributes="0"/>
                       <Component id="botonGestionarArticulos" alignment="0" pref="388" max="32767" attributes="0"/>
                       <Component id="botonMonitoriearGrabaciones" alignment="1" pref="388" max="32767" attributes="0"/>
                       <Component id="botonVolverAtras" alignment="0" pref="388" max="32767" attributes="0"/>
-                      <Component id="botonCambiarEstadoDeClase" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -59,16 +58,14 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="botonAgendarClaseASede" min="-2" pref="55" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="botonCambiarEstadoDeClase" min="-2" pref="55" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="botonGestionarClientes" min="-2" pref="55" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="botonAdministrarAltaDeClientes" min="-2" pref="55" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="botonGestionarArticulos" min="-2" pref="55" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="botonCambiarEstadoDeClase" min="-2" pref="55" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="botonMonitoriearGrabaciones" min="-2" pref="55" max="-2" attributes="0"/>
-                  <EmptySpace pref="112" max="32767" attributes="0"/>
+                  <EmptySpace pref="23" max="32767" attributes="0"/>
                   <Component id="botonVolverAtras" min="-2" pref="55" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -82,14 +79,6 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonAgendarClaseASedeActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="botonGestionarClientes">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="AGREGAR ARTICULOS A SEDE"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonGestionarClientesActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="botonAdministrarAltaDeClientes">

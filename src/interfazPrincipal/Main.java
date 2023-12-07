@@ -15,7 +15,7 @@ public class Main {
 	    	- Crear usuarios con perfiles 
 	    	- Asignar sedes a administrativos.
 	    	- Cargar tipos de clases.
-	    	- Crear tipos de artículos.
+	    	- Crear tipos de artículos
            
                 SoporteTécnico st = new SoporteTécnico("uade_TPO_POO");
 		
@@ -120,6 +120,7 @@ public class Main {
 		/*
 		Cliente:
 		    - Desde el perfil, reservar lugares para clases presenciales o virtuales según corresponda.
+		
 		System.out.println("NOS INSCRIBIMOS A UNA CLASE");
 		String nombreUsuarioBuscado = "FBM";
 		for (Socio socio : st.getClientes()) {
@@ -134,7 +135,7 @@ public class Main {
 			}
 		}
 		System.out.println("\n");
-		*/
+		
                 
 		/*
 		 Administrativo:
@@ -150,11 +151,10 @@ public class Main {
 		st.crearNuevaSede("Recoleta", "Black");
 		st.asignarSede("Recoleta", "cgabaglio");
 		String nombreAdmoinBuscado = "cgabaglio";
-		st.crearNuevaClase("cgabaglio", "Julieta", "Recoleta", "AIRE LIBRE", "yoga", "Lunes", "18", "3");
 		for (Administrador admin: st.getAdministradores()) {
 		    if (nombreAdmoinBuscado.toUpperCase().equals(admin.getUsername())) {
 		    	System.out.println("ASIGNAMOS UNA CLASE A UNA SEDE");
-		    	admin.agregarClaseASedeAsignada("julieta", "AIRE LIBRE", "yoga", "Lunes", "18", "3", "Recoleta");
+		    	admin.agregarClaseASedeAsignada("julieta", "AIRE LIBRE", "yoga virtual", "Lunes", "18", "3", "Recoleta");
 		    	System.out.println(admin.getSedes().get(0).getClases().get(0).getSede().getUbicacion());
 		    	
 		    	
@@ -168,49 +168,63 @@ public class Main {
 					System.out.println(socio.getUsername() + " " + socio.getNivelSuscripción() + " " + socio.isAlta());
 				}
 				admin.gestionarAltaCliente("lem", "alta");
-		    	admin.gestionarNivelSuscripcionCliente("fbm", "oro");
+		    	admin.gestionarNivelSuscripcionCliente("fbm", "gold");
 		    	admin.gestionarAltaCliente("fbm", "alta");
 		    	admin.gestionarNivelSuscripcionCliente("lem", "black");
 		    	for (Socio socio : st.getClientes()) {
 					System.out.println(socio.getUsername() + " " + socio.getNivelSuscripción() + " " + socio.isAlta());
 				}
 		    	
+		    	//agregarArticulos(String ubicacion_sede, String tipo, String marca, String tipo_amortizacion, 
+		    	//String fecha_de_creacion, String cantidad_a_agregar, String pesoSTR, String uso, String largoSTR, 
+		    	//String anchoSTR, String descripcion)
+		    	
+		    	
+		    	//st.crearArticulo("Pesa", "Gadnic", "por uso", "20", "de tobillera", "3", null, null, null);
+			//st.crearArticulo("Pesa", "IronMan", "por fecha", "200", "disco", "8", null, null, null);
+			//st.crearArticulo("Colchoneta", "SofTech", "por fecha", "400", null, null, "2", "1", null);
+			//st.crearArticulo("Colchoneta", "Pampero", "por uso", "25", null, null, "3", "1", null);
+		    	
 		    	
 		    	System.out.println("\n");
 		    	System.out.println("AGREGAR ARTICULOS A SEDES:");
-		    	admin.agregarArticulos("Recoleta", "PESA", "8", "DE TOBILLERA", null, null, null, "1");
-		    	admin.agregarArticulos("Recoleta", "COLCHONETA", null, null, "4", "1", null, "6");
-		    	admin.agregarArticulos("Recoleta", "PESA", "8", "DE TOBILLERA", null, null, null, "10");
-		    	admin.agregarArticulos("Recoleta", "PESA", "15", "DE MANO", null, null, null, "1");
+		    	admin.agregarArticulos("Recoleta", "PESA", "Gadnic", "Por uso", "2023-12-06", "50", "3", "De tobillera", null, null, null);
+		    	admin.agregarArticulos("Recoleta", "PESA", "Gadnic", "Por uso", "2023-12-07", "30", "3", "De tobillera", null, null, null);
+		    	admin.agregarArticulos("Recoleta", "PESA", "Gadnic", "Por uso", "2023-12-08", "50", "3", "De tobillera", null, null, null);
+		    	admin.agregarArticulos("Recoleta", "PESA", "ironman", "Por fecha", "2023-12-08", "50", "8", "Disco", null, null, null);
+		    	admin.agregarArticulos("Recoleta", "COLCHONETA", "Softech", "por fecha", "2023-11-05", "40", null, null, "2", "1", null);
+		    	admin.agregarArticulos("Recoleta", "COLCHONETA", "PAmpero", "por uso", "2023-11-05", "40", null, null, "3", "1", null);
+		    	
+		    	//admin.agregarArticulos("Recoleta", "COLCHONETA", null, null, "4", "1", null, "6", nombreAdmoinBuscado, nombreAdmoinBuscado, nombreAdmoinBuscado);
+		    	//admin.agregarArticulos("Recoleta", "PESA", "8", "DE TOBILLERA", null, null, null, "10", nombreAdmoinBuscado, nombreAdmoinBuscado, nombreAdmoinBuscado);
+		    	//admin.agregarArticulos("Recoleta", "PESA", "15", "DE MANO", null, null, null, "1", nombreAdmoinBuscado, nombreAdmoinBuscado, nombreAdmoinBuscado);
+		    	
 		    	for (Sede sede: st.getSedes()) {
 		    		if (sede.getUbicacion().equals("RECOLETA")) {
-		    			admin.mostrarArticulosSede("RECOLETA");
+		    			System.out.println(admin.mostrarArticulosSede("RECOLETA"));
 		    		}
 		    	}
 		    	
 		    	System.out.println("\n");
 		    	System.out.println("ELIMINAR ARTICULOS A SEDES:");
-		    	admin.eliminarArticuloDeSede("Recoleta", "PESA", "8", "DE TOBILLERA", null, null, null);
+		    	admin.eliminarArticuloDeSede("Recoleta", "PESA", "Gadnic", "Por uso", "2023-12-06", "3", "De tobillera", null, null, null);
+		    	admin.eliminarArticuloDeSede("Recoleta", "PESA", "ironman", "Por fecha", "2023-12-08", "8", "Disco", null, null, null);
+		    	admin.eliminarArticuloDeSede("Recoleta", "COLCHONETA", "Softech", "por fecha", "2023-11-05", null, null, "2", "1", null);
 		    	for (Sede sede: st.getSedes()) {
 		    		if (sede.getUbicacion().equals("RECOLETA")) {
-		    			admin.mostrarArticulosSede("RECOLETA");
+		    			System.out.println(admin.mostrarArticulosSede("RECOLETA"));
 		    		}
 		    	}
-		    }
-		    
-		}
-		
-		*/
+                        */
+		    SoporteTécnico soporteTécnico = new SoporteTécnico("uade_TPO_POO");
                 
-		SoporteTécnico soporteTécnico = new SoporteTécnico("uade_TPO_POO");
-                
-		PantallaInicio interfazInicio = new PantallaInicio();
-                interfazInicio.setST(soporteTécnico);
-                interfazInicio.setVisible(true);
-                interfazInicio.setLocationRelativeTo(null);
-               
-		
-	}
-		
+                    PantallaInicio interfazInicio = new PantallaInicio();
+                    interfazInicio.setST(soporteTécnico);
+                    interfazInicio.setVisible(true);
+                    interfazInicio.setLocationRelativeTo(null);
+        }
 }
+	
+		
+		
 

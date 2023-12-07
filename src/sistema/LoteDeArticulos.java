@@ -15,6 +15,8 @@ public class LoteDeArticulos {
     private int cantidad;
     
     public LoteDeArticulos(Articulo articulo, int cantidad, String fecha_de_creacion) {
+    	lote = new ArrayList<Articulo>();
+    	this.articulo = articulo;
     	this.setFechaDeCreacion(stringToDate(fecha_de_creacion));
     	this.llenarLote(articulo, cantidad);
     	setDesgastePorUso(0);
@@ -23,6 +25,7 @@ public class LoteDeArticulos {
     	} else if (this.getArticulo().getTipoAmortizacion().equals("POR FECHA")) {
     		this.fecha_de_vencimiento = this.fecha_de_creacion.plusDays(this.getArticulo().getDuracion());
     	}
+    	this.cantidad = cantidad;
     }
     
 	public LocalDate getFechaDeCreacion() {
@@ -54,7 +57,7 @@ public class LoteDeArticulos {
 	}
 
 	public void agregarAlLote(Articulo articulo) {
-		this.lote.add(articulo);
+		lote.add(articulo);
 	}
 
 	public void llenarLote(Articulo articulo, int cantidad) {

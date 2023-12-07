@@ -252,8 +252,8 @@ public class PantallaInicio extends javax.swing.JFrame {
             ingresoErroneo.setVisible(true);
             ingresoErroneo.setLocationRelativeTo(null);
         }
-        UsernameUsuario.setText("");
-        contraseñaUsuario.setText("");
+        UsernameAdmin.setText("");
+        contraseñaAdmin.setText("");
     }//GEN-LAST:event_ingresarAdministradoresActionPerformed
 
     private void ingresarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingresarUsuarioActionPerformed

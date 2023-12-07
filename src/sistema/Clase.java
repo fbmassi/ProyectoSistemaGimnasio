@@ -196,6 +196,11 @@ public class Clase {
     }
 
     public void setEstado(String estado) {
+        boolean virtualidad = this.getDisciplina().getTipo().equals("YOGA VIRTUAL") 
+                || this.getDisciplina().getTipo().equals("GIMNASIA POSTURAL VIRTUAL");
+        if (estado.equals("FINALIZADA") && virtualidad){
+            creador_ST.getGrabaciones().agregarClase(this);
+        }
     	this.estado = estado;
     }
 
@@ -273,7 +278,7 @@ public class Clase {
 		return costos;
     }
     
-	public boolean calcularRentabilidad(Clase clase) {
+    public boolean calcularRentabilidad(Clase clase) {
     	//CODIFICAR CALCULO DE RENTABILIDAD
         return false;
     }

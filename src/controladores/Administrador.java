@@ -8,6 +8,7 @@ import sistema.*;
 
 public class Administrador extends Usuario {
 	
+    
 	public SoporteTécnico creador_ST;
 	private ArrayList<Sede> sedes_asignadas;
 	private ArrayList<Clase> clases_a_administrar;
@@ -96,7 +97,8 @@ public class Administrador extends Usuario {
     }
     
     //METODO PARA MONITORIEAR LA CANTIDAD DE ARTICULOS EN UNA SEDE Y SU ESTADO DE DESGASTE
-  	public void mostrarArticulosSede(String ubicacion_sede) {
+  	public String mostrarArticulosSede(String ubicacion_sede) {
+  		String devolver = "";
   		HashMap<Pesa, ArrayList<LoteDeArticulos>> tipos_de_pesa = new HashMap<>();
   		HashMap<Colchoneta, ArrayList<LoteDeArticulos>> tipos_de_colchoneta = new HashMap<>();
   		HashMap<ArticuloPersonalizado, ArrayList<LoteDeArticulos>> tipos_de_personalizados = new HashMap<>();
@@ -114,84 +116,88 @@ public class Administrador extends Usuario {
                         }
                     }
   		}
-  		System.out.println("PESAS: ");
+  		devolver += "<p>PESAS: </p>";
   		for (Entry<Pesa, ArrayList<LoteDeArticulos>> parCV: tipos_de_pesa.entrySet() ) {
-  			System.out.println("Articulo: " + parCV.getKey().getTipo() + " "
-  	        		+ parCV.getKey().getUso()  + " - "
-  	        		+ "Peso: " + parCV.getKey().getPeso() + "kg.");
+  			devolver += "<p>Articulo: " + parCV.getKey().getTipo() + " "
+  	        		+ parCV.getKey().getMarca() + " - " + parCV.getKey().getUso()  + " - "
+  	        		+ "Peso: " + parCV.getKey().getPeso() + "kg.</p>";
   			ArrayList<LoteDeArticulos> artPesas = parCV.getValue();
   			int numero_de_lote = 1;
   			if (parCV.getKey().getTipoAmortizacion().equals("POR USO")) {
 	  			for (LoteDeArticulos lote: artPesas) {
-					System.out.println( "Lote nº: " + numero_de_lote + " - "
+	  				devolver += "<p>Lote nº: " + numero_de_lote + " - "
 		  	        		+ "Cantidad disponible: " + lote.getCantidad() + " - " 
 		  	        		+ "Duracion Máxima: " + lote.getMaxDuracion() + " - " 
-							+ "Estado de desgaste: " + lote.getDesgastePorUso());
+							+ "Estado de desgaste: " + lote.getDesgastePorUso() + ".</p>";
 					 numero_de_lote += 1;
 	  			}
   			} else if (parCV.getKey().getTipoAmortizacion().equals("POR FECHA")) {
   				for (LoteDeArticulos lote: artPesas) {
-					System.out.println( "Lote nº: " + numero_de_lote + " - "
+  					devolver += "<p>Lote nº: " + numero_de_lote + " - "
 		  	        		+ "Cantidad disponible: " + lote.getCantidad() + " - " 
-		  	        		+ "Fecha de caducidad: " + lote.getFechaDeVencimiento());
+		  	        		+ "Fecha de caducidad: " + lote.getFechaDeVencimiento()+ ".</p>";
 					 numero_de_lote += 1;
 	  			}
   			}
   		}
-  		System.out.println("COLCHONETAS: ");
+  		devolver += "<p>COLCHONETAS: </p>\"";
   		for (Entry<Colchoneta, ArrayList<LoteDeArticulos>> parCV: tipos_de_colchoneta.entrySet() ) {
-  			System.out.println("Articulo: " + parCV.getKey().getTipo() + " - "
+  			devolver += "<p>Articulo: " + parCV.getKey().getTipo() + " "
+  					+ parCV.getKey().getMarca() + " - "
   					+ "Dimensiones: "
   	        		+ parCV.getKey().getLargo() + "mts de largo,  "
-  	        		+ parCV.getKey().getAncho() + "mts de ancho");
+  	        		+ parCV.getKey().getAncho() + "mts de ancho </p>";
   			ArrayList<LoteDeArticulos> artColchonetas = parCV.getValue();
   			int numero_de_lote = 1;
   			if (parCV.getKey().getTipoAmortizacion().equals("POR USO")) {
 	  			for (LoteDeArticulos lote: artColchonetas) {
-					System.out.println( "Lote nº: " + numero_de_lote + " - "
+	  				devolver += "<p>Lote nº: " + numero_de_lote + " - "
 		  	        		+ "Cantidad disponible: " + lote.getCantidad() + " - " 
 		  	        		+ "Duracion Máxima: " + lote.getMaxDuracion() + " - " 
-							+ "Estado de desgaste: " + lote.getDesgastePorUso());
+							+ "Estado de desgaste: " + lote.getDesgastePorUso() + ".</p>";
 					 numero_de_lote += 1;
 	  			}
   			} else if (parCV.getKey().getTipoAmortizacion().equals("POR FECHA")) {
   				for (LoteDeArticulos lote: artColchonetas) {
-					System.out.println( "Lote nº: " + numero_de_lote + " - "
+  					devolver += "<p>Lote nº: " + numero_de_lote + " - "
 		  	        		+ "Cantidad disponible: " + lote.getCantidad() + " - " 
-		  	        		+ "Fecha de caducidad: " + lote.getFechaDeVencimiento());
+		  	        		+ "Fecha de caducidad: " + lote.getFechaDeVencimiento()+ ".</p>";
 					 numero_de_lote += 1;
 	  			}
   			}
   		}
-  		System.out.println("PERSONALIZADOS: ");
+  		devolver += "<p>PERSONALIZADOS: </p>\"";
   		for (Entry<ArticuloPersonalizado, ArrayList<LoteDeArticulos>> parCV: tipos_de_personalizados.entrySet() ) {
-  			System.out.println("Articulo: " + parCV.getKey().getTipo() + " - " + parCV.getKey().getDescripcion());
+  			devolver += "<p>Articulo: "  + parCV.getKey().getTipo() + " " + parCV.getKey().getMarca() 
+  					+ " - " + parCV.getKey().getDescripcion() + ".</p>";
   			ArrayList<LoteDeArticulos> artPersonalizados = parCV.getValue();
   			int numero_de_lote = 1;
   			if (parCV.getKey().getTipoAmortizacion().equals("POR USO")) {
 	  			for (LoteDeArticulos lote: artPersonalizados) {
-					System.out.println( "Lote nº: " + numero_de_lote + " - "
+	  				devolver += "<p>Lote nº: "  + numero_de_lote + " - "
 		  	        		+ "Cantidad disponible: " + lote.getCantidad() + " - " 
 		  	        		+ "Duracion Máxima: " + lote.getMaxDuracion() + " - " 
-							+ "Estado de desgaste: " + lote.getDesgastePorUso());
+							+ "Estado de desgaste: " + lote.getDesgastePorUso() + ".</p>";
 					 numero_de_lote += 1;
 	  			}
   			} else if (parCV.getKey().getTipoAmortizacion().equals("POR FECHA")) {
   				for (LoteDeArticulos lote: artPersonalizados) {
-					System.out.println( "Lote nº: " + numero_de_lote + " - "
+  					devolver += "<p>Lote nº: " + numero_de_lote + " - "
 		  	        		+ "Cantidad disponible: " + lote.getCantidad() + " - " 
-		  	        		+ "Fecha de caducidad: " + lote.getFechaDeVencimiento());
+		  	        		+ "Fecha de caducidad: " + lote.getFechaDeVencimiento()  + ".</p>";
 					 numero_de_lote += 1;
 	  			}
   			}
   		}
+  		devolver = strHTML(devolver);
+  		return devolver;
 	  	}
 
-	    //METODO PARA AGREGAR MODIFICAR LA CANTIDAD DE ARTICULOS DE UNA SEDE
-	    public void agregarArticulos(String ubicacion_sede, String tipo, String tipo_amortizacion, String fecha_de_creacion, String cantidad_a_agregar,
-	    		String pesoSTR, String uso, 
-	    		String largoSTR, String anchoSTR, 
-	    		String descripcion) {
+        //METODO PARA AGREGAR MODIFICAR LA CANTIDAD DE ARTICULOS DE UNA SEDE
+        public void agregarArticulos(String ubicacion_sede, String tipo, String marca, String tipo_amortizacion, String fecha_de_creacion, String cantidad_a_agregar,
+                    String pesoSTR, String uso, 
+                    String largoSTR, String anchoSTR, 
+                    String descripcion) {
       	
       	int cantidad = Integer.parseInt(cantidad_a_agregar);
       	boolean existe_articulo = false;
@@ -217,7 +223,9 @@ public class Administrador extends Usuario {
       			if (tipo.toUpperCase().equals("PESA")) {
       				int peso = Integer.parseInt(pesoSTR);
       				for (Pesa pesa:tipos_de_pesa) {
-          				if(peso == pesa.getPeso() && tipo_amortizacion.equals(pesa.getTipoAmortizacion()) && uso.toUpperCase().equals(pesa.getUso())) {
+          				if(peso == pesa.getPeso() && tipo_amortizacion.toUpperCase().equals(pesa.getTipoAmortizacion())
+          						&& uso.toUpperCase().equals(pesa.getUso().toUpperCase())
+          						&& pesa.getMarca().equals(marca.toUpperCase())) {
           					sede.agregarArticulos(pesa, cantidad, fecha_de_creacion);
           					existe_articulo = true;
           				}
@@ -226,14 +234,19 @@ public class Administrador extends Usuario {
       				int largo = Integer.parseInt(largoSTR);
       				int ancho = Integer.parseInt(anchoSTR);
       				for (Colchoneta colchoneta:tipos_de_colchoneta) {
-          				if(largo == colchoneta.getLargo() && ancho == colchoneta.getAncho()) {
+          				if(colchoneta.getMarca().equals(marca.toUpperCase())
+          						&& colchoneta.getTipoAmortizacion().equals(tipo_amortizacion.toUpperCase())
+          						&& largo == colchoneta.getLargo() 
+          						&& ancho == colchoneta.getAncho()) {
           					sede.agregarArticulos(colchoneta, cantidad, fecha_de_creacion);
           					existe_articulo = true;
           				}
       				}
       			} else if ((tipo.toUpperCase().equals("PERSONALIZADO")))
   					for (ArticuloPersonalizado articulo_personalizado: tipos_de_personalizados) {
-  	    				if(descripcion.toUpperCase().equals(articulo_personalizado.getDescripcion())) {
+  	    				if(articulo_personalizado.getMarca().equals(marca.toUpperCase())
+  	    						&& tipo_amortizacion.toUpperCase().equals(articulo_personalizado.getTipoAmortizacion())
+  	    						&& descripcion.toUpperCase().equals(articulo_personalizado.getDescripcion())) {
   	    					sede.agregarArticulos(articulo_personalizado, cantidad, fecha_de_creacion);
   	    					existe_articulo = true;
   	    				}
@@ -251,7 +264,10 @@ public class Administrador extends Usuario {
       
       
       //METODO PARA DAR DE BAJA ARTICULOS
-      public void eliminarArticuloDeSede(String ubicacion_sede, String tipo, String pesoSTR, String uso, String largoSTR, String anchoSTR, String descripcion) {
+      public void eliminarArticuloDeSede(String ubicacion_sede, String tipo, String marca, String tipo_amortizacion,
+	    		String pesoSTR, String uso, 
+	    		String largoSTR, String anchoSTR, 
+	    		String descripcion) {
 
       	boolean existe_articulo = false;
       	boolean existe_sede = false;
@@ -276,7 +292,9 @@ public class Administrador extends Usuario {
       			if (tipo.toUpperCase().equals("PESA")) {
       				int peso = Integer.parseInt(pesoSTR);
       				for (Pesa pesa:tipos_de_pesa) {
-          				if(peso == pesa.getPeso() && uso.toUpperCase().equals(pesa.getUso())) {
+          				if(peso == pesa.getPeso() && tipo_amortizacion.toUpperCase().equals(pesa.getTipoAmortizacion())
+          						&& uso.toUpperCase().equals(pesa.getUso().toUpperCase())
+          						&& pesa.getMarca().equals(marca.toUpperCase())) {
           					sede.eliminarArticulo(pesa);
           					existe_articulo = true;
           				}
@@ -285,14 +303,19 @@ public class Administrador extends Usuario {
       				int largo = Integer.parseInt(largoSTR);
       				int ancho = Integer.parseInt(anchoSTR);
       				for (Colchoneta colchoneta:tipos_de_colchoneta) {
-          				if(largo == colchoneta.getLargo() && ancho == colchoneta.getAncho()) {
+          				if(colchoneta.getMarca().equals(marca.toUpperCase())
+          						&& colchoneta.getTipoAmortizacion().equals(tipo_amortizacion.toUpperCase())
+          						&& largo == colchoneta.getLargo() 
+          						&& ancho == colchoneta.getAncho()) {
           					sede.eliminarArticulo(colchoneta);
           					existe_articulo = true;
           				}
       				}
       			} else if ((tipo.toUpperCase().equals("PERSONALIZADO")))
   					for (ArticuloPersonalizado articulo_personalizado: tipos_de_personalizados) {
-  	    				if(descripcion.toUpperCase().equals(articulo_personalizado.getDescripcion())) {
+  	    				if(articulo_personalizado.getMarca().equals(marca.toUpperCase())
+  	    						&& tipo_amortizacion.toUpperCase().equals(articulo_personalizado.getTipoAmortizacion())
+  	    						&& descripcion.toUpperCase().equals(articulo_personalizado.getDescripcion())) {
   	    					sede.eliminarArticulo(articulo_personalizado);
   	    					existe_articulo = true;
   	    				}
@@ -301,8 +324,9 @@ public class Administrador extends Usuario {
       	}
       	
       	if (!existe_articulo && existe_sede) {
-      		System.out.println("NO EXISTE EL ARTICULO INGRESADO.");
-      		
+      		IngresoErroneo ingresoErroneo = new IngresoErroneo();
+      		ingresoErroneo.setVisible(true);
+            ingresoErroneo.setLocationRelativeTo(null);
       	} else if (!existe_sede) {
       		System.out.println("NO EXISTE LA SEDE SELECCIONADA.");
       	}
@@ -324,15 +348,39 @@ public class Administrador extends Usuario {
 	}
 	
     //METODO PARA TRANSICIONAR ESTADO DE LAS CLASES
-    public void transicionarEstadoClase(Clase clase, String estado) {
-    	clase.setEstado(estado);
-    	this.creador_ST.getGrabaciones().agregarClase(clase);
+    public void transicionarEstadoClase(String ubicacion, String tipo_disciplina, String dia, String horario, String estado) {
+        boolean inscipcion_no_exitosa = true;
+    	for (Clase clase: this.creador_ST.getClases()) {
+    		int horario_entero = Integer.parseInt(horario);
+    		if (clase.getSede().getUbicacion().equals(ubicacion.toUpperCase()) 
+				&& clase.getDisciplina().getTipo().equals(tipo_disciplina.toUpperCase())
+				&& clase.getDia().equals(dia.toUpperCase())
+				&& clase.getHorario() == horario_entero) {
+	    			clase.setEstado(estado);
+	    			inscipcion_no_exitosa = false;
+    		}
+    	}
+    	if (inscipcion_no_exitosa) {
+    		IngresoErroneo ingresoErroneo = new IngresoErroneo();
+    		ingresoErroneo.setVisible(true);
+                ingresoErroneo.setLocationRelativeTo(null);
+    	}
     }
     
     @Override
     public String visualizarClases() {
-            //CODIFICAR VISUALIZACION
-        return "";
+    	String devolver = "";
+        for (Clase clase: this.getClases()) {
+            if (!clase.getEstado().equals("FINALIZADA"))
+                devolver += "<p>CLASE: " + clase.getSede().getUbicacion() + " - " + clase.getDisciplina().getTipo() 
+                    + " - "  + clase.getDia() + " " + clase.getHorario() + "hs. - ESTADO: " + clase.getEstado() +".</p>";
+            }
+        devolver = strHTML(devolver);
+        return devolver;
+    }
+    
+    private String strHTML(String texto) {
+        return "<html>" + texto + "</html>";
     }
 	
 }
