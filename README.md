@@ -6,7 +6,7 @@ Este repositorio contiene el código fuente y la documentación del sistema de g
 
 El equipo de analistas ha realizado un relevamiento detallado para la confección del sistema, considerando los siguientes aspectos:
 
-- **Niveles de Socios y Sedes**: Los socios se clasifican en niveles ("Black", "Oro", "Platinum") y cada sede tiene un nivel mínimo de aceptación. No puede haber más de una sede en el mismo barrio.
+- **Niveles de Socios y Sedes**: Los socios se clasifican en niveles ("Black", "Gold", "Platinum") y cada sede tiene un nivel mínimo de aceptación. No puede haber más de una sede en el mismo barrio.
 
 - **Asignación de Clases**: Se establece un proceso para asignar clases, considerando la disponibilidad de profesores, lugares y la capacidad de las sedes. Se detallan restricciones para profesores y alumnos.
 
