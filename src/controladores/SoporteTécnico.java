@@ -216,4 +216,8 @@ public class SoporteTécnico {
     public Grabaciones getGrabaciones() {
     	return this.grabaciones;
     }
+    
+    public void agregarClase(Clase clase) {
+        this.clases.add(clase);
+    }
 }

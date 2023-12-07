@@ -31,9 +31,9 @@ public class Grabaciones {
 	}
 
 	public void eliminarClases(int cantidad_clases_a_eliminar) {
-		for (int i = 0; i > cantidad_clases_a_eliminar; i++) {
-			yoga_virtual.remove(i);
-			gimnasia_virtual.remove(i);
+		for (int i = 0; i < cantidad_clases_a_eliminar; i++) {
+			yoga_virtual.remove(0);
+			gimnasia_virtual.remove(0);
 		}
 	}
 	}

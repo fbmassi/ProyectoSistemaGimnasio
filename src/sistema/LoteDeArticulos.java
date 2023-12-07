@@ -6,8 +6,8 @@ import java.util.*;
 
 public class LoteDeArticulos {
 	
-	private Articulo articulo;
-	private ArrayList<Articulo> lote;
+    private Articulo articulo;
+    private ArrayList<Articulo> lote;
     private LocalDate fecha_de_creacion;
     private LocalDate fecha_de_vencimiento;
     private int desgaste_por_uso;

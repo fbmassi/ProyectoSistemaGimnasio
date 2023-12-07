@@ -41,30 +41,24 @@ public class Administrador extends Usuario {
 		clases_a_administrar.add(clase);
 	}
 
-	public void crearNuevaClase(String nombre_profesor, String ubicacion_sede, String nombre_emplazamiento, String nombre_disciplina, String dia, String horario, String duracion) {
-    	Clase clase = new Clase(this.creador_ST, this.username, nombre_profesor, ubicacion_sede, nombre_emplazamiento, nombre_disciplina, dia, horario, duracion);
-    	clases_a_administrar.add(clase);
-		if (clase.getDisciplina().getVirtualidad()) {
-            creador_ST.guardarGrabacion(clase);
-        }
+	public Clase crearNuevaClase(String nombre_profesor, String ubicacion_sede, String nombre_emplazamiento, String nombre_disciplina, String dia, String horario, String duracion) {
+            Clase clase = new Clase(this.creador_ST, this.username, nombre_profesor, ubicacion_sede, nombre_emplazamiento, nombre_disciplina, dia, horario, duracion);
+        return clase;       
     }
 		
     //METODO PARA AGREGAR CLASES A UNA SEDE
     public void agregarClaseASedeAsignada(String nombre_profesor, String nombre_emplazamiento, String nombre_disciplina, String dia, String horario, String duracion, String ubicacion_sede) {
-    	Clase clase = new Clase(creador_ST, this.username, nombre_profesor, nombre_emplazamiento, nombre_disciplina, dia, horario, duracion);
-    	boolean asignacion_realizada = false;
-    	for (Sede sede: sedes_asignadas) {
-    		if (sede.getUbicacion().equals(ubicacion_sede.toUpperCase())) {
-    			clase.setSede(sede);
-    			sede.agregarClase(clase);
-    			asignacion_realizada = true;
-    		}
-    	}
-    	if (!asignacion_realizada) {
-    		IngresoErroneo ingresoErroneo = new IngresoErroneo();
-                ingresoErroneo.setVisible(true);
-                ingresoErroneo.setLocationRelativeTo(null);
-    	}
+    	Clase clase = this.crearNuevaClase(nombre_profesor, ubicacion_sede, nombre_emplazamiento, nombre_disciplina, dia, horario, duracion);
+        for (Sede sede : this.getSedes()){
+            if (sede.getUbicacion().equals(ubicacion_sede.toUpperCase())) {
+                sede.agregarClase(clase);
+                this.creador_ST.agregarClase(clase);
+            }
+        }
+        /*
+        Clase clase = new Clase(creador_ST, this.username, nombre_profesor, nombre_emplazamiento, nombre_disciplina, dia, horario, duracion);
+    	this.creador_ST.crearNuevaClase(username, nombre_profesor, ubicacion_sede, nombre_emplazamiento, nombre_disciplina, dia, horario, duracion);
+        */
     }
     
     //METODO PARA MODIFICAR EL ALTA DEL PERFIL DE CLIENTES
@@ -91,7 +85,7 @@ public class Administrador extends Usuario {
     			if (nivel_suscripcion.toUpperCase().equals("PLATINUM")) {
     				socio.setNivelSuscripción("Platinum");
     			} else if (nivel_suscripcion.toUpperCase().equals("BLACK")) {
-    				socio.setNivelSuscripción("Black");;
+    				socio.setNivelSuscripción("Black");
     			} else if (nivel_suscripcion.toUpperCase().equals("GOLD")) {
     				socio.setNivelSuscripción("Gold");
     			} else {
@@ -107,18 +101,18 @@ public class Administrador extends Usuario {
   		HashMap<Colchoneta, ArrayList<LoteDeArticulos>> tipos_de_colchoneta = new HashMap<>();
   		HashMap<ArticuloPersonalizado, ArrayList<LoteDeArticulos>> tipos_de_personalizados = new HashMap<>();
   		for (Sede sede: this.creador_ST.getSedes()) {
-      		if (sede.getUbicacion().equals(ubicacion_sede.toUpperCase())) {
-      			HashMap<Articulo, ArrayList<LoteDeArticulos>> articulos_de_sede = sede.getCantidadStock();
-      			for (Entry<Articulo, ArrayList<LoteDeArticulos>> parCV: articulos_de_sede.entrySet()) {
-      				if (parCV.getKey() instanceof Pesa) {
-      					tipos_de_pesa.put((Pesa) parCV.getKey(), parCV.getValue());
-      				} else if (parCV.getKey() instanceof Colchoneta) {
-      					tipos_de_colchoneta.put((Colchoneta) parCV.getKey(), parCV.getValue());
-      				} else if (parCV.getKey() instanceof ArticuloPersonalizado) {
-      					tipos_de_personalizados.put((ArticuloPersonalizado) parCV.getKey(), parCV.getValue());
-      				}	
-      	        }
-      		}
+                    if (sede.getUbicacion().equals(ubicacion_sede.toUpperCase())) {
+                        HashMap<Articulo, ArrayList<LoteDeArticulos>> articulos_de_sede = sede.getCantidadStock();
+                        for (Entry<Articulo, ArrayList<LoteDeArticulos>> parCV: articulos_de_sede.entrySet()) {
+                                if (parCV.getKey() instanceof Pesa) {
+                                        tipos_de_pesa.put((Pesa) parCV.getKey(), parCV.getValue());
+                                } else if (parCV.getKey() instanceof Colchoneta) {
+                                        tipos_de_colchoneta.put((Colchoneta) parCV.getKey(), parCV.getValue());
+                                } else if (parCV.getKey() instanceof ArticuloPersonalizado) {
+                                        tipos_de_personalizados.put((ArticuloPersonalizado) parCV.getKey(), parCV.getValue());
+                                }	
+                        }
+                    }
   		}
   		System.out.println("PESAS: ");
   		for (Entry<Pesa, ArrayList<LoteDeArticulos>> parCV: tipos_de_pesa.entrySet() ) {

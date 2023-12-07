@@ -4,9 +4,12 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/Users/francobmassi/Documentos/FACULTAD/MATERIAS/2º%20SEGUNDO%20AÑO/2º%20SEMESTRE/Paradigma%20Orientado%20a%20Objetos/Trabajo%20Práctico%20Obligatorio/Proyecto_Sistema_Gimnasio/src/controladores/SoporteTécnico.java</file>
-            <file>file:/Users/francobmassi/Documentos/FACULTAD/MATERIAS/2º%20SEGUNDO%20AÑO/2º%20SEMESTRE/Paradigma%20Orientado%20a%20Objetos/Trabajo%20Práctico%20Obligatorio/Proyecto_Sistema_Gimnasio/src/controladores/Usuario.java</file>
+            <file>file:/Users/francobmassi/Documentos/FACULTAD/MATERIAS/2º%20SEGUNDO%20AÑO/2º%20SEMESTRE/Paradigma%20Orientado%20a%20Objetos/Trabajo%20Práctico%20Obligatorio/Proyecto_Sistema_Gimnasio/src/sistema/LoteDeArticulos.java</file>
+            <file>file:/Users/francobmassi/Documentos/FACULTAD/MATERIAS/2º%20SEGUNDO%20AÑO/2º%20SEMESTRE/Paradigma%20Orientado%20a%20Objetos/Trabajo%20Práctico%20Obligatorio/Proyecto_Sistema_Gimnasio/src/controladores/Administrador.java</file>
             <file>file:/Users/francobmassi/Documentos/FACULTAD/MATERIAS/2º%20SEGUNDO%20AÑO/2º%20SEMESTRE/Paradigma%20Orientado%20a%20Objetos/Trabajo%20Práctico%20Obligatorio/Proyecto_Sistema_Gimnasio/src/interfazPrincipal/Main.java</file>
-            <file>file:/Users/francobmassi/Documentos/FACULTAD/MATERIAS/2º%20SEGUNDO%20AÑO/2º%20SEMESTRE/Paradigma%20Orientado%20a%20Objetos/Trabajo%20Práctico%20Obligatorio/Proyecto_Sistema_Gimnasio/src/interfaces/PanelDeControlCliente.java</file>
+            <file>file:/Users/francobmassi/Documentos/FACULTAD/MATERIAS/2º%20SEGUNDO%20AÑO/2º%20SEMESTRE/Paradigma%20Orientado%20a%20Objetos/Trabajo%20Práctico%20Obligatorio/Proyecto_Sistema_Gimnasio/src/interfaces/PanelDeControlAdmin.java</file>
+            <file>file:/Users/francobmassi/Documentos/FACULTAD/MATERIAS/2º%20SEGUNDO%20AÑO/2º%20SEMESTRE/Paradigma%20Orientado%20a%20Objetos/Trabajo%20Práctico%20Obligatorio/Proyecto_Sistema_Gimnasio/src/interfaces/AgendarClasesASedes.java</file>
+            <file>file:/Users/francobmassi/Documentos/FACULTAD/MATERIAS/2º%20SEGUNDO%20AÑO/2º%20SEMESTRE/Paradigma%20Orientado%20a%20Objetos/Trabajo%20Práctico%20Obligatorio/Proyecto_Sistema_Gimnasio/src/sistema/Sede.java</file>
         </group>
     </open-files>
 </project-private>

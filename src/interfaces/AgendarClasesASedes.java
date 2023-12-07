@@ -279,7 +279,7 @@ public class AgendarClasesASedes extends javax.swing.JFrame {
         String hora = horaDeClase.getText();
         String duracion = duracionDeClase.getText();
         try{ 
-            admin.agregarClaseASedeAsignada(prof, emplazamiento, duracion, dia, hora, duracion, duracion);
+            admin.agregarClaseASedeAsignada(prof, emplazamiento, disc, dia, hora, duracion, sede);
         } catch(NumberFormatException e) {
             IngresoErroneo ingresoErroneo = new IngresoErroneo();
             ingresoErroneo.setVisible(true);
