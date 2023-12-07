@@ -11,12 +11,12 @@ public class Socio extends Usuario {
 	private String nivel_suscripción;
 	private boolean alta;
 
-    public Socio(SoporteTécnico creador_ST, String username, String contraseña, String nivel_suscripcion) {
+    public Socio(SoporteTécnico creador_ST, String username, String contraseña, String n_suscripcion) {
         super(username, contraseña);
         this.creador_ST = creador_ST;
         this.alta = true;
         this.nivel_suscripción = "";
-        this.setNivelSuscripción(nivel_suscripción);
+        this.setNivelSuscripción(n_suscripcion);
     }
 	
     public void pedirReseva(String ubicacion, String tipo_disciplina, String dia, String horario) {
@@ -34,7 +34,7 @@ public class Socio extends Usuario {
     	}
     	if (inscipcion_no_exitosa) {
     		ingresoErroneo.setVisible(true);
-            ingresoErroneo.setLocationRelativeTo(null);
+                ingresoErroneo.setLocationRelativeTo(null);
     	}
     }
 

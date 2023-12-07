@@ -36,7 +36,7 @@ public class PantallaInicio extends javax.swing.JFrame {
         panelPrincipal = new javax.swing.JPanel();
         tituloPrincipal = new javax.swing.JLabel();
         administradores = new javax.swing.JLabel();
-        correoElectronicoAdmin = new javax.swing.JTextField();
+        UsernameAdmin = new javax.swing.JTextField();
         contraseñaAdmin = new javax.swing.JTextField();
         ingresarAdministradores = new javax.swing.JButton();
         usuario = new javax.swing.JLabel();
@@ -55,10 +55,10 @@ public class PantallaInicio extends javax.swing.JFrame {
         administradores.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         administradores.setText("Administradores");
 
-        correoElectronicoAdmin.setText("Username...");
-        correoElectronicoAdmin.addActionListener(new java.awt.event.ActionListener() {
+        UsernameAdmin.setText("Username...");
+        UsernameAdmin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                correoElectronicoAdminActionPerformed(evt);
+                UsernameAdminActionPerformed(evt);
             }
         });
 
@@ -146,7 +146,7 @@ public class PantallaInicio extends javax.swing.JFrame {
                                 .addGap(29, 29, 29)
                                 .addComponent(ingresarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(correoElectronicoAdmin)
+                                .addComponent(UsernameAdmin)
                                 .addComponent(administradores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(contraseñaAdmin))))
                     .addGroup(panelPrincipalLayout.createSequentialGroup()
@@ -162,7 +162,7 @@ public class PantallaInicio extends javax.swing.JFrame {
                 .addGap(44, 44, 44)
                 .addComponent(administradores)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(correoElectronicoAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(UsernameAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(contraseñaAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -198,9 +198,9 @@ public class PantallaInicio extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void correoElectronicoAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_correoElectronicoAdminActionPerformed
+    private void UsernameAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsernameAdminActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_correoElectronicoAdminActionPerformed
+    }//GEN-LAST:event_UsernameAdminActionPerformed
 
     private void contraseñaAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contraseñaAdminActionPerformed
         // TODO add your handling code here:
@@ -221,33 +221,49 @@ public class PantallaInicio extends javax.swing.JFrame {
     private void ingresarSoporteTecnicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingresarSoporteTecnicoActionPerformed
         String contraseña = contraseñaST.getText();
         contraseñaST.setText("");
-        PanelDeControlST panelCst = new PanelDeControlST();
-        IngresoErroneo ingresoErroneo = new IngresoErroneo();
         if (this.soporteTécnico.iniciarSesion(contraseña)) {
+            PanelDeControlST panelCst = new PanelDeControlST();
             panelCst.setST(soporteTécnico);
             panelCst.setVisible(true);
             panelCst.setLocationRelativeTo(null);
         } else{
+            IngresoErroneo ingresoErroneo = new IngresoErroneo();
             ingresoErroneo.setVisible(true);
             ingresoErroneo.setLocationRelativeTo(null);
         }
     }//GEN-LAST:event_ingresarSoporteTecnicoActionPerformed
 
     private void ingresarAdministradoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingresarAdministradoresActionPerformed
-        String username = correoElectronicoAdmin.getText();
-        String contraseña = contraseñaAdmin.getText();
-        correoElectronicoAdmin.setText("");
-        contraseñaAdmin.setText("");
+        String username = UsernameAdmin.getText().toUpperCase();
+        String contraseña = contraseñaAdmin.getText().toUpperCase();
+        boolean existe_socio = false;
+        for (Administrador admin : soporteTécnico.getAdministradores()) {
+            if (username.equals(admin.getUsername()) && admin.iniciarSesion(contraseña)) {
+                PanelDeControlAdmin panelAdmin = new PanelDeControlAdmin();
+                panelAdmin.setST(soporteTécnico);
+                panelAdmin.setVisible(true);
+                panelAdmin.setLocationRelativeTo(null);
+                panelAdmin.setAdmin(admin);
+                existe_socio = true;
+            }
+        }
+        if (!existe_socio) {
+            IngresoErroneo ingresoErroneo = new IngresoErroneo();
+            ingresoErroneo.setVisible(true);
+            ingresoErroneo.setLocationRelativeTo(null);
+        }
+        UsernameUsuario.setText("");
+        contraseñaUsuario.setText("");
     }//GEN-LAST:event_ingresarAdministradoresActionPerformed
 
     private void ingresarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingresarUsuarioActionPerformed
         String username = UsernameUsuario.getText().toUpperCase();
         String contraseña = contraseñaUsuario.getText().toUpperCase();
-        PanelDeControlCliente panelCliente = new PanelDeControlCliente();
-        IngresoErroneo ingresoErroneo = new IngresoErroneo();
         boolean existe_socio = false;
         for (Socio socio : soporteTécnico.getClientes()) {
             if (username.equals(socio.getUsername()) && socio.iniciarSesion(contraseña)) {
+                PanelDeControlCliente panelCliente = new PanelDeControlCliente();
+                panelCliente.setST(soporteTécnico);
                 panelCliente.setVisible(true);
                 panelCliente.setLocationRelativeTo(null);
                 panelCliente.setCliente(socio);
@@ -255,6 +271,7 @@ public class PantallaInicio extends javax.swing.JFrame {
             }
         }
         if (!existe_socio) {
+            IngresoErroneo ingresoErroneo = new IngresoErroneo();
             ingresoErroneo.setVisible(true);
             ingresoErroneo.setLocationRelativeTo(null);
         }
@@ -264,12 +281,12 @@ public class PantallaInicio extends javax.swing.JFrame {
 
   
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField UsernameAdmin;
     private javax.swing.JTextField UsernameUsuario;
     private javax.swing.JLabel administradores;
     private javax.swing.JTextField contraseñaAdmin;
     private javax.swing.JTextField contraseñaST;
     private javax.swing.JTextField contraseñaUsuario;
-    private javax.swing.JTextField correoElectronicoAdmin;
     private javax.swing.JButton ingresarAdministradores;
     private javax.swing.JButton ingresarSoporteTecnico;
     private javax.swing.JButton ingresarUsuario;

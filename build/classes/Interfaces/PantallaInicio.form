@@ -69,7 +69,7 @@
                                   <Component id="ingresarUsuario" min="-2" pref="113" max="-2" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="correoElectronicoAdmin" max="32767" attributes="0"/>
+                                  <Component id="UsernameAdmin" max="32767" attributes="0"/>
                                   <Component id="administradores" max="32767" attributes="0"/>
                                   <Component id="contraseñaAdmin" alignment="0" max="32767" attributes="0"/>
                               </Group>
@@ -92,7 +92,7 @@
                   <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                   <Component id="administradores" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="correoElectronicoAdmin" min="-2" pref="35" max="-2" attributes="0"/>
+                  <Component id="UsernameAdmin" min="-2" pref="35" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="contraseñaAdmin" min="-2" pref="35" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -133,12 +133,12 @@
             <Property name="text" type="java.lang.String" value="Administradores"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="correoElectronicoAdmin">
+        <Component class="javax.swing.JTextField" name="UsernameAdmin">
           <Properties>
             <Property name="text" type="java.lang.String" value="Username..."/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="correoElectronicoAdminActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="UsernameAdminActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="contrase&#xf1;aAdmin">

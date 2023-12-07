@@ -221,13 +221,37 @@ public class PanelDeControlCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonReservarClaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonReservarClaseActionPerformed
-        String ubicacion = sede.getText();
-        String disc = disciplina.getText();
-        String day = dia.getText();
+        String ubicacion = sede.getText().toUpperCase();
+        String disc = disciplina.getText().toUpperCase();
+        String day = dia.getText().toUpperCase();
         String horario = hora.getText();
-        
-        cliente.pedirReseva(ubicacion, disc, day, horario);
-        
+        try {
+            int hourInt = Integer.parseInt(horario);
+            cliente.pedirReseva(ubicacion, disc, day, horario);
+            boolean inscripcion_exitosa = false; 
+            for (Clase clase: soporteTécnico.getClases()) {
+                if (!clase.getEstado().equals("FINALIZADA") && clase.getSede().getUbicacion().equals(ubicacion) 
+                    && clase.getDisciplina().getTipo().equals(disc) && clase.getDia().equals(day)
+                    && clase.getHorario()==hourInt && clase.getListaInscriptos().contains(cliente)) {
+                        inscripcion_exitosa = true;
+                    }      
+            }
+            /*
+            if (inscripcion_exitosa){
+                InscripcionExitosa iscEx = new InscripcionExitosa();
+                iscEx.setVisible(true);
+                iscEx.setLocationRelativeTo(null);
+            } else {
+                InscripcionFallida iscFall = new InscripcionFallida();
+                iscFall.setVisible(true);
+                iscFall.setLocationRelativeTo(null);
+            }
+        */
+        } catch (NumberFormatException e){
+            IngresoErroneo ingresoErroneo = new IngresoErroneo();
+            ingresoErroneo.setVisible(true);
+            ingresoErroneo.setLocationRelativeTo(null);
+        }
         sede.setText("");
         disciplina.setText("");
         dia.setText("");

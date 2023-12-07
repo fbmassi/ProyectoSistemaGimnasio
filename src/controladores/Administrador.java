@@ -3,6 +3,7 @@ import java.util.*;
 import java.util.Map.Entry;
 
 import articulos.*;
+import interfaces.IngresoErroneo;
 import sistema.*;
 
 public class Administrador extends Usuario {
@@ -57,11 +58,12 @@ public class Administrador extends Usuario {
     			clase.setSede(sede);
     			sede.agregarClase(clase);
     			asignacion_realizada = true;
-    			System.out.println("SE CONCRETÓ LA INSCRIPCION.");
     		}
     	}
     	if (!asignacion_realizada) {
-    		System.out.println("LA SEDE SOLICITADA NO EXISTE, DEBE SOLICITAR SU CREACION AL SOPORTE TECNICO.");
+    		IngresoErroneo ingresoErroneo = new IngresoErroneo();
+                ingresoErroneo.setVisible(true);
+                ingresoErroneo.setLocationRelativeTo(null);
     	}
     }
     
@@ -74,7 +76,9 @@ public class Administrador extends Usuario {
     			} else if (alta.toUpperCase().equals("BAJA")) {
     				socio.setAlta(false);
     			} else {
-    				System.out.println("Lo siento, el estado ingresado no existe.");
+    				IngresoErroneo ingresoErroneo = new IngresoErroneo();
+                                ingresoErroneo.setVisible(true);
+                                ingresoErroneo.setLocationRelativeTo(null);
     			}
     		}
     	}
@@ -88,8 +92,8 @@ public class Administrador extends Usuario {
     				socio.setNivelSuscripción("Platinum");
     			} else if (nivel_suscripcion.toUpperCase().equals("BLACK")) {
     				socio.setNivelSuscripción("Black");;
-    			} else if (nivel_suscripcion.toUpperCase().equals("ORO")) {
-    				socio.setNivelSuscripción("Oro");;
+    			} else if (nivel_suscripcion.toUpperCase().equals("GOLD")) {
+    				socio.setNivelSuscripción("Gold");
     			} else {
     				System.out.println("Lo siento, el nivel de suscripcion deseado no existe.");
     			}

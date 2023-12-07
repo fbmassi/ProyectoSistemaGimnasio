@@ -4,6 +4,9 @@ import java.util.*;
 import controladores.Administrador;
 import controladores.Socio;
 import controladores.SoporteTécnico;
+import interfaces.IngresoErroneo;
+import interfaces.InscripcionExitosa;
+import interfaces.InscripcionFallida;
 
 public class Clase {
 	
@@ -80,6 +83,9 @@ public class Clase {
             this.estado = "AGENDADA";
         } else {
         	this.estado = "FALTA OBJETO";
+                IngresoErroneo ingresoErroneo = new IngresoErroneo();
+                ingresoErroneo.setVisible(true);
+                ingresoErroneo.setLocationRelativeTo(null);
         }
     }
     
@@ -132,6 +138,9 @@ public class Clase {
             this.estado = "AGENDADA";
         } else {
         	this.estado = "FALTA OBJETO";
+                IngresoErroneo ingresoErroneo = new IngresoErroneo();
+                ingresoErroneo.setVisible(true);
+                ingresoErroneo.setLocationRelativeTo(null);
         }
     }
     	
@@ -220,17 +229,32 @@ public class Clase {
     
     public void agregarAlumno(Socio alumno) {
     	if (alumno.getNivelSuscripción().equals(this.sede.getNivelSuscripcion())
-    			&& this.confirmarDisponibilidad()) {
-    		if (alumno.getUltimaClase() != null && !alumno.getUltimaClase().getDia().equals(this.dia))
-				alumno.setUltimaClase(this);
-	        	alumnos.add(alumno);
-	        	this.cant_inscriptos += 1;
-	        	System.out.println("SE HIZO EFECTIVA LA INSCRIPCION");
-	        	if (calcularRentabilidad(this)) {
-	        		this.estado = "CONFIRMADA";
-	        	}
-    	} else {
-    		System.out.println("NO POSEE EL NIVEL DE SUSCRIPCION NECESARIO PARA LA SEDE.");
+                && this.confirmarDisponibilidad() && alumno.getUltimaClase() != null 
+                && !alumno.getUltimaClase().getDia().equals(this.dia) && alumno.isAlta()) {
+                    alumno.setUltimaClase(this);
+                    alumnos.add(alumno);
+                    this.cant_inscriptos += 1;
+                    InscripcionExitosa iscEx = new InscripcionExitosa();
+                    iscEx.setVisible(true);
+                    iscEx.setLocationRelativeTo(null);
+                    if (calcularRentabilidad(this)) {
+                        this.estado = "CONFIRMADA";
+                    }
+    	} else if (alumno.getNivelSuscripción().equals(this.sede.getNivelSuscripcion())
+                && this.confirmarDisponibilidad() && alumno.getUltimaClase() == null  && alumno.isAlta()) {
+                    alumno.setUltimaClase(this);
+                    alumnos.add(alumno);
+                    this.cant_inscriptos += 1;
+                    InscripcionExitosa iscEx = new InscripcionExitosa();
+                    iscEx.setVisible(true);
+                    iscEx.setLocationRelativeTo(null);
+                    if (calcularRentabilidad(this)) {
+                        this.estado = "CONFIRMADA";
+                    }
+        } else {
+    		InscripcionFallida iscFall = new InscripcionFallida();
+                iscFall.setVisible(true);
+                iscFall.setLocationRelativeTo(null);
     	}
     }
 

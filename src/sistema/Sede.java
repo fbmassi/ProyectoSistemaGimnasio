@@ -8,7 +8,7 @@ import java.time.format.*;
 
 public class Sede {
 	
-	private Administrador admin;
+    private Administrador admin;
     private String ubicacion;
     private String nivel_suscripcion;
     private ArrayList<Clase> clases_en_sede;
@@ -74,7 +74,7 @@ public class Sede {
 	
 	public void removerClasesFinalizadas() {
 		for (Clase clase: clases_en_sede) {
-			if (clase.getEstado()=="FINALIZADA") {
+			if (clase.getEstado().equals("FINALIZADA")) {
 				this.clases_en_sede.remove(clase);
 			}
 		}

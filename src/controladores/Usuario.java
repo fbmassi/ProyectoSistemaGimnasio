@@ -31,28 +31,4 @@ public abstract class Usuario {
 
     public abstract String visualizarClases();
     
-    
-    public void gestionarPerfil() {
-        try (Scanner scanner = new Scanner(System.in)) {        	
-            if (this.inicio_sesion) {
-                System.out.println("Seleccione qué desea editar"
-                		+ "\\n\\tE para nombre de usuario"
-                		+ "\\n\\tC para contraseña"
-                		+ "\\nIngrese cualquier otro caracter en caso de no querer modificar nada.");
-                String editar = scanner.nextLine();
-                if (editar.equals("E")) {
-                    System.out.print("Ingrese su nuevo nombre de usuario: ");
-                    String username = scanner.nextLine();
-                    this.username = username;
-                } else if (editar.equals("C")) {
-                    System.out.print("Ingrese su nueva contraseña: ");
-                    String contraseña = scanner.nextLine();
-                    this.contraseña = contraseña;
-                } else {
-                    System.out.println("El perfil no fue modificado.");
-                }
-            }
-        }
-    }
-    
 }

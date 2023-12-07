@@ -16,9 +16,7 @@ public class Main {
 	    	- Asignar sedes a administrativos.
 	    	- Cargar tipos de clases.
 	    	- Crear tipos de artículos.
-		 */
-            
-		
+           
                 SoporteTécnico st = new SoporteTécnico("uade_TPO_POO");
 		
 		//MÉTODOS PARA CREAR SEDES
@@ -92,11 +90,9 @@ public class Main {
 		//MÉTODOS PARA CREAR CLASES
 		System.out.println("CREAMOS CLASES");
 		st.crearNuevaClase("fbmassi", "Javier", "Belgrano", "SALÓN", "CROSSFIT", "JUEVES", "18", "3");
-		//st.crearNuevaClase("fbmassi", "Julieta", "Devoto", "AIRE LIBRE", "yoga", "MIERCOLES", "18", "3");
-		//st.crearNuevaClase("lemassi", "Julieta", "Palermo", "SALÓN", "yoga", "VIERNES", "18", "3");
 		st.crearNuevaClase("lemassi", "Julieta", "Palermo", "SALÓN", "yoga virtual", "VIERNES", "11", "3");
 	
-                /*
+                
                 for (Clase clase: st.getClases()) {
 			System.out.println(clase.getDisciplina().getTipo() + clase.getDia() + clase.getHorario());
 		}
@@ -118,25 +114,28 @@ public class Main {
 			System.out.println("Articulo: " + art.getTipo() + " - " + art.getMarca() + " - " + art.getTipoAmortizacion() + " - " + art.getDuracion());
 		}
 		System.out.println("\n");
-		*/
 		
 		
 		
 		/*
 		Cliente:
 		    - Desde el perfil, reservar lugares para clases presenciales o virtuales según corresponda.
-		*/
-            
 		System.out.println("NOS INSCRIBIMOS A UNA CLASE");
 		String nombreUsuarioBuscado = "FBM";
 		for (Socio socio : st.getClientes()) {
 		    if (nombreUsuarioBuscado.equals(socio.getUsername())) {
-                System.out.println(socio.visualizarClases());
-                socio.pedirReseva("BELGRANO", "CROSSFIT", "JUEVES", "18");
+                        System.out.println(socio.visualizarClases());
+                        socio.pedirReseva("BELGRANO", "CROSSFIT", "JUEVES", "18");
 		    }
 		}
+                for (Clase clase: st.getClases()) {
+			for (Socio socio: clase.getListaInscriptos()) {
+				System.out.println(socio.getUsername());
+			}
+		}
 		System.out.println("\n");
-		
+		*/
+                
 		/*
 		 Administrativo:
 			Agendar clases para sedes.
@@ -202,15 +201,14 @@ public class Main {
 		}
 		
 		*/
-	
-                /*
+                
 		SoporteTécnico soporteTécnico = new SoporteTécnico("uade_TPO_POO");
                 
 		PantallaInicio interfazInicio = new PantallaInicio();
                 interfazInicio.setST(soporteTécnico);
                 interfazInicio.setVisible(true);
                 interfazInicio.setLocationRelativeTo(null);
-*/
+               
 		
 	}
 		
