@@ -67,7 +67,7 @@ public class GestionDeGrabaciones extends javax.swing.JFrame {
             }
         });
 
-        botonVerClases.setText("MOSTRAR CLASES PARA ADMINISTRAR");
+        botonVerClases.setText("MOSTRAR GRABACIONES");
         botonVerClases.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonVerClasesActionPerformed(evt);

@@ -75,7 +75,7 @@ public class CambioDeEstadoClase extends javax.swing.JFrame {
             }
         });
 
-        botonVerClases.setText("MOSTRAR GRABACIONES");
+        botonVerClases.setText("MOSTRAR CLASES");
         botonVerClases.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonVerClasesActionPerformed(evt);
