@@ -227,13 +227,13 @@ public class PanelDeControlCliente extends javax.swing.JFrame {
         String horario = hora.getText();
         try {
             int hourInt = Integer.parseInt(horario);
-            boolean inscripcion_exitosa = false; 
+            boolean inscripcion_exitosa = false;
+            cliente.pedirReseva(ubicacion, disc, day, horario);
             for (Clase clase: soporteTécnico.getClases()) {
                 if (!clase.getEstado().equals("FINALIZADA") && clase.getSede().getUbicacion().equals(ubicacion) 
                     && clase.getDisciplina().getTipo().equals(disc) && clase.getDia().equals(day)
                     && clase.getHorario()==hourInt && clase.getListaInscriptos().contains(cliente)) {
                         inscripcion_exitosa = true;
-                        cliente.pedirReseva(ubicacion, disc, day, horario);
                     }      
             }
             
