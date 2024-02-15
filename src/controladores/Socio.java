@@ -27,14 +27,14 @@ public class Socio extends Usuario {
 				&& clase.getDisciplina().getTipo().equals(tipo_disciplina.toUpperCase())
 				&& clase.getDia().equals(dia.toUpperCase())
 				&& clase.getHorario() == horario_entero) {
-	    			clase.agregarAlumno(this);
+                    clase.agregarAlumno(this);
 	    			inscipcion_no_exitosa = false;
     		}
     	}
     	if (inscipcion_no_exitosa) {
     		IngresoErroneo ingresoErroneo = new IngresoErroneo();
     		ingresoErroneo.setVisible(true);
-                ingresoErroneo.setLocationRelativeTo(null);
+            ingresoErroneo.setLocationRelativeTo(null);
     	}
     }
 
